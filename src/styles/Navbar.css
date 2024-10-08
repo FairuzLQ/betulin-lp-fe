@@ -6,8 +6,13 @@
     padding: 1rem 2rem;
     background-color: var(--background-color); /* White background */
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    position: fixed; /* Make navbar fixed to the top */
+    top: 0;
+    width: 100%;
+    z-index: 1000;
+    transition: background-color 0.3s ease, box-shadow 0.3s ease; /* Smooth transitions */
 }
-  
+
 .navbar__logo a {
     font-size: 1.5rem;
     font-weight: bold;
@@ -18,23 +23,30 @@
 
 .navbar__logo img {
     margin-top: 10px;
+    transition: transform 0.3s ease-in-out; /* Add smooth hover effect */
 }
-  
+
+.navbar__logo img:hover {
+    transform: scale(1.1); /* Slightly enlarge logo on hover */
+}
+
+/* Navbar Menu */
 .navbar__menu {
     display: flex;
     gap: 2.3rem;
     margin-right: 30px;
+    transition: transform 0.3s ease-in-out;
 }
-  
+
 .navbar__list {
     display: flex;
     gap: 2.3rem;
 }
-  
+
 .navbar__item {
     list-style: none;
 }
-  
+
 .navbar__link {
     color: var(--primary-color); /* Primary color */
     text-decoration: none;
@@ -42,6 +54,7 @@
     font-weight: bold;
     padding-bottom: 0.5rem;
     position: relative;
+    transition: color 0.3s ease, border-bottom 0.3s ease; /* Smooth hover and active transition */
 }
 
 /* Active link styling with underline */
@@ -54,6 +67,8 @@
 .navbar__link:hover {
     color: var(--secondary-color); /* Secondary color on hover */
     border-bottom: 2px solid var(--secondary-color); /* Hover underline */
+    transform: translateY(-3px); /* Slight move up on hover */
+    transition: color 0.3s ease, border-bottom 0.3s ease, transform 0.3s ease; /* Smooth transition for hover */
 }
 
 /* Toggle Button */
@@ -67,8 +82,13 @@
 .bx-menu, .bx-x {
     font-size: 2rem;
     cursor: pointer;
+    transition: transform 0.3s ease; /* Smooth transition for menu toggle */
 }
-  
+
+.bx-menu:hover, .bx-x:hover {
+    transform: rotate(180deg); /* Rotate on hover for visual effect */
+}
+
 /* Responsive Styles */
 @media screen and (max-width: 768px) {
     .navbar__menu {
@@ -90,7 +110,7 @@
     }
 
     .navbar__menu.active {
-        transform: translateX(0);
+        transform: translateX(0); /* Slide-in effect for mobile menu */
     }
 
     .navbar__toggle {
@@ -105,10 +125,18 @@
     .navbar__link {
         font-size: 1.5rem;
         color: var(--primary-color);
+        transition: color 0.3s ease, border-bottom 0.3s ease; /* Transition for mobile links */
     }
 
     .navbar__link.active-link {
         color: var(--primary-color);
         border-bottom: 2px solid var(--primary-color); /* Ensure underline remains in mobile */
+    }
+
+    /* Add some cool slide-in effect on mobile */
+    .navbar__menu.active .navbar__link {
+        transform: translateX(0);
+        opacity: 1;
+        transition: opacity 0.5s ease, transform 0.5s ease;
     }
 }

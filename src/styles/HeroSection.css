@@ -18,6 +18,7 @@
     height: 100%;
     object-fit: cover;
     z-index: -1; /* Ensure video stays behind the content */
+    filter: brightness(70%); /* Dim the video for better readability */
 }
 
 /* Hero section styles */
@@ -27,21 +28,29 @@
     text-align: center;
     color: white;
     padding: 100px;
+    animation: fadeInUp 1s ease-out forwards;
+    opacity: 0; /* Initially hidden for animation */
 }
 
-/* Title styling */
+/* Title styling with animation */
 .hero-section__title {
     font-size: 54px;
     font-weight: bold;
     color: #FFFFFF; /* White text */
     margin-bottom: 20px;
+    margin-top: 80px;
+    animation: fadeInDown 1.2s ease-out forwards;
+    opacity: 0; /* Initially hidden */
 }
 
-/* Subtitle styling */
+/* Subtitle styling with smooth effect */
 .hero-section__subtitle {
     font-size: 18px;
     color: #E0D7D7; /* Light grey subtitle */
     margin-bottom: 80px;
+    opacity: 0;
+    animation: fadeInUp 1.5s ease-out forwards;
+    transition: color 0.3s ease;
 }
 
 /* Button container */
@@ -49,48 +58,77 @@
     display: flex;
     justify-content: center;
     gap: 50px; /* Space between buttons */
+    opacity: 0;
+    animation: fadeInUp 2s ease-out forwards;
+}
+
+/* Button base styling */
+.hero-section__primary-btn,
+.hero-section__secondary-btn {
+    padding: 12px 24px;
+    border: none;
+    font-size: 16px;
+    font-weight: bold;
+    cursor: pointer;
+    border-radius: 30px;
+    transition: all 0.3s ease;
 }
 
 /* Primary Button */
 .hero-section__primary-btn {
-    padding: 12px 24px;
     background-color: #06479D;
     color: white;
-    border: none;
-    font-size: 16px;
-    font-weight: bold;
-    cursor: pointer;
-    border-radius: 30px;
-    transition: background-color 0.3s ease;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
 }
 
 .hero-section__primary-btn:hover {
-    background-color: var(--secondary-color);
-    color: white;
+    background-color: #6FADFF; /* Change to secondary color */
+    transform: translateY(-5px); /* Lift effect on hover */
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
 }
 
 /* Secondary Button */
 .hero-section__secondary-btn {
-    padding: 12px 24px;
     background-color: white;
-    color: var(--primary-color);
-    border: none;
-    font-size: 16px;
-    font-weight: bold;
-    cursor: pointer;
-    border-radius: 30px;
-    transition: background-color 0.3s ease;
+    color: #06479D; /* Primary color */
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
 }
 
 .hero-section__secondary-btn:hover {
-    background-color: var(--secondary-color);
+    background-color: #6FADFF; /* Change to secondary color */
     color: white;
+    transform: translateY(-5px); /* Lift effect on hover */
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
+}
+
+/* Fade-in animations for the elements */
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(30px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes fadeInDown {
+    from {
+        opacity: 0;
+        transform: translateY(-30px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
 }
 
 /* Responsive Styles */
 @media screen and (max-width: 768px) {
     .hero-section__title {
         font-size: 36px; /* Adjust title size for mobile */
+        margin-top: 100px;
     }
 
     .hero-section__subtitle {
@@ -102,7 +140,7 @@
         gap: 20px; /* Increase gap between buttons */
     }
 
-    .hero-section__primary-btn, 
+    .hero-section__primary-btn,
     .hero-section__secondary-btn {
         font-size: 14px; /* Reduce font size for buttons */
         padding: 10px 20px; /* Adjust padding for smaller screens */
