@@ -1,0 +1,114 @@
+/* General Styles */
+.navbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1rem 2rem;
+    background-color: var(--background-color); /* White background */
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+  
+.navbar__logo a {
+    font-size: 1.5rem;
+    font-weight: bold;
+    color: var(--primary-color); /* Primary color */
+    text-decoration: none;
+    margin-left: 30px;
+}
+
+.navbar__logo img {
+    margin-top: 10px;
+}
+  
+.navbar__menu {
+    display: flex;
+    gap: 2.3rem;
+    margin-right: 30px;
+}
+  
+.navbar__list {
+    display: flex;
+    gap: 2.3rem;
+}
+  
+.navbar__item {
+    list-style: none;
+}
+  
+.navbar__link {
+    color: var(--primary-color); /* Primary color */
+    text-decoration: none;
+    font-size: 16px;
+    font-weight: bold;
+    padding-bottom: 0.5rem;
+    position: relative;
+}
+
+/* Active link styling with underline */
+.navbar__link.active-link {
+    color: var(--primary-color);
+    border-bottom: 2px solid var(--primary-color); /* Visible underline */
+}
+
+/* Add hover effect */
+.navbar__link:hover {
+    color: var(--secondary-color); /* Secondary color on hover */
+    border-bottom: 2px solid var(--secondary-color); /* Hover underline */
+}
+
+/* Toggle Button */
+.navbar__toggle {
+    display: none;
+    cursor: pointer;
+    font-size: 2rem;
+    color: var(--primary-color);
+}
+
+.bx-menu, .bx-x {
+    font-size: 2rem;
+    cursor: pointer;
+}
+  
+/* Responsive Styles */
+@media screen and (max-width: 768px) {
+    .navbar__menu {
+        position: absolute;
+        top: 60px;
+        right: 0;
+        background-color: var(--background-color);
+        width: 100%;
+        height: 100vh;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        gap: 1rem;
+        transform: translateX(100%);
+        transition: transform 0.3s ease-in-out;
+        z-index: 999;
+        margin-right: 0;
+    }
+
+    .navbar__menu.active {
+        transform: translateX(0);
+    }
+
+    .navbar__toggle {
+        display: block;
+    }
+
+    .navbar__list {
+        flex-direction: column;
+        gap: 1.5rem;
+    }
+
+    .navbar__link {
+        font-size: 1.5rem;
+        color: var(--primary-color);
+    }
+
+    .navbar__link.active-link {
+        color: var(--primary-color);
+        border-bottom: 2px solid var(--primary-color); /* Ensure underline remains in mobile */
+    }
+}

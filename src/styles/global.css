@@ -1,0 +1,64 @@
+/* Reset CSS */
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;700&display=swap');
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+  
+  /* Variabel CSS untuk warna dan font */
+  :root {
+    --font-family: 'Poppins', sans-serif;
+    --primary-color: #06479D;
+    --secondary-color: #6FADFF;
+    --background-color: #FFFFFF;
+    --font-color-black: #000000;
+    --button-black: #3C3C43;
+    --grey-font: #666666;
+    --background-grey: #F2F0EC;
+    --background-light-blue: #F3F8FF;
+  }
+  
+  /* Gaya global untuk seluruh aplikasi */
+  body {
+    font-family: var(--font-family);
+    background-color: var(--background-color);
+    color: var(--font-color-black);
+    line-height: 1.6;
+  }
+  
+  h1, h2, h3, h4, h5, h6 {
+    color: var(--font-color-black);
+  }
+  
+  a {
+    color: var(--primary-color);
+    text-decoration: none;
+  }
+  
+  a:hover {
+    color: var(--secondary-color);
+  }
+  
+  button {
+    background-color: var(--button-black);
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    font-weight: 500;
+    cursor: pointer;
+  }
+  
+  .bg-grey {
+    background-color: var(--background-grey);
+  }
+  
+  .bg-light-blue {
+    background-color: var(--background-light-blue);
+  }
+  
+  .text-grey {
+    color: var(--grey-font);
+  }
+  

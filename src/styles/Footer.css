@@ -1,0 +1,111 @@
+/* Footer general styling */
+.footer {
+  background-color: var(--background-color); /* Light blue background */
+  padding: 2rem;
+  color: #000000; /* Black font */
+}
+
+.footer__container {
+  display: grid;
+  grid-template-columns: 1fr repeat(3, 1fr);
+  gap: 1.5rem;
+  align-items: start; /* Align all columns at the start (top of the grid) */
+}
+
+.footer__column {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.footer__logo {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start; /* Align logo column to the left */
+}
+
+.footer__logo img {
+  max-width: 100%; /* Ensure the logo is responsive */
+}
+
+.footer__motto {
+  margin-top: 0.5rem;
+  font-size: 0.8rem;
+  color: #06479D;
+  font-weight: lighter; 
+  text-align: left; /* Align text in the logo column to the left */
+}
+
+.footer__list {
+  list-style-type: none;
+  padding: 0;
+}
+
+.footer__list li {
+  margin: 0.5rem 0;
+}
+
+.footer__list li a {
+  text-decoration: none;
+  color: #06479D; /* Primary color */
+  font-weight: bold;
+}
+
+.footer__list li a:hover {
+  color: var(--secondary-color);
+}
+
+/* Divider styling */
+.footer__divider {
+  border: none;
+  border-top: 1px solid var(--primary-color);
+  margin: 1rem 0;
+}
+
+/* Footer bottom section */
+.footer__bottom {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.footer__bottom-left {
+  font-size: 0.9rem;
+  color: var(--primary-color); /* Grey font */
+}
+
+.footer__bottom-right {
+  display: flex;
+  gap: 1rem;
+}
+
+.footer__social-icon {
+  font-size: 1.5rem;
+  color: #06479D;
+  transition: color 0.3s ease;
+}
+
+.footer__social-icon:hover {
+  color: var(--secondary-color);
+}
+
+/* Responsive Design */
+@media screen and (max-width: 768px) {
+  .footer__container {
+    grid-template-columns: 1fr; /* Stack columns on smaller screens */
+    text-align: center;
+  }
+
+  .footer__bottom {
+    flex-direction: column;
+    gap: 1rem;
+  }
+
+  .footer__logo {
+    align-items: center; /* Center the logo on smaller screens */
+  }
+
+  .footer__motto {
+    text-align: center; /* Center the motto on smaller screens */
+  }
+}

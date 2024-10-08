@@ -1,0 +1,220 @@
+/* Overall Section Style */
+.layanan-section {
+    background-color: #ffffff; /* White background for section */
+    padding: 60px 20px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+/* Card Style */
+.layanan-card {
+    width: 90%;
+    max-width: 1200px;
+    padding: 40px;
+    background: linear-gradient(to bottom, #F2F9FF, #FCFDFF); /* Gradient background */
+    border-radius: 20px;
+    text-align: center;
+    overflow: hidden; /* Ensure the card stays inside its container */
+    transition: all 0.3s ease; /* Smooth transition for card */
+    animation: fadeInCard 1s ease; /* Card fade-in effect */
+}
+
+/* Card fade-in animation */
+@keyframes fadeInCard {
+    from {
+        opacity: 0;
+        transform: scale(0.95);
+    }
+    to {
+        opacity: 1;
+        transform: scale(1);
+    }
+}
+
+/* Title Style */
+.layanan-title {
+    font-size: 36px;
+    font-weight: bold;
+    color: #06479D;
+    margin-bottom: 10px;
+    position: relative;
+    display: inline-block;
+    padding-bottom: 10px;
+    animation: slideInTitle 1s ease; /* Slide-in effect for the title */
+}
+
+@keyframes slideInTitle {
+    from {
+        opacity: 0;
+        transform: translateY(-30px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.layanan-title::after {
+    content: '';
+    position: absolute;
+    left: 50%;
+    bottom: 0;
+    transform: translateX(-50%);
+    width: 80px;
+    height: 3px;
+    background-color: #06479D; /* Underline color */
+}
+
+/* Subtitle Style */
+.layanan-subtitle {
+    font-size: 18px;
+    color: #666666; /* Grey subtitle */
+    margin-bottom: 40px;
+    animation: fadeInSubtitle 1s ease 0.2s; /* Fade-in effect for subtitle */
+    animation-fill-mode: both;
+}
+
+@keyframes fadeInSubtitle {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Service Grid Style */
+.layanan-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 30px;
+    transition: all 0.3s ease; /* Smooth transition for grid */
+}
+
+/* Individual Service Card Style */
+.layanan-service {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    padding: 20px;
+    background-color: #ffffff;
+    border-radius: 10px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); /* Subtle shadow */
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    animation: serviceFadeIn 1s ease; /* Fade-in effect for services */
+}
+
+@keyframes serviceFadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(50px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Hover effect for service card */
+.layanan-service:hover {
+    transform: scale(1.1); /* Slightly enlarge the card */
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3); /* Enhance shadow on hover */
+}
+
+.layanan-icon {
+    font-size: 40px; /* Adjust icon size */
+    margin-bottom: 15px;
+    color: #06479D; /* Icon color */
+    transition: color 0.3s ease, transform 0.3s ease;
+}
+
+.layanan-icon:hover {
+    transform: rotate(360deg); /* Rotate the icon when hovered */
+}
+
+.layanan-service-title {
+    font-size: 20px;
+    font-weight: bold;
+    color: #06479D;
+    margin-bottom: 10px;
+    transition: color 0.3s ease;
+}
+
+.layanan-service-title:hover {
+    color: #6FADFF; /* Slight color change on hover */
+}
+
+.layanan-service-description {
+    font-size: 16px;
+    color: #666666;
+}
+
+/* Show more/less button */
+.show-more-container {
+    margin-top: 20px;
+    text-align: center; /* Center the button */
+    animation: fadeIn 0.6s ease; /* Fade-in animation for show more button */
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(20px); /* Slight upward movement */
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.show-more-btn {
+    background-color: transparent;
+    color: #06479D;
+    border: none;
+    font-size: 16px;
+    cursor: pointer;
+    display: inline-flex; /* Use inline-flex to keep text and arrow aligned */
+    flex-direction: column;
+    align-items: center; /* Center the arrow vertically below the text */
+    padding: 0;
+    font-weight: bold;
+    transition: color 0.3s ease, transform 0.3s ease;
+}
+
+.show-more-btn:hover {
+    transform: scale(1.05); /* Slight scale-up effect on hover */
+}
+
+.show-more-btn .arrow {
+    display: inline-block;
+    border: solid #06479D;
+    border-width: 0 1px 1px 0; /* Smaller arrow */
+    padding: 5px; /* Make the arrow smaller */
+    transition: transform 0.3s ease, border-color 0.3s ease;
+    margin-top: 15px; /* Space between text and arrow */
+}
+
+/* Downward arrow */
+.arrow.down {
+    transform: rotate(45deg);
+}
+
+/* Upward arrow */
+.arrow.up {
+    transform: rotate(-135deg);
+}
+
+.show-more-btn:hover .arrow {
+    border-color: #3C3C43; /* Darken the arrow color on hover */
+}
+
+/* Responsive Design */
+@media screen and (max-width: 768px) {
+    .layanan-grid {
+        grid-template-columns: 1fr; /* Stack services vertically on small screens */
+    }
+}

@@ -1,0 +1,85 @@
+/* Style the overall container */
+.beranda {
+    position: relative;
+    width: 100%;
+    height: 100vh; /* Full viewport height */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
+}
+
+/* Video background styles */
+.video-background {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    z-index: -1; /* Ensure video stays behind the content */
+}
+
+/* Hero section styles */
+.hero-section {
+    position: relative;
+    z-index: 1; /* Ensure content is on top of the video */
+    text-align: center;
+    color: white;
+    padding: 100px;
+}
+
+/* Title styling */
+.hero-title {
+    font-size: 54px;
+    font-weight: bold;
+    color: #FFFFFF; /* White text */
+    margin-bottom: 20px;
+}
+
+/* Subtitle styling */
+.hero-subtitle {
+    font-size: 18px;
+    color: #E0D7D7; /* Light grey subtitle */
+    margin-bottom: 80px;
+}
+
+/* Button container */
+.hero-buttons {
+    display: flex;
+    justify-content: center;
+    gap: 50px; /* Space between buttons */
+}
+
+/* Primary Button */
+.primary-btn {
+    padding: 12px 24px;
+    background-color: #06479D;
+    color: white;
+    border: none;
+    font-size: 16px;
+    font-weight: bold;
+    cursor: pointer;
+    border-radius: 30px;
+}
+
+.primary-btn:hover {
+    background-color: var(--secondary-color);
+    color: white;
+}
+
+.secondary-btn:hover {
+    background-color: var(--secondary-color);
+    color: white;
+}
+/* Secondary Button */
+.secondary-btn {
+    padding: 12px 24px;
+    background-color: white;
+    color: var(--primary-color);
+    border: none;
+    font-size: 16px;
+    font-weight: bold;
+    cursor: pointer;
+    border-radius: 30px;
+}

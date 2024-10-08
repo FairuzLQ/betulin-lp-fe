@@ -1,0 +1,183 @@
+/* Cara Pesan Section Styles */
+.cara-pesan-section {
+    background-color: #ffffff;
+    padding: 60px 20px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    animation: fadeInUp 1s ease-in-out; /* Animate section */
+}
+
+/* Title Style */
+.cara-pesan-title {
+    font-size: 36px;
+    font-weight: bold;
+    color: #06479D;
+    margin-bottom: 40px;
+    position: relative;
+    display: inline-block;
+    padding-bottom: 10px;
+    animation: slideIn 1.2s ease-out; /* Slide in animation for title */
+}
+
+.cara-pesan-title::after {
+    content: '';
+    position: absolute;
+    left: 50%;
+    bottom: 0;
+    transform: translateX(-50%);
+    width: 80px;
+    height: 3px;
+    background-color: #06479D;
+}
+
+/* Timeline container */
+.timeline-container {
+    width: 100%;
+    max-width: 1200px;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    animation: fadeIn 1.5s ease-in-out;
+}
+
+/* Timeline horizontal line */
+.timeline-line {
+    position: absolute;
+    top: 20px;
+    left: 0;
+    right: 0;
+    height: 2px;
+    background-color: #06479D;
+    z-index: 0;
+}
+
+/* Timeline steps container */
+.timeline-steps {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+}
+
+/* Individual step style */
+.timeline-step {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    position: relative;
+    animation: bounceIn 1.3s ease-out;
+}
+
+.timeline-step-point {
+    width: 40px;
+    height: 40px;
+    background-color: #06479D;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 20px;
+    position: relative;
+    z-index: 2;
+    transition: transform 0.3s ease, background-color 0.3s ease;
+    animation: bounceIn 1.2s ease-out;
+}
+
+.timeline-step-point:hover {
+    transform: scale(1.2);
+    background-color: #6FADFF;
+}
+
+.step-number {
+    color: white;
+    font-size: 18px;
+    font-weight: bold;
+    z-index: 3;
+    animation: fadeInUp 1.4s ease-in-out;
+}
+
+/* Step description */
+.step-description {
+    max-width: 150px;
+    opacity: 0;
+    animation: fadeIn 2s forwards;
+}
+
+.step-title {
+    font-size: 16px;
+    font-weight: bold;
+    color: #06479D;
+    margin-bottom: 10px;
+    animation: fadeInUp 1.4s ease-in-out;
+}
+
+/* Animations */
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}
+
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes slideIn {
+    from {
+        transform: translateX(-100%);
+    }
+    to {
+        transform: translateX(0);
+    }
+}
+
+@keyframes bounceIn {
+    0% {
+        transform: scale(0.9);
+    }
+    50% {
+        transform: scale(1.1);
+    }
+    100% {
+        transform: scale(1);
+    }
+}
+
+/* Responsive Design */
+@media screen and (max-width: 768px) {
+    .timeline-steps {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    .timeline-line {
+        height: 100%;
+        width: 2px;
+        top: 0;
+        left: 20px;
+        right: unset;
+    }
+
+    .timeline-step {
+        flex-direction: row;
+        margin-bottom: 40px;
+        align-items: center;
+    }
+
+    .timeline-step-point {
+        margin-right: 20px;
+    }
+}

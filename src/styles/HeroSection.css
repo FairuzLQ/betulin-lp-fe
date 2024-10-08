@@ -1,0 +1,110 @@
+/* Style the overall hero section container */
+.hero-section__container {
+    position: relative;
+    width: 100%;
+    height: 100vh; /* Full viewport height */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
+}
+
+/* Video background styles */
+.hero-section__video-background {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    z-index: -1; /* Ensure video stays behind the content */
+}
+
+/* Hero section styles */
+.hero-section__content {
+    position: relative;
+    z-index: 1; /* Ensure content is on top of the video */
+    text-align: center;
+    color: white;
+    padding: 100px;
+}
+
+/* Title styling */
+.hero-section__title {
+    font-size: 54px;
+    font-weight: bold;
+    color: #FFFFFF; /* White text */
+    margin-bottom: 20px;
+}
+
+/* Subtitle styling */
+.hero-section__subtitle {
+    font-size: 18px;
+    color: #E0D7D7; /* Light grey subtitle */
+    margin-bottom: 80px;
+}
+
+/* Button container */
+.hero-section__buttons {
+    display: flex;
+    justify-content: center;
+    gap: 50px; /* Space between buttons */
+}
+
+/* Primary Button */
+.hero-section__primary-btn {
+    padding: 12px 24px;
+    background-color: #06479D;
+    color: white;
+    border: none;
+    font-size: 16px;
+    font-weight: bold;
+    cursor: pointer;
+    border-radius: 30px;
+    transition: background-color 0.3s ease;
+}
+
+.hero-section__primary-btn:hover {
+    background-color: var(--secondary-color);
+    color: white;
+}
+
+/* Secondary Button */
+.hero-section__secondary-btn {
+    padding: 12px 24px;
+    background-color: white;
+    color: var(--primary-color);
+    border: none;
+    font-size: 16px;
+    font-weight: bold;
+    cursor: pointer;
+    border-radius: 30px;
+    transition: background-color 0.3s ease;
+}
+
+.hero-section__secondary-btn:hover {
+    background-color: var(--secondary-color);
+    color: white;
+}
+
+/* Responsive Styles */
+@media screen and (max-width: 768px) {
+    .hero-section__title {
+        font-size: 36px; /* Adjust title size for mobile */
+    }
+
+    .hero-section__subtitle {
+        font-size: 16px; /* Adjust subtitle size for mobile */
+    }
+
+    .hero-section__buttons {
+        flex-direction: column; /* Stack buttons vertically on mobile */
+        gap: 20px; /* Increase gap between buttons */
+    }
+
+    .hero-section__primary-btn, 
+    .hero-section__secondary-btn {
+        font-size: 14px; /* Reduce font size for buttons */
+        padding: 10px 20px; /* Adjust padding for smaller screens */
+    }
+}
