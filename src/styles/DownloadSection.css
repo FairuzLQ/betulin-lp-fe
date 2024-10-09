@@ -1,0 +1,103 @@
+/* Overall section styling */
+.download-section {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 60px 20px;
+    background-color: #F2F0EC; /* Light background color */
+    color: #06479D;
+    position: relative;
+}
+
+/* Left content styling */
+.download-section__content {
+    flex: 1;
+    max-width: 600px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding-left: 100px;
+    padding-top: 50px;
+}
+
+/* Download now text styling */
+.download-now {
+    font-size: 18px;
+    font-weight: lighter;
+    margin-bottom: 10px;
+    color: black;
+}
+
+/* Title styling */
+.download-section__title {
+    font-size: 48px;
+    font-weight: bold;
+    margin-bottom: 10px;
+    color: black;
+}
+
+/* Subtitle styling */
+.download-section__subtitle {
+    font-size: 18px;
+    color: black;
+}
+
+/* Google Play button */
+.google-play-btn {
+    width: 200px;
+    cursor: pointer;
+    transition: transform 0.3s ease; /* Animation for button hover */
+}
+
+.google-play-btn:hover {
+    transform: scale(1.1); /* Slight zoom on hover */
+}
+
+/* Right image container */
+.download-section__image {
+    flex: 1;
+    display: flex;
+    justify-content: flex-end;
+    margin-right: -20px;
+}
+
+.download-section__image img {
+    padding: 0;
+    margin: 0;
+    max-width: 100%;
+    height: auto;
+    border-radius: 10px;
+    transition: transform 0.3s ease; /* Animation for image hover */
+}
+
+.download-section__image img:hover {
+    transform: scale(1.05); /* Slight zoom on hover */
+}
+
+/* Responsive Design */
+@media screen and (max-width: 1024px) {
+    .download-section {
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+        max-height: 100%;
+    }
+
+    .download-section__content {
+        align-items: center;
+        max-width: 100%;
+        padding: 0;
+    }
+
+    .google-play-btn {
+        width: 150px;
+    }
+
+    .download-section__image {
+        margin-top: 30px;
+    }
+
+    .download-section__image img {
+        max-width: 100%;
+    }
+}
