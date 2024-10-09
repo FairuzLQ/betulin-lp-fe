@@ -1,0 +1,126 @@
+/* Overall section styling */
+.hubungi-kami-section {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 60px 20px;
+    background-color: var(--background-color); /* Light background */
+}
+
+/* Card container */
+.hubungi-kami-card {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background: linear-gradient(to right, #06479D, #ABCFFF); /* Gradient background */
+    border-radius: 20px;
+    padding: 40px;
+    max-width: 1200px;
+    width: 100%;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1); /* Card shadow */
+    color: white;
+    position: relative; /* Make the card a relative container for absolute positioning */
+    overflow: visible; /* Ensure the image can overflow */
+}
+
+/* Left content container */
+.hubungi-kami-content {
+    flex: 1;
+    padding-right: 40px;
+    padding-left: 100px;
+}
+
+/* Title styling */
+.hubungi-kami-title {
+    font-size: 28px;
+    font-weight: bold;
+    margin-bottom: 10px;
+    color: #fff;
+}
+
+/* Subtitle styling */
+.hubungi-kami-subtitle {
+    font-size: 16px;
+    margin-bottom: 30px;
+    color: #f0f0f0;
+}
+
+/* Button styling */
+.hubungi-kami-btn {
+    padding: 12px 24px;
+    background-color: var(--secondary-color);
+    color: var(--background-color);
+    border: none;
+    font-size: 16px;
+    font-weight: bold;
+    cursor: pointer;
+    border-radius: 15px;
+    position: relative;
+    transition: all 0.3s ease;
+}
+
+/* Add dashed border for decoration */
+.hubungi-kami-btn::before {
+    content: 'p!';
+    position: absolute;
+    top: -15px; /* Position it slightly above the button */
+    right: -25px; /* Position it slightly to the right of the button */
+    width: 60px;
+    height: 20px;
+    border: 2px dashed #f0f0f0; /* Dashed border */
+    border-radius: 5px; /* Slightly rounded edges for a softer look */
+    transform: rotate(15deg); /* Rotate the border for a decorative angle */
+}
+
+/* Button hover effect */
+.hubungi-kami-btn:hover {
+    background-color: #f0f0f0;
+    color: #06479D;
+}
+
+/* Right image container */
+.hubungi-kami-image {
+    flex: 1;
+    display: flex;
+    justify-content: flex-end;
+    position: relative; /* Ensure child elements can be positioned within */
+}
+
+/* Image styling */
+.hubungi-kami-image img {
+    max-width: 400px;
+    height: auto;
+    border-radius: 10px;
+    position: absolute; /* Position the image absolutely */
+    bottom: -220px; /* Make the image overflow from the bottom of the card */
+    right: 0;
+}
+
+/* Responsive Design */
+@media screen and (max-width: 920px) {
+    .hubungi-kami-card {
+        flex-direction: column;
+        text-align: center;
+        padding: 30px;
+    }
+
+    .hubungi-kami-content {
+        padding-right: 0;
+        padding-left: 0;
+        margin-bottom: 30px;
+    }
+
+    .hubungi-kami-title {
+        font-size: 28px;
+    }
+
+    .hubungi-kami-subtitle {
+        font-size: 16px;
+    }
+
+    .hubungi-kami-image img {
+        max-width: 100%;
+        position: static; /* Reset the absolute position for smaller screens */
+        margin-top: 20px;
+    }
+}

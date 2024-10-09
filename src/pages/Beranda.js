@@ -3,6 +3,7 @@ import React from 'react';
 import HeroSection from '../components/HeroSection'; // Importing HeroSection
 import LayananBerandaSection from '../components/LayananBerandaSection';
 import CaraPesanSection from '../components/CaraPesanSection';
+import HubungiKamiSection from '../components/HubungiKamiSection';
 
 const Beranda = () => {
     return (
@@ -11,6 +12,7 @@ const Beranda = () => {
             <HeroSection />
             <LayananBerandaSection />
             <CaraPesanSection />
+            <HubungiKamiSection />
             {/* Other sections of Beranda can be added here */}
         </div>
     );

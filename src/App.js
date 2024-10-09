@@ -10,7 +10,7 @@ import Blog from './pages/Blog';
 import BlogKategori from './pages/BlogKategori';
 import BlogPost from './pages/BlogPost';
 import TentangKami from './pages/TentangKami';
-import './styles/global.css'; // Impor CSS global
+import './styles/global.css'; 
 
 function App() {
   return (
