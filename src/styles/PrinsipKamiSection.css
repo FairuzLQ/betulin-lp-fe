@@ -1,0 +1,77 @@
+/* Overall Section Styling */
+.prinsip-kami-section {
+    background-color: #06479D; /* Background color */
+    padding: 60px 20px;
+    color: #ffffff;
+    text-align: center;
+}
+
+/* Section Title Styling */
+.prinsip-kami-title {
+    font-size: 36px;
+    font-weight: bold;
+    color: #ffffff;
+    margin-bottom: 40px;
+}
+
+/* Grid for Images */
+.prinsip-kami-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr); /* 4 columns */
+    gap: 30px;
+}
+
+/* Image Card */
+.prinsip-kami-card {
+    position: relative;
+    overflow: hidden;
+    border-radius: 10px;
+}
+
+.prinsip-kami-image {
+    width: 100%;
+    height: auto;
+    border-radius: 10px;
+    transition: transform 0.3s ease; /* Add hover effect */
+}
+
+/* Dark overlay for the image */
+.prinsip-kami-overlay {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background: rgba(0, 0, 0, 0.5); /* Darken the image */
+    padding: 20px;
+    text-align: center;
+    color: #ffffff;
+}
+
+/* Caption Styling */
+.prinsip-kami-caption {
+    font-size: 20px;
+    font-weight: bold;
+}
+
+/* Sub-caption Styling */
+.prinsip-kami-subcaption {
+    font-size: 14px;
+}
+
+/* Image Hover Effect */
+.prinsip-kami-card:hover .prinsip-kami-image {
+    transform: scale(1.1); /* Slight zoom-in effect on hover */
+}
+
+/* Responsive Design */
+@media screen and (max-width: 1024px) {
+    .prinsip-kami-grid {
+        grid-template-columns: repeat(2, 1fr); /* 2 columns on tablet */
+    }
+}
+
+@media screen and (max-width: 768px) {
+    .prinsip-kami-grid {
+        grid-template-columns: 1fr; /* 1 column on mobile */
+    }
+}

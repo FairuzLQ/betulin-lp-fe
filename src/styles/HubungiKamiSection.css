@@ -5,6 +5,18 @@
     align-items: center;
     padding: 60px 20px;
     background-color: var(--background-color); /* Light background */
+    opacity: 0;
+    animation: fadeIn 1s ease-in forwards; /* Fade-in animation for the section */
+}
+
+/* Fade-in keyframes */
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
 }
 
 /* Card container */
@@ -21,6 +33,12 @@
     color: white;
     position: relative; /* Make the card a relative container for absolute positioning */
     overflow: visible; /* Ensure the image can overflow */
+    transition: transform 0.4s ease, box-shadow 0.4s ease; /* Smooth card hover effect */
+}
+
+.hubungi-kami-card:hover {
+    transform: translateY(-10px); /* Slight lift on hover */
+    box-shadow: 0 15px 40px rgba(0, 0, 0, 0.2); /* Deeper shadow on hover */
 }
 
 /* Left content container */
@@ -28,6 +46,17 @@
     flex: 1;
     padding-right: 40px;
     padding-left: 100px;
+    transform: translateX(-50px);
+    opacity: 0;
+    animation: slideIn 0.6s ease forwards 0.3s; /* Slide in from left with delay */
+}
+
+/* Slide-in keyframes for content */
+@keyframes slideIn {
+    to {
+        transform: translateX(0);
+        opacity: 1;
+    }
 }
 
 /* Title styling */
@@ -57,11 +86,23 @@
     border-radius: 15px;
     position: relative;
     transition: all 0.3s ease;
+    z-index: 1;
+    animation: pulse 1.5s infinite; /* Add pulsing effect */
+}
+
+/* Pulse animation for button */
+@keyframes pulse {
+    0%, 100% {
+        transform: scale(1);
+    }
+    50% {
+        transform: scale(1.05); /* Slight enlargement */
+    }
 }
 
 /* Add dashed border for decoration */
 .hubungi-kami-btn::before {
-    content: 'p!';
+    content: 'fastrep!';
     position: absolute;
     top: -15px; /* Position it slightly above the button */
     right: -25px; /* Position it slightly to the right of the button */
@@ -70,6 +111,17 @@
     border: 2px dashed #f0f0f0; /* Dashed border */
     border-radius: 5px; /* Slightly rounded edges for a softer look */
     transform: rotate(15deg); /* Rotate the border for a decorative angle */
+    transition: transform 0.4s ease; /* Smooth transform on hover */
+    font-size: 11px;
+    display: flex; /* Flexbox for centering */
+    justify-content: center; /* Center horizontally */
+    align-items: center; /* Center vertically */
+    text-align: center;
+}
+
+
+.hubungi-kami-btn:hover::before {
+    transform: rotate(-5deg); /* Rotate the dashed border on hover */
 }
 
 /* Button hover effect */
@@ -94,6 +146,20 @@
     position: absolute; /* Position the image absolutely */
     bottom: -220px; /* Make the image overflow from the bottom of the card */
     right: 0;
+    opacity: 0;
+    animation: floatUp 0.8s ease forwards 0.5s; /* Float-up animation with delay */
+}
+
+/* Float-up animation for the image */
+@keyframes floatUp {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
 }
 
 /* Responsive Design */
@@ -108,6 +174,9 @@
         padding-right: 0;
         padding-left: 0;
         margin-bottom: 30px;
+        transform: none; /* Reset for mobile */
+        opacity: 1; /* Reset for mobile */
+        animation: none; /* Disable animation for mobile */
     }
 
     .hubungi-kami-title {
@@ -122,5 +191,6 @@
         max-width: 100%;
         position: static; /* Reset the absolute position for smaller screens */
         margin-top: 20px;
+         /* Disable animation for mobile */
     }
 }
