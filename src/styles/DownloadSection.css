@@ -7,6 +7,18 @@
     background-color: #F2F0EC; /* Light background color */
     color: #06479D;
     position: relative;
+    opacity: 0;
+    animation: fadeIn 1s ease-in forwards; /* Simple fade-in animation */
+}
+
+/* Fade-in animation */
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
 }
 
 /* Left content styling */
@@ -46,11 +58,11 @@
 .google-play-btn {
     width: 200px;
     cursor: pointer;
-    transition: transform 0.3s ease; /* Animation for button hover */
+    transition: transform 0.2s ease; /* Subtle zoom on hover */
 }
 
 .google-play-btn:hover {
-    transform: scale(1.1); /* Slight zoom on hover */
+    transform: scale(1.05); /* Small zoom on hover */
 }
 
 /* Right image container */
@@ -61,17 +73,18 @@
     margin-right: -20px;
 }
 
+/* Image styling */
 .download-section__image img {
     padding: 0;
     margin: 0;
     max-width: 100%;
     height: auto;
     border-radius: 10px;
-    transition: transform 0.3s ease; /* Animation for image hover */
+    transition: transform 0.2s ease; /* Subtle zoom on hover */
 }
 
 .download-section__image img:hover {
-    transform: scale(1.05); /* Slight zoom on hover */
+    transform: scale(1.05); /* Small zoom on hover */
 }
 
 /* Responsive Design */
@@ -80,7 +93,6 @@
         flex-direction: column;
         align-items: center;
         text-align: center;
-        max-height: 100%;
     }
 
     .download-section__content {
