@@ -8,11 +8,11 @@ const LayananHeroSection = () => {
         <section className="layanan-hero-section">
             <div className="layanan-hero-overlay">
                 <h1 className="layanan-hero-title">Layanan Kami</h1>
-                <p className="layanan-hero-subtitle">Bingung? Coba cari disini</p>
+                <p className="layanan-hero-subtitle">Betulin Aja Disini!</p>
                 <div className="layanan-hero-searchbar">
                     <input 
                         type="text" 
-                        placeholder="Cari layanan yang kamu butuh..." 
+                        placeholder="Mau betulin apa?" 
                         className="layanan-hero-input" 
                     />
                     <button className="layanan-hero-search-btn">
