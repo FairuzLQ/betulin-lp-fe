@@ -4,9 +4,9 @@ import 'react-responsive-carousel/lib/styles/carousel.min.css'; // Import the CS
 import '../styles/RecentPostCarouselSection.css';
 // Import images statically if they are stored in the local assets folder
 import image1 from '../assets/images/layanan-img.png';
-import image2 from '../assets/images/layanan-img.png';
-import image3 from '../assets/images/layanan-img.png';
-import image4 from '../assets/images/layanan-img.png';
+import image2 from '../assets/images/woi-test.jpg';
+import image3 from '../assets/images/woi-test.jpg';
+import image4 from '../assets/images/woi-test.jpg';
 
 const RecentPostCarouselSection = () => {
   const posts = [
