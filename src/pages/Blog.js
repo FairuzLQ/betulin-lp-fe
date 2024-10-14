@@ -5,7 +5,7 @@ import RecentPostCarouselSection from '../components/RecentPostCarouselSection';
 const Blog = () => {
     return (
         <div>
-            
+            <RecentPostCarouselSection />
             <DownloadSection />
             {/* Other sections of Beranda can be added here */}
         </div>
