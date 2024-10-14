@@ -1,6 +1,7 @@
 /* NewCategoryShowcase Section Styling */
 .new-category-showcase {
     display: flex;
+    flex-wrap: wrap;
     gap: 30px;
     padding: 50px;
     background-color: #f8f8f8;
@@ -9,6 +10,7 @@
   .main-post {
     flex: 2;
     position: relative;
+    width: 100%;
   }
   
   .main-post-image {
@@ -72,6 +74,7 @@
     display: flex;
     flex-direction: column;
     gap: 20px;
+    width: 100%;
   }
   
   .side-post {
@@ -116,18 +119,37 @@
   @media (max-width: 768px) {
     .new-category-showcase {
       flex-direction: column;
+      padding: 20px;
     }
+  
     .main-post-image {
       height: 300px;
     }
+  
+    .main-post-info {
+      bottom: 10px;
+      left: 15px;
+      padding: 15px;
+    }
+  
+    .main-post-info h2 {
+      font-size: 1.5rem;
+    }
+  
     .side-posts {
       flex-direction: row;
-      gap: 10px;
       overflow-x: scroll;
+      gap: 10px;
       padding-bottom: 10px;
     }
+  
     .side-post {
       flex: 0 0 70%;
+      min-width: 70%;
+    }
+  
+    .side-post-info h3 {
+      font-size: 1rem;
     }
   }
   

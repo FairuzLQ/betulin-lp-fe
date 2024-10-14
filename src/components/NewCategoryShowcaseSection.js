@@ -1,7 +1,7 @@
 import React from 'react';
 import '../styles/NewCategoryShowcaseSection.css'; // Custom CSS for this component
 
-const NewCategoryShowcaseSection = () => {
+const NewCategoryShowcase = () => {
   const posts = [
     {
       image: require('../assets/images/layanan-img.png'),
@@ -60,4 +60,4 @@ const NewCategoryShowcaseSection = () => {
   );
 };
 
-export default NewCategoryShowcaseSection;
+export default NewCategoryShowcase;
