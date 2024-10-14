@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import '../styles/PortofolioSection.css';
 
 const categories = [
@@ -28,6 +28,19 @@ const servicesWithImages = {
 const PortfolioSection = () => {
   const [selectedCategory, setSelectedCategory] = useState(categories[0]);
   const [searchQuery, setSearchQuery] = useState('');
+  const [isDesktop, setIsDesktop] = useState(window.innerWidth >= 1024);
+
+  useEffect(() => {
+    // Listen for window resize events to determine if it's desktop or not
+    const handleResize = () => {
+      setIsDesktop(window.innerWidth >= 1024);
+    };
+
+    window.addEventListener('resize', handleResize);
+
+    // Cleanup the event listener on component unmount
+    return () => window.removeEventListener('resize', handleResize);
+  }, []);
 
   const filteredServices = selectedCategory.services.filter(service =>
     service.toLowerCase().includes(searchQuery.toLowerCase())
@@ -38,8 +51,14 @@ const PortfolioSection = () => {
     setSelectedCategory(category);
   };
 
+  // Calculate the number of rows required based on the number of services (3 services per row)
+  const numberOfRows = Math.ceil(filteredServices.length / 3);
+
+  // Dynamically adjust the section height based on the number of rows for desktop screens only
+  const sectionHeight = isDesktop ? 600 + (numberOfRows - 1) * 250 : 'auto'; // Base height is 600px, with 250px added for each additional row
+
   return (
-    <div className="portfolio-section">
+    <div className="portfolio-section" style={{ height: sectionHeight }}>
       <div className="portfolio-carousel">
         {categories.map(category => (
           <div
@@ -72,7 +91,7 @@ const PortfolioSection = () => {
                   <h4>{service}</h4>
                 </div>
                 <div className="card-back">
-                  <p>Detail service for {service} Detail service for Detail service for</p>
+                  <p>Detail service for {service}</p>
                 </div>
               </div>
             </div>
