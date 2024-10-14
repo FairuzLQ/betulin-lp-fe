@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import '../styles/PortofolioSection.css';
 
 const categories = [
-  { id: 1, name: 'Utilitas Rumah', services: ['Atap', 'Plafon', 'Genteng'] },
+  { id: 1, name: 'Utilitas Rumah', services: ['Atap', 'Plafon', 'Genteng', 'Dinding'] },
   { id: 2, name: 'Otomotif', services: ['Servis Mobil', 'Perbaikan Ban', 'Ganti Oli'] },
   { id: 3, name: 'Elektronik', services: ['Perbaikan TV', 'Instalasi AC', 'Instalasi Kulkas'] },
   { id: 4, name: 'Lanskap', services: ['Taman', 'Pohon', 'Dekorasi Batu'] }
@@ -13,6 +13,7 @@ const servicesWithImages = {
   'Atap': require('../assets/images/cs-image.png'),
   'Plafon': require('../assets/images/cs-image.png'),
   'Genteng': require('../assets/images/cs-image.png'),
+  'Dinding': require('../assets/images/cs-image.png'),
   'Servis Mobil': require('../assets/images/cs-image.png'),
   'Perbaikan Ban': require('../assets/images/cs-image.png'),
   'Ganti Oli': require('../assets/images/cs-image.png'),
@@ -71,7 +72,7 @@ const PortfolioSection = () => {
                   <h4>{service}</h4>
                 </div>
                 <div className="card-back">
-                  <p>Detail service for {service}</p>
+                  <p>Detail service for {service} Detail service for Detail service for</p>
                 </div>
               </div>
             </div>
