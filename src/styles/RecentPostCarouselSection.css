@@ -1,6 +1,7 @@
 .recent-post-carousel {
     width: 100%; /* Full width */
     margin: 0 auto;
+    margin-top: 80px;
   }
   
   .post-card {
@@ -13,9 +14,7 @@
     transition: transform 0.3s ease;
   }
   
-  .post-card:hover {
-    transform: translateY(-5px); /* Lift the card slightly on hover */
-  }
+
   
   .post-image {
     width: 100%;
@@ -31,14 +30,24 @@
     transition: transform 0.3s ease;
   }
   
+  .post-category {
+    position: absolute;
+    top: 50px;
+    left: 50px;
+    background-color: var(--primary-color); /* Semi-transparent white background */
+    color: var(--background-color);
+    font-size: 0.9rem;
+    font-weight: bold;
+    padding: 5px 10px;
+    border-radius: 5px;
+  }
+  
   .post-details {
     position: absolute;
-    bottom: 0;
-    left: 0;
+    bottom: 30px;
+    left: 50px;
     right: 0;
-    background: rgba(0, 0, 0, 0.6); /* Semi-transparent background for the text */
     color: #fff;
-    padding: 15px;
     text-align: left;
   }
   
@@ -55,10 +64,7 @@
     margin: 5px 0 0;
   }
   
-  /* Hover effect to zoom image slightly */
-  .post-card:hover .post-image img {
-    transform: scale(1.05);
-  }
+ 
   
   /* RESPONSIVENESS */
   
@@ -77,9 +83,7 @@
   
   /* For tablets (768px to 1023px) */
   @media (max-width: 1023px) {
-    .recent-post-carousel {
-      padding: 15px;
-    }
+    
     .post-card {
       height: 350px;
     }

@@ -12,9 +12,10 @@ const RecentPostCarouselSection = () => {
   const posts = [
     {
       image: image1,
-      title: 'Post 1',
+      title: 'Berita Terbaru Lorem Ipsum Dono Kasino Indro',
       author: 'John Doe',
       date: 'October 12, 2024',
+      category: 'Technology',
       link: '/post-1',
     },
     {
@@ -22,6 +23,7 @@ const RecentPostCarouselSection = () => {
       title: 'Post 2',
       author: 'Jane Smith',
       date: 'October 13, 2024',
+      category: 'Business',
       link: '/post-2',
     },
     {
@@ -29,6 +31,7 @@ const RecentPostCarouselSection = () => {
       title: 'Post 3',
       author: 'Alice Johnson',
       date: 'October 14, 2024',
+      category: 'Health',
       link: '/post-3',
     },
     {
@@ -36,13 +39,13 @@ const RecentPostCarouselSection = () => {
       title: 'Post 4',
       author: 'Bob Brown',
       date: 'October 15, 2024',
+      category: 'Lifestyle',
       link: '/post-4',
     },
   ];
 
   return (
     <div className="recent-post-carousel">
-      <h2>Recent Posts</h2>
       <Carousel
         showArrows={true}
         showThumbs={false}
@@ -54,6 +57,7 @@ const RecentPostCarouselSection = () => {
         {posts.map((post, index) => (
           <div key={index} className="post-card">
             <div className="post-image">
+              <div className="post-category">{post.category}</div>
               <img src={post.image} alt={post.title} />
               <div className="post-details">
                 <h3>{post.title}</h3>
