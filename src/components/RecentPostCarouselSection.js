@@ -17,6 +17,8 @@ const RecentPostCarouselSection = () => {
       date: 'October 12, 2024',
       category: 'Technology',
       link: '/post-1',
+      authorLink: '/author/john-doe',
+      categoryLink: '/category/technology',
     },
     {
       image: image2,
@@ -25,6 +27,8 @@ const RecentPostCarouselSection = () => {
       date: 'October 13, 2024',
       category: 'Business',
       link: '/post-2',
+      authorLink: '/author/jane-smith',
+      categoryLink: '/category/business',
     },
     {
       image: image3,
@@ -33,6 +37,8 @@ const RecentPostCarouselSection = () => {
       date: 'October 14, 2024',
       category: 'Health',
       link: '/post-3',
+      authorLink: '/author/alice-johnson',
+      categoryLink: '/category/health',
     },
     {
       image: image4,
@@ -41,6 +47,8 @@ const RecentPostCarouselSection = () => {
       date: 'October 15, 2024',
       category: 'Lifestyle',
       link: '/post-4',
+      authorLink: '/author/bob-brown',
+      categoryLink: '/category/lifestyle',
     },
   ];
 
@@ -57,11 +65,20 @@ const RecentPostCarouselSection = () => {
         {posts.map((post, index) => (
           <div key={index} className="post-card">
             <div className="post-image">
-              <div className="post-category">{post.category}</div>
+              <a href={post.categoryLink} className="post-category">
+                {post.category}
+              </a>
               <img src={post.image} alt={post.title} />
               <div className="post-details">
-                <h3>{post.title}</h3>
-                <p>{post.author} • {post.date}</p>
+                <a href={post.link} className="post-title">
+                  <h3>{post.title}</h3>
+                </a>
+                <p>
+                  <a href={post.authorLink} className="post-author">
+                    {post.author}
+                  </a>{' '}
+                  • {post.date}
+                </p>
               </div>
             </div>
           </div>
