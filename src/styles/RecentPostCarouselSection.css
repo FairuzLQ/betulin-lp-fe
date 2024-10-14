@@ -8,7 +8,6 @@
     height: 400px; /* Adjust height as needed */
     display: flex;
     flex-direction: column;
-    border-radius: 10px;
     overflow: hidden;
     box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1); /* Add subtle shadow for depth */
     transition: transform 0.3s ease;
