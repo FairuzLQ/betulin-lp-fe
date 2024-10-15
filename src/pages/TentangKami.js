@@ -3,6 +3,7 @@ import DownloadSection from '../components/DownloadSection';
 import AboutUsHeroSection from '../components/AboutUsHeroSection';
 import VisiMisiSection from '../components/VisiMisiSection';
 import LokasiLayananSection from '../components/LokasiLayananSection';
+import MemilihKamiSection from '../components/MemilihKamiSection';
 
 
 const TentangKami = () => {
@@ -11,6 +12,7 @@ const TentangKami = () => {
             <AboutUsHeroSection />
             <VisiMisiSection />
             <LokasiLayananSection />
+            <MemilihKamiSection />
             <DownloadSection />
             {/* Other sections of Beranda can be added here */}
         </div>
