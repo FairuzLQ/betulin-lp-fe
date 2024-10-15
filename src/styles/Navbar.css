@@ -68,7 +68,7 @@
     color: var(--secondary-color); /* Secondary color on hover */
     border-bottom: 2px solid var(--secondary-color); /* Hover underline */
     transform: translateY(-3px); /* Slight move up on hover */
-    transition: color 0.3s ease, border-bottom 0.3s ease, transform 0.3s ease; /* Smooth transition for hover */
+    transition: color 0.3s ease, transform 0.3s ease; /* Smooth transition for hover */
 }
 
 /* Toggle Button */
