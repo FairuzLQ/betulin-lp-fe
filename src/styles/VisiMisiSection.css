@@ -1,0 +1,219 @@
+/* Unique Section Styling */
+.unique-visi-misi-section {
+    background-color: #f9f9f9;
+    padding: 60px 20px;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    animation: uniqueFadeInUp 0.8s ease-in-out;
+  }
+  
+  .unique-section-header {
+    margin-bottom: 30px;
+  }
+  
+  .unique-section-title {
+    font-size: 2.5rem;
+    font-weight: bold;
+    margin-bottom: 20px;
+    color: #333;
+    animation: uniqueFadeInText 1s ease forwards;
+  }
+  
+  .unique-tabs {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+    animation: uniqueFadeInText 1.2s ease forwards;
+  }
+  
+  .unique-tab-button {
+    background-color: transparent;
+    border: 2px solid #06479d;
+    padding: 10px 20px;
+    border-radius: 5px;
+    font-size: 1rem;
+    color: #06479d;
+    cursor: pointer;
+    transition: background-color 0.3s ease, color 0.3s ease, transform 0.3s ease;
+  }
+  
+  .unique-tab-button:hover,
+  .unique-tab-button.active {
+    background-color: #06479d;
+    color: white;
+    transform: scale(1.1); /* Slight zoom on hover */
+  }
+  
+  /* Content Area */
+  .unique-content {
+    max-width: 800px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    margin-top: 40px;
+  }
+  
+  .unique-icon {
+    font-size: 4rem;
+    color: #06479d;
+    margin-bottom: 20px;
+    animation: uniqueBounce 1.5s infinite; /* Bouncing icon animation */
+  }
+  
+  .unique-content-title {
+    font-size: 1.8rem;
+    font-weight: bold;
+    margin-bottom: 15px;
+    animation: uniqueFadeInText 1s ease forwards;
+  }
+  
+  .unique-content-text {
+    font-size: 1.2rem;
+    color: #666;
+    line-height: 1.6;
+    max-width: 700px;
+    margin: 0 auto;
+    animation: uniqueFadeInText 1.3s ease forwards;
+  }
+  
+  /* Mission List Styling */
+  .unique-mission-list {
+    list-style-type: none;
+    padding: 0;
+    margin-top: 20px;
+    text-align: left;
+  }
+  
+  .unique-mission-list li {
+    display: flex;
+    align-items: center;
+    margin-bottom: 20px;
+    position: relative;
+    opacity: 0;
+    animation: uniqueBounceIn 0.6s ease forwards; /* Bounce-in for mission list items */
+    animation-delay: calc(0.1s * var(--i)); /* Delay based on index for staggered effect */
+  }
+  
+  .unique-number {
+    background-color: #06479d;
+    color: white;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 1.2rem;
+    font-weight: bold;
+    margin-right: 20px;
+    flex-shrink: 0;
+    transition: transform 0.3s ease, background-color 0.3s ease; /* Smooth hover effect */
+  }
+  
+  .unique-mission-list li:hover .unique-number {
+    transform: scale(1.2); /* Slight zoom on hover */
+    background-color: #ff6a00; /* Change color on hover */
+  }
+  
+  .unique-mission-list p {
+    font-size: 1.1rem;
+    color: #333;
+    margin: 0;
+    transition: color 0.3s ease;
+  }
+  
+  .unique-mission-list li:hover p {
+    color: #06479d; /* Change text color on hover */
+  }
+  
+  /* Keyframes for Animations */
+  @keyframes uniqueFadeInUp {
+    0% {
+      opacity: 0;
+      transform: translateY(50px);
+    }
+    100% {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+  
+  @keyframes uniqueFadeInText {
+    0% {
+      opacity: 0;
+    }
+    100% {
+      opacity: 1;
+    }
+  }
+  
+  @keyframes uniqueBounce {
+    0%, 20%, 50%, 80%, 100% {
+      transform: translateY(0);
+    }
+    40% {
+      transform: translateY(-15px);
+    }
+    60% {
+      transform: translateY(-7px);
+    }
+  }
+  
+  @keyframes uniqueBounceIn {
+    0% {
+      opacity: 0;
+      transform: translateY(100px);
+    }
+    100% {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+  
+  /* RESPONSIVENESS */
+  @media (max-width: 768px) {
+    .unique-section-title {
+      font-size: 2rem;
+    }
+  
+    .unique-content-title {
+      font-size: 1.5rem;
+    }
+  
+    .unique-content-text {
+      font-size: 1rem;
+    }
+  
+    .unique-icon {
+      font-size: 3rem;
+    }
+  
+    .unique-tabs {
+      flex-direction: column;
+      gap: 10px;
+      align-items: center; /* Center tabs horizontally */
+    }
+  
+    .unique-tab-button {
+      width: 100%;
+      max-width: 300px;
+    }
+  
+    .unique-mission-list {
+      text-align: center; /* Center mission list items */
+    }
+  
+    .unique-mission-list li {
+      flex-direction: column;
+      align-items: center; /* Center mission list items horizontally */
+      text-align: center;
+    }
+  
+    .unique-number {
+      margin-bottom: 10px;
+    }
+  }
+  

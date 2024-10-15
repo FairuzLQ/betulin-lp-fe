@@ -1,16 +1,16 @@
 /* Overall section styling */
-.hubungi-kami-section {
+.unique-hubungi-kami-section {
     display: flex;
     justify-content: center;
     align-items: center;
     padding: 60px 20px;
     background-color: var(--background-color); /* Light background */
     opacity: 0;
-    animation: fadeIn 1s ease-in forwards; /* Fade-in animation for the section */
+    animation: uniqueFadeIn 1s ease-in forwards; /* Fade-in animation for the section */
 }
 
 /* Fade-in keyframes */
-@keyframes fadeIn {
+@keyframes uniqueFadeIn {
     from {
         opacity: 0;
     }
@@ -20,7 +20,7 @@
 }
 
 /* Card container */
-.hubungi-kami-card {
+.unique-hubungi-kami-card {
     display: flex;
     align-items: center;
     justify-content: space-between;
@@ -36,23 +36,23 @@
     transition: transform 0.4s ease, box-shadow 0.4s ease; /* Smooth card hover effect */
 }
 
-.hubungi-kami-card:hover {
+.unique-hubungi-kami-card:hover {
     transform: translateY(-10px); /* Slight lift on hover */
     box-shadow: 0 15px 40px rgba(0, 0, 0, 0.2); /* Deeper shadow on hover */
 }
 
 /* Left content container */
-.hubungi-kami-content {
+.unique-hubungi-kami-content {
     flex: 1;
     padding-right: 40px;
     padding-left: 100px;
     transform: translateX(-50px);
     opacity: 0;
-    animation: slideIn 0.6s ease forwards 0.3s; /* Slide in from left with delay */
+    animation: uniqueSlideIn 0.6s ease forwards 0.3s; /* Slide in from left with delay */
 }
 
 /* Slide-in keyframes for content */
-@keyframes slideIn {
+@keyframes uniqueSlideIn {
     to {
         transform: translateX(0);
         opacity: 1;
@@ -60,7 +60,7 @@
 }
 
 /* Title styling */
-.hubungi-kami-title {
+.unique-hubungi-kami-title {
     font-size: 28px;
     font-weight: bold;
     margin-bottom: 10px;
@@ -68,14 +68,14 @@
 }
 
 /* Subtitle styling */
-.hubungi-kami-subtitle {
+.unique-hubungi-kami-subtitle {
     font-size: 16px;
     margin-bottom: 30px;
     color: #f0f0f0;
 }
 
 /* Button styling */
-.hubungi-kami-btn {
+.unique-hubungi-kami-btn {
     padding: 12px 24px;
     background-color: var(--secondary-color);
     color: var(--background-color);
@@ -87,11 +87,11 @@
     position: relative;
     transition: all 0.3s ease;
     z-index: 1;
-    animation: pulse 1.5s infinite; /* Add pulsing effect */
+    animation: uniquePulse 1.5s infinite; /* Add pulsing effect */
 }
 
 /* Pulse animation for button */
-@keyframes pulse {
+@keyframes uniquePulse {
     0%, 100% {
         transform: scale(1);
     }
@@ -101,7 +101,7 @@
 }
 
 /* Add dashed border for decoration */
-.hubungi-kami-btn::before {
+.unique-hubungi-kami-btn::before {
     content: 'fastrep!';
     position: absolute;
     top: -15px; /* Position it slightly above the button */
@@ -119,19 +119,18 @@
     text-align: center;
 }
 
-
-.hubungi-kami-btn:hover::before {
+.unique-hubungi-kami-btn:hover::before {
     transform: rotate(-5deg); /* Rotate the dashed border on hover */
 }
 
 /* Button hover effect */
-.hubungi-kami-btn:hover {
+.unique-hubungi-kami-btn:hover {
     background-color: #f0f0f0;
     color: #06479D;
 }
 
 /* Right image container */
-.hubungi-kami-image {
+.unique-hubungi-kami-image {
     flex: 1;
     display: flex;
     justify-content: flex-end;
@@ -139,7 +138,7 @@
 }
 
 /* Image styling */
-.hubungi-kami-image img {
+.unique-hubungi-kami-image img {
     max-width: 400px;
     height: auto;
     border-radius: 10px;
@@ -147,11 +146,11 @@
     bottom: -220px; /* Make the image overflow from the bottom of the card */
     right: 0;
     opacity: 0;
-    animation: floatUp 0.8s ease forwards 0.5s; /* Float-up animation with delay */
+    animation: uniqueFloatUp 0.8s ease forwards 0.5s; /* Float-up animation with delay */
 }
 
 /* Float-up animation for the image */
-@keyframes floatUp {
+@keyframes uniqueFloatUp {
     from {
         opacity: 0;
         transform: translateY(20px);
@@ -164,13 +163,13 @@
 
 /* Responsive Design */
 @media screen and (max-width: 920px) {
-    .hubungi-kami-card {
+    .unique-hubungi-kami-card {
         flex-direction: column;
         text-align: center;
         padding: 30px;
     }
 
-    .hubungi-kami-content {
+    .unique-hubungi-kami-content {
         padding-right: 0;
         padding-left: 0;
         margin-bottom: 30px;
@@ -179,15 +178,15 @@
         animation: none; /* Disable animation for mobile */
     }
 
-    .hubungi-kami-title {
+    .unique-hubungi-kami-title {
         font-size: 28px;
     }
 
-    .hubungi-kami-subtitle {
+    .unique-hubungi-kami-subtitle {
         font-size: 16px;
     }
 
-    .hubungi-kami-image img {
+    .unique-hubungi-kami-image img {
         max-width: 100%;
         position: static; /* Reset the absolute position for smaller screens */
         margin-top: 20px;

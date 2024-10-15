@@ -4,14 +4,14 @@ import csImage from '../assets/images/cs-image.png'; // Import the customer serv
 
 const HubungiKamiSection = () => {
   return (
-    <section className="hubungi-kami-section">
-      <div className="hubungi-kami-card">
-        <div className="hubungi-kami-content">
-          <h2 className="hubungi-kami-title">Butuh Bantuan? Customer Service Kami Siap Membantu Anda!</h2>
-          <p className="hubungi-kami-subtitle">Kami selalu siap siaga 24 jam untuk Anda</p>
-          <button className="hubungi-kami-btn">Hubungi Kami</button>
+    <section className="unique-hubungi-kami-section">
+      <div className="unique-hubungi-kami-card">
+        <div className="unique-hubungi-kami-content">
+          <h2 className="unique-hubungi-kami-title">Butuh Bantuan? Customer Service Kami Siap Membantu Anda!</h2>
+          <p className="unique-hubungi-kami-subtitle">Kami selalu siap siaga 24 jam untuk Anda</p>
+          <button className="unique-hubungi-kami-btn">Hubungi Kami</button>
         </div>
-        <div className="hubungi-kami-image">
+        <div className="unique-hubungi-kami-image">
           <img src={csImage} alt="Customer Service" />
         </div>
       </div>
