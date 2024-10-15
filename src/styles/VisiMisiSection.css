@@ -30,9 +30,9 @@
   
   .unique-tab-button {
     background-color: transparent;
-    border: 2px solid #06479d;
+    
     padding: 10px 20px;
-    border-radius: 5px;
+    border-radius: 30px;
     font-size: 1rem;
     color: #06479d;
     cursor: pointer;

@@ -1,0 +1,72 @@
+/* Overall section styling */
+.lokasi-layanan-section {
+    background-color: #f7fafc;
+    padding: 60px 20px;
+    text-align: center;
+  }
+  
+  .lokasi-header {
+    margin-bottom: 30px;
+  }
+  
+  .lokasi-header h2 {
+    font-size: 2.5rem;
+    color: #06479d;
+    margin-bottom: 10px;
+  }
+  
+  .lokasi-header p {
+    font-size: 1.2rem;
+    color: #555;
+  }
+  
+  /* Map styling */
+  .lokasi-map {
+    width: 100%;
+    max-width: 900px;
+    margin: 0 auto;
+    border-radius: 15px;
+    overflow: hidden;
+    box-shadow: 0 8px 15px rgba(0, 0, 0, 0.1);
+  }
+  
+  /* Popup styling */
+  .leaflet-popup-content {
+    font-family: 'Arial', sans-serif;
+  }
+  
+  .custom-popup h3 {
+    margin: 0;
+    font-size: 1.3rem;
+    color: #06479d;
+  }
+  
+  .custom-popup p {
+    font-size: 0.9rem;
+    color: #666;
+  }
+  
+  /* Marker hover styling */
+  .leaflet-marker-icon {
+    transition: transform 0.3s ease;
+  }
+  
+  .leaflet-marker-icon:hover {
+    transform: scale(1.2);
+  }
+  
+  /* RESPONSIVENESS */
+  @media (max-width: 768px) {
+    .lokasi-header h2 {
+      font-size: 2rem;
+    }
+  
+    .lokasi-header p {
+      font-size: 1rem;
+    }
+  
+    .lokasi-map {
+      width: 100%;
+    }
+  }
+  
