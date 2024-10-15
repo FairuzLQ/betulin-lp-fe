@@ -11,7 +11,6 @@ const jabodetabekCenter = [-6.200000, 106.816666]; // Jakarta
 const bekasiCenter = [-6.240893, 106.992874]; // Bekasi
 const tangerangCenter = [-6.202393, 106.652710]; // Tangerang
 const depokCenter = [-6.402484, 106.794243]; // Depok
-const bogorCenter = [-6.597147, 106.806039]; // Bogor
 
 // Custom marker icon with more height
 const customMarkerIcon = new L.Icon({
@@ -30,7 +29,16 @@ const LokasiLayananSection = () => {
       </div>
 
       <div className="lokasi-map">
-        <MapContainer center={jabodetabekCenter} zoom={10} scrollWheelZoom={false} style={{ height: '500px', width: '100%' }}>
+        <MapContainer 
+          center={jabodetabekCenter} 
+          zoom={10} 
+          scrollWheelZoom={false}
+          doubleClickZoom={false} 
+          dragging={false} 
+          touchZoom={false} 
+          zoomControl={false} 
+          style={{ height: '500px', width: '100%' }}
+        >
           {/* Custom tile layer for a cleaner look */}
           <TileLayer
             url="https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png"
@@ -76,7 +84,6 @@ const LokasiLayananSection = () => {
               </div>
             </Popup>
           </Marker>
-
         </MapContainer>
       </div>
     </section>

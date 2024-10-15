@@ -3,6 +3,17 @@
     background-color: #f7fafc;
     padding: 60px 20px;
     text-align: center;
+    opacity: 0;
+    transform: translateY(50px);
+    animation: fadeIn 0.8s ease forwards; /* Simple fade-in animation */
+  }
+  
+  /* Fade-in keyframes */
+  @keyframes fadeIn {
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
   }
   
   .lokasi-header {
@@ -13,11 +24,21 @@
     font-size: 2.5rem;
     color: #06479d;
     margin-bottom: 10px;
+    opacity: 0;
+    animation: fadeInText 1.2s ease forwards; /* Fade-in text with delay */
   }
   
   .lokasi-header p {
     font-size: 1.2rem;
     color: #555;
+    opacity: 0;
+    animation: fadeInText 1.4s ease forwards; /* Fade-in text with delay */
+  }
+  
+  @keyframes fadeInText {
+    to {
+      opacity: 1;
+    }
   }
   
   /* Map styling */
@@ -28,6 +49,16 @@
     border-radius: 15px;
     overflow: hidden;
     box-shadow: 0 8px 15px rgba(0, 0, 0, 0.1);
+    opacity: 0;
+    transform: scale(0.9); /* Start with smaller size */
+    animation: fadeInMap 1s ease forwards 0.5s; /* Map zoom-in effect */
+  }
+  
+  @keyframes fadeInMap {
+    to {
+      opacity: 1;
+      transform: scale(1);
+    }
   }
   
   /* Popup styling */
@@ -48,11 +79,12 @@
   
   /* Marker hover styling */
   .leaflet-marker-icon {
-    transition: transform 0.3s ease;
+    transition: transform 0.3s ease, filter 0.3s ease;
   }
   
   .leaflet-marker-icon:hover {
     transform: scale(1.2);
+    filter: brightness(1.2); /* Slight brightness effect */
   }
   
   /* RESPONSIVENESS */
