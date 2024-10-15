@@ -5,7 +5,7 @@
     text-align: center;
     opacity: 0;
     transform: translateY(50px);
-    animation: fadeIn 0.8s ease forwards; /* Simple fade-in animation */
+    animation: fadeIn 0.8s ease forwards;
   }
   
   /* Fade-in keyframes */
@@ -25,20 +25,47 @@
     color: #06479d;
     margin-bottom: 10px;
     opacity: 0;
-    animation: fadeInText 1.2s ease forwards; /* Fade-in text with delay */
-  }
-  
-  .lokasi-header p {
-    font-size: 1.2rem;
-    color: #555;
-    opacity: 0;
-    animation: fadeInText 1.4s ease forwards; /* Fade-in text with delay */
+    animation: fadeInText 1.2s ease forwards;
   }
   
   @keyframes fadeInText {
     to {
       opacity: 1;
     }
+  }
+  
+  /* Subtext styling for Tukang and Kecamatan */
+  .lokasi-subtext {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 1.2rem;
+    color: #333;
+    margin-top: 20px;
+  }
+  
+  .subtext-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  
+  .subtext-number {
+    font-size: 2rem;
+    font-weight: bold;
+    color: #06479d;
+  }
+  
+  .subtext-text {
+    font-size: 1.2rem;
+    color: #555;
+  }
+  
+  .subtext-divider {
+    font-size: 5rem;
+    font-weight: lighter;
+    color: #06479d;
+    margin: 0 40px;
   }
   
   /* Map styling */
@@ -50,8 +77,8 @@
     overflow: hidden;
     box-shadow: 0 8px 15px rgba(0, 0, 0, 0.1);
     opacity: 0;
-    transform: scale(0.9); /* Start with smaller size */
-    animation: fadeInMap 1s ease forwards 0.5s; /* Map zoom-in effect */
+    transform: scale(0.9);
+    animation: fadeInMap 1s ease forwards 0.5s;
   }
   
   @keyframes fadeInMap {
@@ -84,7 +111,7 @@
   
   .leaflet-marker-icon:hover {
     transform: scale(1.2);
-    filter: brightness(1.2); /* Slight brightness effect */
+    filter: brightness(1.2);
   }
   
   /* RESPONSIVENESS */
@@ -99,6 +126,18 @@
   
     .lokasi-map {
       width: 100%;
+    }
+  
+    .subtext-divider {
+      margin: 0 10px;
+    }
+  
+    .subtext-number {
+      font-size: 1.6rem;
+    }
+  
+    .subtext-text {
+      font-size: 1rem;
     }
   }
   

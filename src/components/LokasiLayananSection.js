@@ -25,7 +25,17 @@ const LokasiLayananSection = () => {
     <section className="lokasi-layanan-section">
       <div className="lokasi-header">
         <h2>Kami tersedia di Jabodetabek</h2>
-        <p>100 Tukang &bull; 30 Kecamatan</p>
+        <div className="lokasi-subtext">
+          <div className="subtext-item">
+            <span className="subtext-number">100</span>
+            <span className="subtext-text">Tukang</span>
+          </div>
+          <div className="subtext-divider">|</div>
+          <div className="subtext-item">
+            <span className="subtext-number">30</span>
+            <span className="subtext-text">Kecamatan</span>
+          </div>
+        </div>
       </div>
 
       <div className="lokasi-map">
@@ -39,16 +49,12 @@ const LokasiLayananSection = () => {
           zoomControl={false} 
           style={{ height: '500px', width: '100%' }}
         >
-          {/* Custom tile layer for a cleaner look */}
           <TileLayer
             url="https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png"
             attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors &copy; <a href="https://carto.com/">CARTO</a>'
           />
-
-          {/* Highlight Jabodetabek area using circles */}
           <Circle center={jabodetabekCenter} radius={30000} color="#06479D" fillColor="#ABCFFF" fillOpacity={0.5} />
 
-          {/* Markers for each city */}
           <Marker position={jabodetabekCenter} icon={customMarkerIcon}>
             <Popup className="custom-popup">
               <div>
