@@ -1,0 +1,76 @@
+/* Styling for About Us Hero Section */
+.about-us-hero-section {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh; /* Use min-height instead of height to accommodate all content */
+  background-color: var(--background-color);
+  padding: 20px;
+  text-align: center;
+  transition: background-color 0.4s ease-in-out; /* Smooth transition for background color */
+}
+
+.hero-content {
+  max-width: 800px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding-top: 100px; /* Use padding instead of margin for spacing */
+  opacity: 0;
+  transform: translateY(20px);
+  animation: fadeIn 0.8s forwards ease-in-out; /* Fade-in effect for content */
+}
+
+.hero-title {
+  font-size: 3rem;
+  font-weight: bold;
+  margin-bottom: 20px;
+  color: #333;
+  transition: color 0.3s ease-in-out; /* Smooth color transition */
+}
+
+.hero-subtitle {
+  font-size: 1.2rem;
+  margin-bottom: 30px;
+  color: #666;
+  max-width: 600px;
+  transition: color 0.3s ease-in-out; /* Smooth color transition */
+}
+
+/* Image transitions */
+.hero-image {
+  width: 100%;
+  max-width: 600px;
+  height: auto;
+  border-radius: 10px;
+  margin-top: -120px;
+  transition: transform 0.5s ease, opacity 0.5s ease; /* Smooth scaling and opacity transitions */
+}
+
+.hero-content:hover .hero-image {
+  transform: scale(1.05); /* Slight zoom effect on hover */
+  opacity: 1;
+}
+
+/* Entrance animation for content */
+@keyframes fadeIn {
+  to {
+    opacity: 1;
+    transform: translateY(0); /* Slide up while fading in */
+  }
+}
+
+/* RESPONSIVENESS */
+@media (max-width: 768px) {
+  .hero-title {
+    font-size: 2rem;
+  }
+
+  .hero-subtitle {
+    font-size: 1rem;
+  }
+
+  .hero-image {
+    max-width: 100%;
+  }
+}
