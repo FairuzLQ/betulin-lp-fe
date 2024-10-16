@@ -1,8 +1,18 @@
-import React from 'react';
+import React, { useEffect } from 'react';
+import AOS from 'aos';
+import 'aos/dist/aos.css';
 import '../styles/MemilihKamiSection.css'; // Custom CSS for this section
 import { FaCrown, FaHandshake, FaShieldAlt, FaRegSmile } from 'react-icons/fa'; // Using icons to make it more creative
 
 const MemilihKamiSection = () => {
+  // Initialize AOS inside useEffect to make sure it runs when the component is mounted
+  useEffect(() => {
+    AOS.init({
+      duration: 1000, // You can adjust the animation duration here
+      once: true, // Ensure animations occur only once
+    });
+  }, []);
+
   return (
     <section className="memilih-kami-section">
       <h2 className="section-title" data-aos="fade-up">Kenapa Memilih Kami?</h2>
