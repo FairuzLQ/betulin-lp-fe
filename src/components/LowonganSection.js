@@ -35,7 +35,7 @@ const LowonganSection = () => {
 
   return (
     <section className="lowongan-section" data-aos="fade-up"> {/* Apply AOS animation */}
-      <h2 className="section-title" data-aos="fade-right">Lowongan Tersedia</h2>
+      <h2 className="section-title-lowongan" data-aos="fade-right">Lowongan Tersedia</h2>
       <div className="underline" data-aos="fade-right"></div>
 
       {/* Show this message if no jobs are available */}
