@@ -1,0 +1,81 @@
+/* Overall Section Styling */
+.karir-hero-section {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 80px 80px; /* Increased padding */
+    background-color: #ffffff; /* White background */
+    margin-top: 50px; /* Larger top margin */
+    box-shadow: 0 8px 15px rgba(0, 0, 0, 0.1); /* Subtle shadow for the section */
+  }
+  
+  /* Left Content Styling */
+  .karir-hero-content {
+    max-width: 50%;
+    padding-right: 40px; /* More padding on the right */
+  }
+  
+  .karir-hero-title {
+    font-size: 3rem;
+    color: #06479d;
+    
+  }
+  
+  .karir-hero-subtitle {
+    font-size: 1.2rem;
+    margin-bottom: 60px;
+    color: #555;
+  }
+  
+  .karir-hero-btn {
+    background-color: #ff6a00;
+    color: white;
+    padding: 15px 30px;
+    font-size: 1.2rem;
+    text-decoration: none;
+    border-radius: 50px;
+    transition: all 0.3s ease;
+  }
+  
+  .karir-hero-btn:hover {
+    transform: scale(1.1);
+    box-shadow: 0 0 15px rgba(255, 106, 0, 0.8);
+  }
+  
+  /* Right Image Styling */
+  .karir-hero-image img {
+    max-width: 100%;
+  }
+  
+  /* Responsive Styling */
+  @media (max-width: 768px) {
+    .karir-hero-section {
+      flex-direction: column;
+      text-align: center;
+      padding: 60px 20px; /* Adjust padding for smaller screens */
+    }
+  
+    .karir-hero-content {
+      max-width: 100%;
+      margin-bottom: 30px;
+      padding-right: 0;
+    }
+  
+    .karir-hero-image {
+      max-width: 100%;
+    }
+  
+    .karir-hero-title {
+      font-size: 2.5rem;
+    }
+  
+    .karir-hero-subtitle {
+      font-size: 1rem;
+    }
+  
+    .karir-hero-btn {
+      padding: 12px 25px;
+      font-size: 1rem;
+    }
+  }
+  
