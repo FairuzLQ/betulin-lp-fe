@@ -2,8 +2,8 @@
 .portfolio-section {
     display: flex;
     justify-content: space-between;
-    padding: 40px;
-    background-color: #f0f0f0;
+    padding: 40px 70px;
+    background-color: #F3F8FF;
     height: 100vh;
 }
   
@@ -100,6 +100,7 @@
 .card-front {
     background-color: #06479D;
     color: white;
+    font-size: 26px;
     background-size: cover; /* Ensure the image covers the entire card */
     background-position: center; /* Center the image in the card */
     background-repeat: no-repeat; /* Prevents background repetition */
@@ -112,6 +113,20 @@
     text-align: center;
 }
 
+.no-services {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    margin-top: 50px;
+  }
+  
+.no-services p {
+    font-size: 1.5rem;
+    color: #555;
+    margin-top: 20px;
+  }
+  
 /* Custom Scrollbar for Mobile */
 @media screen and (max-width: 768px) {
     .portfolio-section {
@@ -170,7 +185,8 @@
 
     .portfolio-services {
         grid-template-columns: 1fr; /* Single column layout for service cards */
-        gap: 15px;
+        gap: 35px;
+        padding: 0px 30px;
     }
 
     .service-card {

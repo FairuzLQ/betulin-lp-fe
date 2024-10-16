@@ -1,5 +1,8 @@
 import React, { useState, useEffect } from 'react';
+import AOS from 'aos';
+import 'aos/dist/aos.css'; // Import AOS styles
 import '../styles/PortofolioSection.css';
+import { FaSadTear } from 'react-icons/fa'; // Importing icon for no results
 
 const categories = [
   { id: 1, name: 'Utilitas Rumah', services: ['Atap', 'Plafon', 'Genteng', 'Dinding'] },
@@ -31,6 +34,9 @@ const PortfolioSection = () => {
   const [isDesktop, setIsDesktop] = useState(window.innerWidth >= 1024);
 
   useEffect(() => {
+    // Initialize AOS
+    AOS.init({ once: true });
+
     // Listen for window resize events to determine if it's desktop or not
     const handleResize = () => {
       setIsDesktop(window.innerWidth >= 1024);
@@ -49,6 +55,7 @@ const PortfolioSection = () => {
   const handleCategoryChange = (id) => {
     const category = categories.find(cat => cat.id === id);
     setSelectedCategory(category);
+    setSearchQuery(''); // Reset search query when category changes
   };
 
   // Calculate the number of rows required based on the number of services (3 services per row)
@@ -65,6 +72,7 @@ const PortfolioSection = () => {
             key={category.id}
             className={`carousel-item ${selectedCategory.id === category.id ? 'active' : ''}`}
             onClick={() => handleCategoryChange(category.id)}
+            data-aos="fade-right" // AOS animation on carousel items
           >
             <h3>{category.name}</h3>
           </div>
@@ -72,31 +80,40 @@ const PortfolioSection = () => {
       </div>
       
       <div className="portfolio-content">
-        <h2>{selectedCategory.name}</h2>
+        <h2 data-aos="fade-up">{selectedCategory.name}</h2>
         <input
           type="text"
           placeholder="Cari layanan..."
           value={searchQuery}
           onChange={(e) => setSearchQuery(e.target.value)}
           className="search-bar"
+          data-aos="fade-in"
         />
-        <div className="portfolio-services">
-          {filteredServices.map(service => (
-            <div className="service-card" key={service}>
-              <div className="card-inner">
-                <div
-                  className="card-front"
-                  style={{ backgroundImage: `url(${servicesWithImages[service]})` }} // Set background image dynamically
-                >
-                  <h4>{service}</h4>
-                </div>
-                <div className="card-back">
-                  <p>Detail service for {service}</p>
+
+        {filteredServices.length > 0 ? (
+          <div className="portfolio-services" data-aos="fade-up">
+            {filteredServices.map(service => (
+              <div className="service-card" key={service} data-aos="zoom-in">
+                <div className="card-inner">
+                  <div
+                    className="card-front"
+                    style={{ backgroundImage: `url(${servicesWithImages[service]})` }} // Set background image dynamically
+                  >
+                    <h4>{service}</h4>
+                  </div>
+                  <div className="card-back">
+                    <p>Detail service for {service}</p>
+                  </div>
                 </div>
               </div>
-            </div>
-          ))}
-        </div>
+            ))}
+          </div>
+        ) : (
+          <div className="no-services" data-aos="fade-up">
+            <FaSadTear size={50} color="#06479d" />
+            <p>Sayangnya layanan tersebut belum ada</p>
+          </div>
+        )}
       </div>
     </div>
   );
