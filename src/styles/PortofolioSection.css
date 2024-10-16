@@ -2,7 +2,7 @@
 .portfolio-section {
     display: flex;
     justify-content: space-between;
-    padding: 40px 70px;
+    padding: 30px 70px;
     background-color: #F3F8FF;
     height: 100vh;
 }
@@ -125,6 +125,7 @@
     font-size: 1.5rem;
     color: #555;
     margin-top: 20px;
+    text-align: center;
   }
   
 /* Custom Scrollbar for Mobile */
