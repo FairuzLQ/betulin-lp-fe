@@ -5,6 +5,7 @@ import Beranda from './pages/Beranda';
 import Karir from './pages/Karir';
 import KarirDetail from './pages/KarirDetail';
 import SyaratKetentuan from './pages/SyaratKetentuan';
+import KebijakanPrivasi from './pages/KebijakanPrivasi';
 import Layanan from './pages/Layanan';
 import Blog from './pages/Blog';
 import BlogKategori from './pages/BlogKategori';
@@ -24,6 +25,7 @@ function App() {
           <Route path="/karir" element={<Karir />} />
           <Route path="/karir-detail" element={<KarirDetail />} />
           <Route path="/syarat-ketentuan" element={<SyaratKetentuan />} />
+          <Route path="/kebijakan-privasi" element={<KebijakanPrivasi />} />
           <Route path="/layanan" element={<Layanan />} />
           <Route path="/blog" element={<Blog />} />
           <Route path="/blog-kategori" element={<BlogKategori />} />
