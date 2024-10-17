@@ -80,10 +80,10 @@ const PortfolioSection = () => {
       </div>
       
       <div className="portfolio-content">
-        <h2 data-aos="fade-up">{selectedCategory.name}</h2>
+        <h2 data-aos="fade-up">Layanan Kami</h2>
         <input
           type="text"
-          placeholder="Cari layanan..."
+          placeholder="Mau betulin apa?"
           value={searchQuery}
           onChange={(e) => setSearchQuery(e.target.value)}
           className="search-bar"

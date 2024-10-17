@@ -1,129 +1,149 @@
-/* Overall section styling */
+/* Overall Hero Section Styling */
 .layanan-hero-section {
-    position: relative;
-    width: 100%;
-    height: 500px; /* Set a shorter height */
-    background-image: url('../assets/images/layanan-img.png'); /* Set your background image */
-    background-size: cover;
-    background-position: center;
     display: flex;
-    justify-content: center;
+    justify-content: space-between;
     align-items: center;
-    text-align: center; /* Ensures content stays centered vertically and horizontally */
-}
-
-/* Overlay to darken the background for readability */
-.layanan-hero-overlay {
+    padding: 60px 80px;
+    background-color: white;
+    position: relative;
+    overflow: hidden;
+  }
+  
+  /* Left Content Styling */
+  .layanan-hero-content {
+    max-width: 50%;
+    z-index: 2;
+    padding-right: 20px;
+  }
+  
+  .layanan-hero-title {
+    font-size: 3.5rem;
+    color: #06479d;
+    margin-bottom: 20px;
+    line-height: 1.2;
+    animation: fadeInLeft 1.2s ease-in-out;
+  }
+  
+  .highlight-text {
+    color: #ff6a00;
+    position: relative;
+  }
+  
+  .layanan-hero-subtitle {
+    font-size: 1.2rem;
+    color: #555;
+    margin-bottom: 40px;
+    animation: fadeInLeft 1.5s ease-in-out;
+  }
+  
+  .layanan-hero-btn {
+    padding: 15px 30px;
+    font-size: 1.2rem;
+    font-weight: bold;
+    color: white;
+    background-color: #ff6a00;
+    text-decoration: none;
+    border-radius: 50px;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    animation: fadeInLeft 1.8s ease-in-out;
+  }
+  
+  .layanan-hero-btn:hover {
+    transform: scale(1.1);
+    box-shadow: 0 8px 20px rgba(255, 106, 0, 0.8);
+  }
+  
+  /* Right Image Styling */
+  .layanan-hero-image {
+    max-width: 45%;
+    z-index: 2;
+    animation: fadeInRight 1.5s ease-in-out;
+  }
+  
+  .layanan-hero-image img {
+    max-width: 100%;
+    border-radius: 10px;
+  }
+  
+  /* Background Animation */
+  .layanan-hero-section::before {
+    content: '';
     position: absolute;
     top: 0;
-    left: 0;
     right: 0;
-    bottom: 0;
-    background-color: rgba(0, 0, 0, 0.5); /* Dark overlay */
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    color: #fff;
-    animation: fadeIn 1s ease-in; /* Add fade-in animation */
-}
-
-/* Title styling */
-.layanan-hero-title {
-    font-size: 36px;
-    font-weight: bold;
-    margin-bottom: 5px;
-    animation: slideInFromBottom 1s ease-in-out; /* Slide-in effect */
-}
-
-/* Subtitle styling */
-.layanan-hero-subtitle {
-    font-size: 18px;
-    margin-bottom: 30px;
-    animation: slideInFromBottom 1.2s ease-in-out; /* Slide-in with delay */
-}
-
-/* Search bar container */
-.layanan-hero-searchbar {
-    display: flex;
-    align-items: center;
-    width: 70%; /* Reduced width */
-    max-width: 400px; /* Smaller max-width for search bar */
-    transition: width 0.3s ease-in-out;
-}
-
-/* Search input styling */
-.layanan-hero-input {
-    flex: 1;
-    padding: 15px 20px; /* Taller search input */
-    font-size: 16px;
-    border: none;
-    border-radius: 5px 0 0 5px;
-    outline: none;
-    transition: box-shadow 0.3s ease-in-out; /* Smooth focus effect */
-}
-
-.layanan-hero-input:focus {
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2); /* Shadow on focus */
-}
-
-/* Search button styling */
-.layanan-hero-search-btn {
-    padding: 15px 20px; /* Taller search button */
-    background-color: #06479D;
-    color: white;
-    border: none;
-    border-radius: 0 5px 5px 0;
-    cursor: pointer;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 18px;
-    transition: background-color 0.3s ease-in-out, transform 0.3s ease-in-out;
-}
-
-.layanan-hero-search-btn:hover {
-    background-color: #003A7D;
-    transform: scale(1.05); /* Slight scaling effect on hover */
-}
-
-/* Animations for content */
-@keyframes fadeIn {
+    width: 600px;
+    height: 600px;
+    background-color: #06479d;
+    border-radius: 50%;
+    z-index: 1;
+    animation: scaleUp 1.5s ease-in-out;
+  }
+  
+  /* Keyframes for fade-in and background animation */
+  @keyframes fadeInLeft {
     from {
-        opacity: 0;
+      opacity: 0;
+      transform: translateX(-50px);
     }
     to {
-        opacity: 1;
+      opacity: 1;
+      transform: translateX(0);
     }
-}
-
-@keyframes slideInFromBottom {
+  }
+  
+  @keyframes fadeInRight {
     from {
-        transform: translateY(50px);
-        opacity: 0;
+      opacity: 0;
+      transform: translateX(50px);
     }
     to {
-        transform: translateY(0);
-        opacity: 1;
+      opacity: 1;
+      transform: translateX(0);
     }
-}
-
-/* Responsive Design */
-@media screen and (max-width: 768px) {
+  }
+  
+  @keyframes scaleUp {
+    from {
+      transform: scale(0);
+    }
+    to {
+      transform: scale(1);
+    }
+  }
+  
+  /* Responsive Design */
+  @media (max-width: 768px) {
+    .layanan-hero-section {
+      flex-direction: column;
+      text-align: center;
+    }
+  
+    .layanan-hero-content {
+      max-width: 100%;
+      padding-right: 0;
+      margin-bottom: 40px;
+    }
+  
     .layanan-hero-title {
-        font-size: 28px;
+      font-size: 2.5rem;
     }
-
+  
     .layanan-hero-subtitle {
-        font-size: 16px;
+      font-size: 1rem;
     }
-
-    .layanan-hero-searchbar {
-        width: 90%; /* Adapt search bar width for smaller screens */
+  
+    .layanan-hero-btn {
+      font-size: 1rem;
+      padding: 12px 25px;
     }
-
-    .layanan-hero-input,
-    .layanan-hero-search-btn {
-        padding: 12px 15px; /* Reduce padding on smaller screens */
+  
+    .layanan-hero-image {
+      max-width: 80%;
     }
-}
+  
+    .layanan-hero-section::before {
+      width: 400px;
+      height: 400px;
+    }
+  }
+  

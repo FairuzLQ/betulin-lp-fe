@@ -1,27 +1,24 @@
 import React from 'react';
-import '../styles/LayananHeroSection.css'; // Ensure you have this CSS file for styling
-import backgroundImage from '../assets/images/layanan-img.png'; // Replace with your actual image path
-import { FaSearch } from 'react-icons/fa'; // Import search icon
+import '../styles/LayananHeroSection.css'; // Custom CSS for this section
+import layananImage from '../assets/images/search-service.svg'; // Importing the image
 
 const LayananHeroSection = () => {
-    return (
-        <section className="layanan-hero-section">
-            <div className="layanan-hero-overlay">
-                <h1 className="layanan-hero-title">Layanan Kami</h1>
-                <p className="layanan-hero-subtitle">Betulin Aja Disini!</p>
-                <div className="layanan-hero-searchbar">
-                    <input 
-                        type="text" 
-                        placeholder="Mau betulin apa?" 
-                        className="layanan-hero-input" 
-                    />
-                    <button className="layanan-hero-search-btn">
-                        <FaSearch />
-                    </button>
-                </div>
-            </div>
-        </section>
-    );
+  return (
+    <section className="layanan-hero-section">
+      <div className="layanan-hero-content">
+        <h1 className="layanan-hero-title">
+          Solusi Layanan <span className="highlight-text">Terbaik</span> untuk Anda
+        </h1>
+        <p className="layanan-hero-subtitle">
+          Kami menyediakan berbagai layanan rumah dan kantor dengan tenaga ahli profesional. Percayakan kepada kami!
+        </p>
+        <a href="#services" className="layanan-hero-btn">Lihat Layanan Kami</a>
+      </div>
+      <div className="layanan-hero-image">
+        <img src={layananImage} alt="Layanan Hero" />
+      </div>
+    </section>
+  );
 };
 
 export default LayananHeroSection;
