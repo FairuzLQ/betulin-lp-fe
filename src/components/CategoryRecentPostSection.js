@@ -59,7 +59,7 @@ const CategoryRecentPostSection = () => {
         ))}
       </div>
       <div className="custom-category-more">
-        <a href="/category/technology" className="custom-more-link">
+        <a href="/blog-kategori" className="custom-more-link">
           Lainnya &gt;
         </a>
       </div>

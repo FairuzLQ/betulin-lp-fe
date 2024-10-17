@@ -1,0 +1,168 @@
+/* BlogKategori Section */
+.blog-kategori-section {
+    padding: 70px;
+    background-color: #f7f9fc;
+  }
+  
+  /* BlogKategori Header */
+  .blog-kategori-header h2 {
+    font-size: 2.5rem;
+    color: #06479d;
+    margin-top: 60px;
+  }
+  
+  .blog-kategori-underline {
+    width: 100px;
+    height: 4px;
+    background-color: #06479d;
+    margin: 10px 0 30px;
+  }
+  
+  /* BlogKategori Content */
+  .blog-kategori-content {
+    display: flex;
+    justify-content: space-between;
+  }
+  
+  /* Post Cards Styling */
+  .blog-kategori-post-cards {
+    flex: 2;
+    display: flex;
+    flex-direction: column;
+    gap: 50px;
+  }
+  
+  .blog-kategori-post-card {
+    display: flex;
+    background-color: white;
+    border-radius: 10px;
+    overflow: hidden;
+    box-shadow: 0 8px 15px rgba(0, 0, 0, 0.1);
+    width: 100%;
+  }
+  
+  .blog-kategori-post-image {
+    width: 40%;
+    height: 100%;
+    object-fit: cover;
+  }
+  
+  .blog-kategori-post-details {
+    padding: 20px;
+    flex: 1;
+  }
+  
+  .blog-kategori-post-details h3 {
+    font-size: 1.5rem;
+    margin-bottom: 10px;
+    color: #06479d;
+  }
+  
+  .blog-kategori-post-details h3 a {
+    text-decoration: none;
+    color: inherit;
+    transition: color 0.3s ease;
+  }
+  
+  .blog-kategori-post-details h3 a:hover {
+    color: #052a75;
+  }
+  
+  .blog-kategori-post-details .author-date {
+    font-size: 0.9rem;
+    color: #888;
+    margin-bottom: 10px;
+  }
+  
+  .blog-kategori-post-details p {
+    font-size: 1rem;
+    color: #555;
+  }
+  
+  /* Extra Section (e.g., Featured Posts) */
+  .blog-kategori-extra-section {
+    flex: 1;
+    background-color: #f9f9f9;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 8px 15px rgba(0, 0, 0, 0.1);
+    margin-left: 40px;
+  }
+  
+  .blog-kategori-featured-post {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
+  }
+  
+  .blog-kategori-featured-post .post {
+    background-color: #ffffff;
+    border-radius: 10px;
+    overflow: hidden;
+    box-shadow: 0 8px 15px rgba(0, 0, 0, 0.1);
+  }
+  
+  .blog-kategori-featured-post img {
+    width: 100%;
+    height: auto;
+    border-radius: 5px;
+  }
+  
+  .blog-kategori-featured-post h4 {
+    font-size: 1.2rem;
+    margin: 10px 10px 0;
+  }
+  
+  .blog-kategori-featured-post p {
+    font-size: 0.9rem;
+    color: #555;
+    padding: 10px;
+  }
+  
+  /* Responsive Styling for Mobile */
+  @media (max-width: 768px) {
+    .blog-kategori-content {
+      flex-direction: column;
+    }
+  
+    .blog-kategori-post-cards {
+      flex-direction: column;
+      gap: 30px;
+    }
+  
+    .blog-kategori-extra-section {
+      margin-top: 30px;
+    }
+  
+    .blog-kategori-featured-post {
+      grid-template-columns: 1fr;
+    }
+  }
+  
+/* Pagination Styling */
+.blog-kategori-pagination {
+    margin-top: 30px;
+    text-align: center;
+  }
+  
+  .pagination-btn {
+    background-color: #f9f9f9;
+    color: #06479d;
+    border: 1px solid #06479d;
+    padding: 10px 15px;
+    margin: 0 5px;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+  }
+  
+  .pagination-btn.active {
+    background-color: #06479d;
+    color: white;
+  }
+  
+  .pagination-btn:hover {
+    background-color: #052a75;
+    color: white;
+  }
+  
