@@ -1,149 +1,184 @@
 /* Overall Hero Section Styling */
 .layanan-hero-section {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 60px 80px;
-    background-color: white;
-    position: relative;
-    overflow: hidden;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 60px 80px;
+  background-color: white;
+  position: relative;
+  overflow: hidden;
+}
+
+/* Left Content Styling */
+.layanan-hero-content {
+  max-width: 50%;
+  z-index: 2;
+  padding-right: 20px;
+}
+
+.layanan-hero-title {
+  font-size: 3.5rem;
+  color: #06479d;
+  margin-bottom: 20px;
+  line-height: 1.2;
+  animation: fadeInLeft 1.2s ease-in-out;
+}
+
+.highlight-text {
+  color: #ff6a00;
+  position: relative;
+}
+
+.layanan-hero-subtitle {
+  font-size: 1.2rem;
+  color: #555;
+  margin-bottom: 40px;
+  animation: fadeInLeft 1.5s ease-in-out;
+}
+
+.layanan-hero-btn {
+  padding: 15px 30px;
+  font-size: 1.2rem;
+  font-weight: bold;
+  color: white;
+  background-color: #ff6a00;
+  text-decoration: none;
+  border-radius: 50px;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  animation: fadeInLeft 1.8s ease-in-out;
+}
+
+.layanan-hero-btn:hover {
+  transform: scale(1.1);
+  box-shadow: 0 8px 20px rgba(255, 106, 0, 0.8);
+}
+
+/* Right Image Styling */
+.layanan-hero-image {
+  max-width: 45%;
+  z-index: 2;
+  animation: fadeInRight 1.5s ease-in-out;
+}
+
+.layanan-hero-image img {
+  max-width: 100%;
+  border-radius: 10px;
+}
+
+/* Keyframes for fade-in and background animation */
+@keyframes fadeInLeft {
+  from {
+    opacity: 0;
+    transform: translateX(-50px);
   }
-  
-  /* Left Content Styling */
-  .layanan-hero-content {
-    max-width: 50%;
-    z-index: 2;
-    padding-right: 20px;
+  to {
+    opacity: 1;
+    transform: translateX(0);
   }
-  
+}
+
+@keyframes fadeInRight {
+  from {
+    opacity: 0;
+    transform: translateX(50px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes scaleUp {
+  from {
+    transform: scale(0);
+  }
+  to {
+    transform: scale(1);
+  }
+}
+
+/* Responsive Design */
+@media (max-width: 1024px) {
+  .layanan-hero-section {
+    padding: 50px 40px;
+  }
+
   .layanan-hero-title {
-    font-size: 3.5rem;
-    color: #06479d;
-    margin-bottom: 20px;
-    line-height: 1.2;
-    animation: fadeInLeft 1.2s ease-in-out;
+    font-size: 3rem;
   }
-  
-  .highlight-text {
-    color: #ff6a00;
-    position: relative;
-  }
-  
+
   .layanan-hero-subtitle {
-    font-size: 1.2rem;
-    color: #555;
-    margin-bottom: 40px;
-    animation: fadeInLeft 1.5s ease-in-out;
+    font-size: 1.1rem;
   }
-  
+
   .layanan-hero-btn {
-    padding: 15px 30px;
-    font-size: 1.2rem;
-    font-weight: bold;
-    color: white;
-    background-color: #ff6a00;
-    text-decoration: none;
-    border-radius: 50px;
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
-    animation: fadeInLeft 1.8s ease-in-out;
+    font-size: 1.1rem;
+    padding: 13px 28px;
   }
-  
-  .layanan-hero-btn:hover {
-    transform: scale(1.1);
-    box-shadow: 0 8px 20px rgba(255, 106, 0, 0.8);
-  }
-  
-  /* Right Image Styling */
+
   .layanan-hero-image {
-    max-width: 45%;
-    z-index: 2;
-    animation: fadeInRight 1.5s ease-in-out;
+    max-width: 50%;
   }
-  
-  .layanan-hero-image img {
+}
+
+@media (max-width: 768px) {
+  .layanan-hero-section {
+    flex-direction: column;
+    text-align: center;
+    padding: 40px 30px;
+  }
+
+  .layanan-hero-content {
     max-width: 100%;
-    border-radius: 10px;
+    padding-right: 0;
+    margin-bottom: 40px;
+    margin-top: 90px;
   }
-  
-  /* Background Animation */
+
+  .layanan-hero-title {
+    font-size: 2.5rem;
+  }
+
+  .layanan-hero-subtitle {
+    font-size: 1rem;
+  }
+
+  .layanan-hero-btn {
+    font-size: 1rem;
+    padding: 12px 25px;
+  }
+
+  .layanan-hero-image {
+    max-width: 80%;
+  }
+
   .layanan-hero-section::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    right: 0;
-    width: 600px;
-    height: 600px;
-    background-color: #06479d;
-    border-radius: 50%;
-    z-index: 1;
-    animation: scaleUp 1.5s ease-in-out;
+    width: 40px;
+    height: 40px;
   }
-  
-  /* Keyframes for fade-in and background animation */
-  @keyframes fadeInLeft {
-    from {
-      opacity: 0;
-      transform: translateX(-50px);
-    }
-    to {
-      opacity: 1;
-      transform: translateX(0);
-    }
+}
+
+@media (max-width: 480px) {
+  .layanan-hero-section {
+    padding: 30px 20px;
   }
-  
-  @keyframes fadeInRight {
-    from {
-      opacity: 0;
-      transform: translateX(50px);
-    }
-    to {
-      opacity: 1;
-      transform: translateX(0);
-    }
+
+  .layanan-hero-title {
+    font-size: 2rem;
   }
-  
-  @keyframes scaleUp {
-    from {
-      transform: scale(0);
-    }
-    to {
-      transform: scale(1);
-    }
+
+  .layanan-hero-subtitle {
+    font-size: 0.9rem;
   }
-  
-  /* Responsive Design */
-  @media (max-width: 768px) {
-    .layanan-hero-section {
-      flex-direction: column;
-      text-align: center;
-    }
-  
-    .layanan-hero-content {
-      max-width: 100%;
-      padding-right: 0;
-      margin-bottom: 40px;
-    }
-  
-    .layanan-hero-title {
-      font-size: 2.5rem;
-    }
-  
-    .layanan-hero-subtitle {
-      font-size: 1rem;
-    }
-  
-    .layanan-hero-btn {
-      font-size: 1rem;
-      padding: 12px 25px;
-    }
-  
-    .layanan-hero-image {
-      max-width: 80%;
-    }
-  
-    .layanan-hero-section::before {
-      width: 400px;
-      height: 400px;
-    }
+
+  .layanan-hero-btn {
+    font-size: 0.9rem;
+    padding: 10px 20px;
   }
-  
+
+  .layanan-hero-image {
+    max-width: 90%;
+  }
+
+
+}

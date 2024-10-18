@@ -51,7 +51,7 @@ const CategoryRecentPostSection = () => {
               </small>
               <h3 className="custom-post-title">{post.title}</h3>
               <p className="custom-post-excerpt">{post.excerpt}</p>
-              <a href={post.link} className="custom-post-detail-button">
+              <a href="/blog-post" className="custom-post-detail-button">
                 Lihat Detail
               </a>
             </div>

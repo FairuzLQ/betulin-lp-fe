@@ -4,19 +4,20 @@
     background-color: #f7f9fc;
 }
 
-  /* BlogKategori Header */
-  .blog-kategori-header h2 {
+/* BlogKategori Header */
+.blog-kategori-header h2 {
     font-size: 2.5rem;
     color: #06479d;
     margin-top: 60px;
-  }
-  
-  .blog-kategori-underline {
+}
+
+.blog-kategori-underline {
     width: 100px;
     height: 4px;
     background-color: #06479d;
     margin: 10px 0 30px;
-  }
+}
+
 /* Wrapper to contain both left and right sections */
 .blog-kategori-content-wrapper {
     display: flex;
@@ -71,6 +72,7 @@
 .blog-kategori-post-details .excerpt-post-category {
     margin-top: 30px;
 }
+
 /* Pagination Styling */
 .blog-kategori-pagination {
     margin-top: 30px;
@@ -103,9 +105,21 @@
     margin-bottom: 30px;
 }
 
+.trending-posts h3 {
+    font-size: 1.5rem;
+    color: #06479d;
+    margin-bottom: 15px;
+    border-bottom: 3px solid #06479d; /* Add underline */
+    display: inline-block;
+}
+
 .trending-post {
     display: flex;
     align-items: center;
+    background-color: white; /* Add card background */
+    padding: 15px;
+    border-radius: 10px;
+    box-shadow: 0 8px 15px rgba(0, 0, 0, 0.1);
     margin-bottom: 15px;
 }
 
@@ -148,7 +162,7 @@
 .banner-section {
     display: flex;
     flex-direction: column;
-    gap: 15px;
+    gap: 25px;
 }
 
 .banner {
@@ -157,6 +171,10 @@
     padding: 20px;
     text-align: center;
     border-radius: 10px;
+}
+
+.banner h4 {
+    margin-bottom: 20px;
 }
 
 .banner-btn {
