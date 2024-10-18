@@ -54,7 +54,7 @@ const LowonganSection = () => {
                 <p className="job-details">
                   {job.type} <span className="divider">|</span> {job.location}
                 </p>
-                <button className="apply-btn">Lamar</button>
+                <button className="apply-btn"><a href='/karir-detail'>Lamar</a></button>
               </div>
             ))}
           </div>

@@ -1,0 +1,170 @@
+/* KarirDetail Styling */
+.karir-detail-page {
+    padding: 70px;
+    background-color: white;
+    margin-top: 80px;
+  }
+  
+  /* Wrapper for both left and right sections */
+  .karir-detail-content-wrapper {
+    display: flex;
+    justify-content: space-between;
+  }
+  
+  /* Left Side: Position Details */
+  .karir-detail-left {
+    flex: 2;
+  }
+  
+  .karir-detail-position {
+    font-size: 2.5rem;
+    color: #06479d;
+    margin-bottom: 20px;
+  }
+  
+  .karir-detail-date-posted {
+    font-size: 1.1rem;
+    color: #888;
+    margin-bottom: 10px;
+  }
+  
+  .karir-detail-division {
+    font-size: 1.1rem;
+    color: #06479d;
+    margin-bottom: 30px;
+  }
+  
+  .karir-detail-content {
+    margin-top: 20px;
+  }
+  
+  .karir-detail-section {
+    margin-bottom: 20px;
+  }
+  
+  .karir-detail-section-title {
+    font-size: 1.5rem;
+    color: #06479d;
+    margin-bottom: 10px;
+  }
+  
+  .karir-detail-section-description {
+    font-size: 1.2rem;
+    color: #555;
+    line-height: 1.6;
+  }
+  
+  /* Right Side: Job Summary, Social Media, Banners */
+  .karir-detail-right {
+    flex: 1;
+    padding-left: 30px;
+  }
+  
+  /* Job Summary Card */
+  .karir-detail-job-summary-card {
+    background-color: white;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 8px 15px rgba(0, 0, 0, 0.1);
+    margin-bottom: 30px;
+  }
+  
+  .karir-detail-job-summary-title {
+    font-size: 1.5rem;
+    color: #06479d;
+    margin-bottom: 15px;
+    border-bottom: 3px solid #06479d;
+    display: inline-block;
+  }
+  
+  .karir-detail-job-summary-content p {
+    font-size: 1.1rem;
+    color: #555;
+    margin-bottom: 10px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+  
+  /* Apply Now Button */
+  .karir-detail-apply-btn {
+    display: inline-block;
+    background-color: #ff6a00;
+    color: white;
+    padding: 12px 30px;
+    border-radius: 50px;
+    text-decoration: none;
+    text-align: center;
+    margin-top: 20px;
+    transition: all 0.3s ease;
+  }
+  
+  .karir-detail-apply-btn:hover {
+    background-color: #e65d00;
+  }
+  
+  /* Social Media Section */
+  .karir-detail-social-media-section {
+    margin-bottom: 30px;
+  }
+  
+  .karir-detail-social-media-list {
+    list-style: none;
+    padding: 0;
+  }
+  
+  .karir-detail-social-media-list li {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 10px;
+  }
+  
+  .karir-detail-social-media-list a {
+    text-decoration: none;
+    color: #06479d;
+  }
+  
+  /* Banners */
+  .karir-detail-banner-section {
+    display: flex;
+    flex-direction: column;
+    gap: 25px;
+  }
+  
+  .karir-detail-banner {
+    background-color: #06479d;
+    color: white;
+    padding: 20px;
+    text-align: center;
+    border-radius: 10px;
+  }
+  
+  .karir-detail-banner h4 {
+    margin-bottom: 20px;
+  }
+  
+  .karir-detail-banner-btn {
+    background-color: white;
+    color: #06479d;
+    padding: 10px 20px;
+    border-radius: 5px;
+    text-decoration: none;
+  }
+  
+  .karir-detail-banner-btn:hover {
+    background-color: #f9f9f9;
+  }
+  
+  /* Responsive Design */
+  @media (max-width: 768px) {
+    .karir-detail-content-wrapper {
+      flex-direction: column;
+    }
+  
+    .karir-detail-right {
+      margin-top: 30px;
+      padding-left: 0;
+    }
+  }
+  
