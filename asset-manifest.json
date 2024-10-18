@@ -1,0 +1,32 @@
+{
+  "files": {
+    "main.css": "/betulin-fe/static/css/main.d11426b8.css",
+    "main.js": "/betulin-fe/static/js/main.b302702b.js",
+    "static/js/453.06d6a2c8.chunk.js": "/betulin-fe/static/js/453.06d6a2c8.chunk.js",
+    "static/media/back.mp4": "/betulin-fe/static/media/back.217bc138c2eb8d98fc50.mp4",
+    "static/media/boxicons.svg": "/betulin-fe/static/media/boxicons.9e2b21b135bc7d4c803f.svg",
+    "static/media/layanan-img.png": "/betulin-fe/static/media/layanan-img.19d3efabc39944ff2258.png",
+    "static/media/boxicons.eot": "/betulin-fe/static/media/boxicons.65a8ce52fc5427e8f94d.eot",
+    "static/media/woi-test.jpg": "/betulin-fe/static/media/woi-test.34f4a9b4b38ee0dc6040.jpg",
+    "static/media/boxicons.woff": "/betulin-fe/static/media/boxicons.d12afc36557395143e4b.woff",
+    "static/media/boxicons.ttf": "/betulin-fe/static/media/boxicons.db9ddb1898dbd76badca.ttf",
+    "static/media/ex-prinsip1.png": "/betulin-fe/static/media/ex-prinsip1.c0ccec103d61208178d9.png",
+    "static/media/ex-prinsip2.png": "/betulin-fe/static/media/ex-prinsip2.fb3c9bc9c4aaf9313bf1.png",
+    "static/media/download-img.png": "/betulin-fe/static/media/download-img.85cd88c2768813ed8811.png",
+    "static/media/boxicons.woff2": "/betulin-fe/static/media/boxicons.df635aaf04cd75132f62.woff2",
+    "static/media/tim.png": "/betulin-fe/static/media/tim.c71d0eb7c658471ce1e1.png",
+    "static/media/karir-tim-hero.png": "/betulin-fe/static/media/karir-tim-hero.37032b03d55f3aca3074.png",
+    "static/media/karir-benefit.png": "/betulin-fe/static/media/karir-benefit.ac57b7df91e9a61e919f.png",
+    "static/media/cs-image.png": "/betulin-fe/static/media/cs-image.deb270f8d990dadf0171.png",
+    "static/media/google-play-badge.svg": "/betulin-fe/static/media/google-play-badge.547ed9516509db9a3d347be73ee4d555.svg",
+    "static/media/search-service.svg": "/betulin-fe/static/media/search-service.726dd64d5b2638bde0999243141d72ac.svg",
+    "index.html": "/betulin-fe/index.html",
+    "main.d11426b8.css.map": "/betulin-fe/static/css/main.d11426b8.css.map",
+    "main.b302702b.js.map": "/betulin-fe/static/js/main.b302702b.js.map",
+    "453.06d6a2c8.chunk.js.map": "/betulin-fe/static/js/453.06d6a2c8.chunk.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.d11426b8.css",
+    "static/js/main.b302702b.js"
+  ]
+}
