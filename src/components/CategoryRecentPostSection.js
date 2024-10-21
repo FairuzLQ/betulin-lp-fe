@@ -1,11 +1,20 @@
-import React from 'react';
+import React, { useEffect } from 'react';
+import AOS from 'aos'; // Import AOS
+import 'aos/dist/aos.css'; // Import AOS styles
 import '../styles/CategoryRecentPostSection.css'; // Keeping the file name the same
-// Import images or pass them dynamically
 import image1 from '../assets/images/layanan-img.png';
 import image2 from '../assets/images/layanan-img.png';
 import image3 from '../assets/images/layanan-img.png';
 
 const CategoryRecentPostSection = () => {
+  // Initialize AOS
+  useEffect(() => {
+    AOS.init({
+      duration: 1000, // Animation duration
+      once: true, // Trigger animation only once when scrolled into view
+    });
+  }, []);
+
   const posts = [
     {
       image: image1,
@@ -34,14 +43,14 @@ const CategoryRecentPostSection = () => {
   ];
 
   return (
-    <section className="custom-category-recent-post">
-      <div className="custom-category-header">
+    <section className="custom-category-recent-post" data-aos="fade-up">
+      <div className="custom-category-header" data-aos="fade-right">
         <h2>Technology</h2>
         <div className="custom-underline"></div>
       </div>
       <div className="custom-category-posts">
         {posts.map((post, index) => (
-          <div key={index} className="custom-category-post">
+          <div key={index} className="custom-category-post" data-aos="zoom-in" data-aos-delay={`${index * 200}`}>
             <div className="custom-post-image">
               <img src={post.image} alt={post.title} />
             </div>
@@ -58,7 +67,7 @@ const CategoryRecentPostSection = () => {
           </div>
         ))}
       </div>
-      <div className="custom-category-more">
+      <div className="custom-category-more" data-aos="fade-up">
         <a href="/blog-kategori" className="custom-more-link">
           Lainnya &gt;
         </a>

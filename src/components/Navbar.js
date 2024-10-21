@@ -11,6 +11,11 @@ const Navbar = () => {
     setMenuOpen(!menuOpen);
   };
 
+  // Function to close the menu on link click
+  const closeMenu = () => {
+    setMenuOpen(false);
+  };
+
   return (
     <header className="navbar">
       <div className="navbar__logo">
@@ -24,6 +29,7 @@ const Navbar = () => {
               to="/"
               className="navbar__link"
               activeClassName="active-link"
+              onClick={closeMenu} // Close menu on click
             >
               Beranda
             </NavLink>
@@ -33,6 +39,7 @@ const Navbar = () => {
               to="/layanan"
               className="navbar__link"
               activeClassName="active-link"
+              onClick={closeMenu} // Close menu on click
             >
               Layanan
             </NavLink>
@@ -42,6 +49,7 @@ const Navbar = () => {
               to="/tentang-kami"
               className="navbar__link"
               activeClassName="active-link"
+              onClick={closeMenu} // Close menu on click
             >
               Tentang Kami
             </NavLink>
@@ -51,6 +59,7 @@ const Navbar = () => {
               to="/karir"
               className="navbar__link"
               activeClassName="active-link"
+              onClick={closeMenu} // Close menu on click
             >
               Karir
             </NavLink>
@@ -60,6 +69,7 @@ const Navbar = () => {
               to="/blog"
               className="navbar__link"
               activeClassName="active-link"
+              onClick={closeMenu} // Close menu on click
             >
               Blog
             </NavLink>

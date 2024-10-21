@@ -38,6 +38,7 @@
 
 .blog-kategori-post-card {
     display: flex;
+    flex-direction: row; /* Default layout: horizontal */
     background-color: white;
     border-radius: 10px;
     overflow: hidden;
@@ -198,5 +199,19 @@
     .blog-kategori-right {
         margin-top: 30px;
         padding-left: 0;
+    }
+
+    /* Make the post cards vertical on mobile */
+    .blog-kategori-post-card {
+        flex-direction: column; /* Change to vertical layout */
+    }
+
+    .blog-kategori-post-image {
+        width: 100%; /* Make the image take full width */
+        height: auto; /* Ensure the image scales properly */
+    }
+
+    .blog-kategori-post-details {
+        padding: 15px;
     }
 }
