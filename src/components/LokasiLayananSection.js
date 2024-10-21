@@ -1,9 +1,11 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { MapContainer, TileLayer, Circle, Marker, Popup } from 'react-leaflet';
 import 'leaflet/dist/leaflet.css';
 import L from 'leaflet';
 import 'leaflet-defaulticon-compatibility';
 import 'leaflet-defaulticon-compatibility/dist/leaflet-defaulticon-compatibility.css';
+import AOS from 'aos'; // Import AOS
+import 'aos/dist/aos.css'; // Import AOS styles
 import '../styles/LokasiLayananSection.css';
 
 // Coordinates for each city in Jabodetabek
@@ -21,11 +23,19 @@ const customMarkerIcon = new L.Icon({
 });
 
 const LokasiLayananSection = () => {
+  // Initialize AOS
+  useEffect(() => {
+    AOS.init({
+      duration: 1000, // Animation duration
+      once: true, // Ensure the animation happens only once while scrolling
+    });
+  }, []);
+
   return (
-    <section className="lokasi-layanan-section">
-      <div className="lokasi-header">
+    <section className="lokasi-layanan-section" data-aos="fade-up">
+      <div className="lokasi-header" data-aos="fade-down">
         <h2>Kami tersedia di Jabodetabek</h2>
-        <div className="lokasi-subtext">
+        <div className="lokasi-subtext" data-aos="fade-up" data-aos-delay="200">
           <div className="subtext-item">
             <span className="subtext-number">100</span>
             <span className="subtext-text">Tukang</span>
@@ -38,7 +48,7 @@ const LokasiLayananSection = () => {
         </div>
       </div>
 
-      <div className="lokasi-map">
+      <div className="lokasi-map" data-aos="zoom-in" data-aos-delay="400">
         <MapContainer 
           center={jabodetabekCenter} 
           zoom={10} 
