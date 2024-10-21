@@ -13,11 +13,13 @@ import BlogPost from './pages/BlogPost';
 import TentangKami from './pages/TentangKami';
 import ScrollToTop from './components/ScrollToTop'; // Import ScrollToTop component
 import './styles/global.css'; 
+import ScrollToTopButton from './components/ScrollToTopButton';
 
 function App() {
   return (
     <Router>
       <ScrollToTop /> {/* Ensure page scrolls to top on route change */}
+      <ScrollToTopButton />
       <div>
         <Navbar /> {/* Navbar will appear on all pages */}
         <Routes>

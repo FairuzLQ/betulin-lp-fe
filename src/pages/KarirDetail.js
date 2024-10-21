@@ -1,8 +1,18 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { FaFacebook, FaTwitter, FaInstagram, FaShareAlt, FaMapMarkerAlt, FaClock, FaCalendarAlt, FaBriefcase, FaCalendarDay, FaEnvelope } from 'react-icons/fa'; // Font Awesome Icons
+import AOS from 'aos'; // Import AOS
+import 'aos/dist/aos.css'; // Import AOS styles
 import '../styles/KarirDetail.css'; // Custom CSS for KarirDetail
 
 const KarirDetail = () => {
+  // Initialize AOS
+  useEffect(() => {
+    AOS.init({
+      duration: 1000, // Animation duration in milliseconds
+      once: true, // Trigger the animation only once when scrolling
+    });
+  }, []);
+
   // Dummy Data for a career detail
   const selectedPosition = {
     id: 1,
@@ -37,17 +47,17 @@ const KarirDetail = () => {
   };
 
   return (
-    <section className="karir-detail-page">
+    <section className="karir-detail-page" data-aos="fade-up">
       <div className="karir-detail-content-wrapper">
         {/* Left Side: Position Detail Section */}
-        <div className="karir-detail-left">
+        <div className="karir-detail-left" data-aos="fade-right">
           <h1 className="karir-detail-position">{selectedPosition.position}</h1>
           <p className="karir-detail-date-posted">Posted on: {selectedPosition.datePosted}</p>
           <p className="karir-detail-division">Division: {selectedPosition.division}</p>
 
           <div className="karir-detail-content">
             {selectedPosition.content.map((section, index) => (
-              <div key={index} className="karir-detail-section">
+              <div key={index} className="karir-detail-section" data-aos="fade-up" data-aos-delay={`${index * 200}`}>
                 <h2 className="karir-detail-section-title">{section.title}</h2>
                 <p className="karir-detail-section-description">{section.description}</p>
               </div>
@@ -56,9 +66,9 @@ const KarirDetail = () => {
         </div>
 
         {/* Right Side: Job Summary, Apply Button, and Social Media */}
-        <div className="karir-detail-right">
+        <div className="karir-detail-right" data-aos="fade-left">
           {/* Job Summary Card */}
-          <div className="karir-detail-job-summary-card">
+          <div className="karir-detail-job-summary-card" data-aos="fade-up" data-aos-delay="200">
             <h3 className="karir-detail-job-summary-title">Job Summary</h3>
             <div className="karir-detail-job-summary-content">
               <p><FaMapMarkerAlt /> Lokasi: {jobSummary.location}</p>
@@ -73,7 +83,7 @@ const KarirDetail = () => {
           </div>
 
           {/* Social Media Section */}
-          <div className="karir-detail-social-media-section">
+          <div className="karir-detail-social-media-section" data-aos="fade-up" data-aos-delay="400">
             <h3>Follow Us</h3>
             <ul className="karir-detail-social-media-list">
               <li><FaFacebook /> <a href="https://facebook.com">Facebook</a></li>
@@ -84,11 +94,11 @@ const KarirDetail = () => {
 
           {/* Banners */}
           <div className="karir-detail-banner-section">
-            <div className="karir-detail-banner">
+            <div className="karir-detail-banner" data-aos="fade-up" data-aos-delay="600">
               <h4>Special Offers!</h4>
               <a href="/offers" className="karir-detail-banner-btn">Check Offers</a>
             </div>
-            <div className="karir-detail-banner">
+            <div className="karir-detail-banner" data-aos="fade-up" data-aos-delay="800">
               <h4>Get a Free Quote!</h4>
               <a href="/quote" className="karir-detail-banner-btn">Request Quote</a>
             </div>

@@ -1,0 +1,28 @@
+.scroll-to-top {
+    position: fixed;
+    bottom: 40px;
+    right: 30px;
+    z-index: 1000; /* Ensure the button is above other elements */
+  }
+  
+  .scroll-to-top-btn {
+    background-color: #06479D;
+    border: none;
+    padding: 10px 15px;
+    border-radius: 50%;
+    color: white;
+    cursor: pointer;
+    font-size: 18px;
+    transition: opacity 0.3s, transform 0.3s;
+    opacity: 0.8;
+  }
+  
+  .scroll-to-top-btn:hover {
+    opacity: 1;
+    transform: translateY(-5px);
+  }
+  
+  .scroll-to-top-btn:focus {
+    outline: none;
+  }
+  
