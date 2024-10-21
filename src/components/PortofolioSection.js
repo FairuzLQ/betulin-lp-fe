@@ -65,7 +65,7 @@ const PortfolioSection = () => {
   const sectionHeight = isDesktop ? 600 + (numberOfRows - 1) * 250 : 'auto'; // Base height is 600px, with 250px added for each additional row
 
   return (
-    <div className="portfolio-section" style={{ height: sectionHeight }}>
+    <div id="services" className="portfolio-section" style={{ height: sectionHeight }}>
       <div className="portfolio-carousel">
         {categories.map(category => (
           <div

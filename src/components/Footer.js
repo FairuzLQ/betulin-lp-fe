@@ -13,7 +13,7 @@ const Footer = () => {
           <div className="footer__logo">
             <img src={logo} alt="Logo" /> {/* Replace with actual logo if needed */}
           </div>
-          <p className="footer__motto">Motto perusahaan di sini</p>
+          <p className="footer__motto">Apapun kerusakan, betulin aja!</p>
         </div>
 
         {/* Column 2: Menu 1 */}
@@ -61,7 +61,7 @@ const Footer = () => {
 
       <div className="footer__bottom">
         <div className="footer__bottom-left">
-          <p>© 2024 Nama Perusahaan. All rights reserved.</p>
+          <p>© 2024 PT Rumah Masa Kini. All rights reserved.</p>
         </div>
         <div className="footer__bottom-right">
           <a href="https://facebook.com" target="_blank" rel="noopener noreferrer">
