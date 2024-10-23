@@ -4,34 +4,60 @@ import 'aos/dist/aos.css'; // Import AOS styles
 import '../styles/PortofolioSection.css';
 import { FaSadTear } from 'react-icons/fa'; // Importing icon for no results
 
-const categories = [
-  { id: 1, name: 'Utilitas Rumah', services: ['Atap', 'Plafon', 'Genteng', 'Dinding'] },
-  { id: 2, name: 'Otomotif', services: ['Servis Mobil', 'Perbaikan Ban', 'Ganti Oli'] },
-  { id: 3, name: 'Elektronik', services: ['Perbaikan TV', 'Instalasi AC', 'Instalasi Kulkas'] },
-  { id: 4, name: 'Lanskap', services: ['Taman', 'Pohon', 'Dekorasi Batu'] }
-];
-
-// Define the images for each service
-const servicesWithImages = {
-  'Atap': require('../assets/images/cs-image.png'),
-  'Plafon': require('../assets/images/cs-image.png'),
-  'Genteng': require('../assets/images/cs-image.png'),
-  'Dinding': require('../assets/images/cs-image.png'),
-  'Servis Mobil': require('../assets/images/cs-image.png'),
-  'Perbaikan Ban': require('../assets/images/cs-image.png'),
-  'Ganti Oli': require('../assets/images/cs-image.png'),
-  'Perbaikan TV': require('../assets/images/cs-image.png'),
-  'Instalasi AC': require('../assets/images/cs-image.png'),
-  'Instalasi Kulkas': require('../assets/images/cs-image.png'),
-  'Taman': require('../assets/images/cs-image.png'),
-  'Pohon': require('../assets/images/cs-image.png'),
-  'Dekorasi Batu': require('../assets/images/cs-image.png'),
-};
-
 const PortfolioSection = () => {
-  const [selectedCategory, setSelectedCategory] = useState(categories[0]);
+  const [categories, setCategories] = useState([]);
+  const [selectedCategory, setSelectedCategory] = useState(null);
   const [searchQuery, setSearchQuery] = useState('');
   const [isDesktop, setIsDesktop] = useState(window.innerWidth >= 1024);
+
+  // Fetch services and categories from the API
+  useEffect(() => {
+    const fetchServices = async () => {
+      try {
+        const response = await fetch(`${process.env.REACT_APP_API_URL}/api/layanans?populate=*`);
+        const result = await response.json();
+        
+        const baseUrl = process.env.REACT_APP_API_URL; // Get the base URL for images
+
+        const data = result.data.map(item => {
+          // Select the appropriate image URL, fallback to default if not available
+          const backgroundImage = item.BackgroundLayanan?.formats?.large?.url ||
+                                  item.BackgroundLayanan?.formats?.medium?.url ||
+                                  item.BackgroundLayanan?.formats?.small?.url ||
+                                  item.BackgroundLayanan?.url ||
+                                  ''; // Ensure there's a valid image URL or empty
+
+          // Create absolute URL if background image is a relative path
+          const fullBackgroundImage = backgroundImage.startsWith('/') ? `${baseUrl}${backgroundImage}` : backgroundImage;
+
+          return {
+            id: item.id,
+            name: item.NamaLayanan,
+            details: item.DetailLayanan.map(detail => detail.children.map(child => child.text).join(' ')), // Map through DetailLayanan to extract text
+            category: item.kategori_layanan.NamaKategori,
+            background: fullBackgroundImage, // Use the full background image URL
+          };
+        });
+
+        const groupedCategories = data.reduce((acc, service) => {
+          const category = acc.find(cat => cat.name === service.category);
+          if (category) {
+            category.services.push(service);
+          } else {
+            acc.push({ name: service.category, services: [service] });
+          }
+          return acc;
+        }, []);
+
+        setCategories(groupedCategories);
+        setSelectedCategory(groupedCategories[0]); // Set the first category as the default
+      } catch (error) {
+        console.error('Error fetching services:', error);
+      }
+    };
+
+    fetchServices();
+  }, []);
 
   useEffect(() => {
     // Initialize AOS
@@ -48,12 +74,16 @@ const PortfolioSection = () => {
     return () => window.removeEventListener('resize', handleResize);
   }, []);
 
+  if (!selectedCategory) {
+    return <p>Loading...</p>;
+  }
+
   const filteredServices = selectedCategory.services.filter(service =>
-    service.toLowerCase().includes(searchQuery.toLowerCase())
+    service.name.toLowerCase().includes(searchQuery.toLowerCase())
   );
 
-  const handleCategoryChange = (id) => {
-    const category = categories.find(cat => cat.id === id);
+  const handleCategoryChange = (categoryName) => {
+    const category = categories.find(cat => cat.name === categoryName);
     setSelectedCategory(category);
     setSearchQuery(''); // Reset search query when category changes
   };
@@ -69,16 +99,16 @@ const PortfolioSection = () => {
       <div className="portfolio-carousel">
         {categories.map(category => (
           <div
-            key={category.id}
-            className={`carousel-item ${selectedCategory.id === category.id ? 'active' : ''}`}
-            onClick={() => handleCategoryChange(category.id)}
+            key={category.name}
+            className={`carousel-item ${selectedCategory.name === category.name ? 'active' : ''}`}
+            onClick={() => handleCategoryChange(category.name)}
             data-aos="fade-right" // AOS animation on carousel items
           >
             <h3>{category.name}</h3>
           </div>
         ))}
       </div>
-      
+
       <div className="portfolio-content">
         <h2 data-aos="fade-up">Layanan Kami</h2>
         <input
@@ -93,16 +123,16 @@ const PortfolioSection = () => {
         {filteredServices.length > 0 ? (
           <div className="portfolio-services" data-aos="fade-up">
             {filteredServices.map(service => (
-              <div className="service-card" key={service} data-aos="zoom-in">
+              <div className="service-card" key={service.id} data-aos="zoom-in">
                 <div className="card-inner">
                   <div
                     className="card-front"
-                    style={{ backgroundImage: `url(${servicesWithImages[service]})` }} // Set background image dynamically
+                    style={{ backgroundImage: `url(${service.background})` }} // Set background image dynamically
                   >
-                    <h4>{service}</h4>
+                    <h4>{service.name}</h4>
                   </div>
                   <div className="card-back">
-                    <p>Detail service for {service}</p>
+                    <p>{service.details.join(' ')}</p> {/* Join the details text to display */}
                   </div>
                 </div>
               </div>
