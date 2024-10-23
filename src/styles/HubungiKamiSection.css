@@ -102,7 +102,7 @@
 
 /* Add dashed border for decoration */
 .unique-hubungi-kami-btn::before {
-    content: 'fastrep!';
+    content: 'fastresp!';
     position: absolute;
     top: -15px; /* Position it slightly above the button */
     right: -25px; /* Position it slightly to the right of the button */
