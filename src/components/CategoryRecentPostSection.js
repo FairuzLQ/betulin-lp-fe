@@ -54,7 +54,12 @@ const CategoryRecentPostSection = ({ category }) => {
   return (
     <section className="custom-category-recent-post" data-aos="fade-up">
       <div className="custom-category-header" data-aos="fade-right">
-        <h2>{category.NamaKategori}</h2>
+        {/* Make the category title clickable */}
+        <h2>
+          <a href={`/category/${category.SlugKategori}`} className="custom-category-title-link">
+            {category.NamaKategori}
+          </a>
+        </h2>
         <div className="custom-underline"></div>
       </div>
       <div className="custom-category-posts">
