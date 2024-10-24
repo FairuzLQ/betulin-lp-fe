@@ -3,9 +3,33 @@ import { FaFacebook, FaTwitter, FaInstagram } from 'react-icons/fa'; // Font Awe
 import AOS from 'aos'; // Import AOS
 import 'aos/dist/aos.css'; // Import AOS styles
 import '../styles/BlogKategori.css'; // Custom CSS
+import { useParams } from 'react-router-dom'; // To fetch category slug
 
 const BlogKategori = () => {
-  // Initialize AOS
+  const { categorySlug } = useParams(); // Get category slug from URL
+  const [posts, setPosts] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const [currentPage, setCurrentPage] = useState(1);
+
+  const postsPerPage = 3; // Number of posts to display per page
+
+  // Helper function to convert slug into normal text
+  const formatCategoryTitle = (slug) => {
+    return slug
+      .split('-') // Split by hyphen
+      .map((word) => word.charAt(0).toUpperCase() + word.slice(1)) // Capitalize first letter of each word
+      .join(' '); // Join them back with spaces
+  };
+
+  const formattedCategoryName = formatCategoryTitle(categorySlug);
+
+  // Dummy Data for blog posts (for the right side)
+  const dummyPosts = [
+    { id: 1, title: "5 Tips for Home Improvement", excerpt: "Improve your home with these top 5 tips. From DIY repairs to smart renovations, we have you covered.", author: "admin", date: "Rabu, 12 Oktober 2024", image: "https://via.placeholder.com/300x200?text=Home+Improvement" },
+    { id: 2, title: "Choosing the Best Paint Colors", excerpt: "Explore the latest trends in paint colors and find the perfect shade to transform your living space.", author: "admin", date: "Kamis, 13 Oktober 2024", image: "https://via.placeholder.com/300x200?text=Paint+Colors" },
+    { id: 3, title: "Maximizing Small Spaces", excerpt: "Learn how to make the most of your small living spaces with smart furniture and organization.", author: "admin", date: "Jumat, 14 Oktober 2024", image: "https://via.placeholder.com/300x200?text=Small+Spaces" },
+  ];
+
   useEffect(() => {
     AOS.init({
       duration: 1000, // Animation duration in milliseconds
@@ -13,38 +37,46 @@ const BlogKategori = () => {
     });
   }, []);
 
-  // Dummy Data for blog posts
-  const dummyPosts = [
-    { id: 1, title: "5 Tips for Home Improvement", excerpt: "Improve your home with these top 5 tips. From DIY repairs to smart renovations, we have you covered.", author: "admin", date: "Rabu, 12 Oktober 2024", image: "https://via.placeholder.com/300x200?text=Home+Improvement" },
-    { id: 2, title: "Choosing the Best Paint Colors", excerpt: "Explore the latest trends in paint colors and find the perfect shade to transform your living space.", author: "admin", date: "Kamis, 13 Oktober 2024", image: "https://via.placeholder.com/300x200?text=Paint+Colors" },
-    { id: 3, title: "Maximizing Small Spaces", excerpt: "Learn how to make the most of your small living spaces with smart furniture and organization.", author: "admin", date: "Jumat, 14 Oktober 2024", image: "https://via.placeholder.com/300x200?text=Small+Spaces" },
-    { id: 4, title: "The Future of Smart Homes", excerpt: "Discover the latest innovations in smart home technology and how they can simplify your life.", author: "admin", date: "Sabtu, 15 Oktober 2024", image: "https://via.placeholder.com/300x200?text=Smart+Homes" },
-    { id: 5, title: "Bathroom Renovation Ideas", excerpt: "Upgrade your bathroom with these simple yet effective renovation ideas for a modern look.", author: "admin", date: "Minggu, 16 Oktober 2024", image: "https://via.placeholder.com/300x200?text=Bathroom+Renovation" },
-  ];
+  // Fetch posts based on category
+  useEffect(() => {
+    const fetchCategoryPosts = async () => {
+      try {
+        const response = await fetch(`${process.env.REACT_APP_API_URL}/api/artikels?filters[kategori_artikel][SlugKategori][$eq]=${categorySlug}&populate=*`);
+        const data = await response.json();
+        setPosts(data.data);
+        setLoading(false);
+      } catch (error) {
+        console.error('Error fetching category posts:', error);
+        setLoading(false);
+      }
+    };
 
-  const postsPerPage = 3; // Change this if you want more/less posts per page
-  const [currentPage, setCurrentPage] = useState(1);
+    fetchCategoryPosts();
+  }, [categorySlug]);
 
   // Pagination logic
   const indexOfLastPost = currentPage * postsPerPage;
   const indexOfFirstPost = indexOfLastPost - postsPerPage;
-  const currentPosts = dummyPosts.slice(indexOfFirstPost, indexOfLastPost);
-  const totalPages = Math.ceil(dummyPosts.length / postsPerPage);
+  const currentPosts = posts.slice(indexOfFirstPost, indexOfLastPost);
+  const totalPages = Math.ceil(posts.length / postsPerPage);
 
   const handlePageChange = (pageNumber) => {
     setCurrentPage(pageNumber);
-    // Scroll to top of the section when pagination is clicked
     window.scrollTo({
       top: 0,
-      behavior: 'smooth' // Makes the scroll smooth
+      behavior: 'smooth',
     });
   };
+
+  if (loading) {
+    return <p>Loading posts for {formattedCategoryName}...</p>;
+  }
 
   return (
     <section className="blog-kategori-section">
       {/* Category Title */}
       <div className="blog-kategori-header" data-aos="fade-up">
-        <h2>Home Improvement</h2>
+        <h2>{formattedCategoryName}</h2>
         <div className="blog-kategori-underline"></div>
       </div>
       <div className="blog-kategori-content-wrapper" data-aos="fade-up">
@@ -52,16 +84,26 @@ const BlogKategori = () => {
         <div className="blog-kategori-left">
           <div className="blog-kategori-post-cards">
             {currentPosts.map((post, index) => (
-              <div className="blog-kategori-post-card" key={post.id} data-aos="fade-up" data-aos-delay={`${index * 200}`}>
-                <img src={post.image} alt={post.title} className="blog-kategori-post-image" />
+              <div
+                className="blog-kategori-post-card"
+                key={post.id}
+                data-aos="fade-up"
+                data-aos-delay={`${index * 200}`}
+              >
+                <img
+                  src={`${process.env.REACT_APP_API_URL}${post.FeaturedImage?.formats?.small?.url || post.FeaturedImage?.url}`}
+                  alt={post.TitleArtikel}
+                  className="blog-kategori-post-image"
+                />
                 <div className="blog-kategori-post-details">
                   <h2>
-                    <a href={`/posts/${post.id}`}>{post.title}</a>
+                    <a href={`/blog-post/${post.id}`}>{post.TitleArtikel}</a>
                   </h2>
                   <p className="author-date">
-                    {post.author} | {post.date}
+                    {post.penulis_artikel?.NamaPenulis} |{' '}
+                    {new Date(post.TglArtikel).toLocaleDateString()}
                   </p>
-                  <p className="excerpt-post-category">{post.excerpt}</p>
+                  <p className="excerpt-post-category">{post.ExcerptArtikel}</p>
                 </div>
               </div>
             ))}

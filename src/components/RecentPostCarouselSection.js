@@ -38,7 +38,7 @@ const RecentPostCarouselSection = () => {
             category: article.kategori_artikel?.NamaKategori || 'Uncategorized',
             link: `/post/${article.id}`, // Dynamic article link
             authorLink: `/author/${article.penulis_artikel?.id}`, // Dynamic author link
-            categoryLink: `/category/${article.kategori_artikel?.SlugKategori}`, // Dynamic category link
+            categoryLink: `/blog-kategori/${article.kategori_artikel?.SlugKategori}`, // Dynamic category link
           };
         });
 

@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import AOS from 'aos'; 
 import 'aos/dist/aos.css'; 
+import { Link } from 'react-router-dom'; // Use Link for navigation
 import '../styles/CategoryRecentPostSection.css'; 
 
 const CategoryRecentPostSection = ({ category }) => {
@@ -54,14 +55,15 @@ const CategoryRecentPostSection = ({ category }) => {
   return (
     <section className="custom-category-recent-post" data-aos="fade-up">
       <div className="custom-category-header" data-aos="fade-right">
-        {/* Make the category title clickable */}
+        {/* Use Link for navigation to the BlogKategori page */}
         <h2>
-          <a href={`/category/${category.SlugKategori}`} className="custom-category-title-link">
+          <Link to={`/blog-kategori/${category.SlugKategori}`} className="custom-category-title-link">
             {category.NamaKategori}
-          </a>
+          </Link>
         </h2>
         <div className="custom-underline"></div>
       </div>
+      {/* Render the posts */}
       <div className="custom-category-posts">
         {posts.map((post, index) => (
           <div key={index} className="custom-category-post" data-aos="zoom-in" data-aos-delay={`${index * 200}`}>
@@ -82,9 +84,9 @@ const CategoryRecentPostSection = ({ category }) => {
         ))}
       </div>
       <div className="custom-category-more" data-aos="fade-up">
-        <a href={`/category/${category.SlugKategori}`} className="custom-more-link">
+        <Link to={`/blog-kategori/${category.SlugKategori}`} className="custom-more-link">
           Lainnya &gt;
-        </a>
+        </Link>
       </div>
     </section>
   );

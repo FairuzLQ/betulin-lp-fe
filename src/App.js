@@ -8,20 +8,20 @@ import SyaratKetentuan from './pages/SyaratKetentuan';
 import KebijakanPrivasi from './pages/KebijakanPrivasi';
 import Layanan from './pages/Layanan';
 import Blog from './pages/Blog';
-import BlogKategori from './pages/BlogKategori';
+import BlogKategori from './pages/BlogKategori'; // BlogKategori component
 import BlogPost from './pages/BlogPost';
 import TentangKami from './pages/TentangKami';
-import ScrollToTop from './components/ScrollToTop'; // Import ScrollToTop component
-import './styles/global.css'; 
+import ScrollToTop from './components/ScrollToTop';
+import './styles/global.css';
 import ScrollToTopButton from './components/ScrollToTopButton';
 
 function App() {
   return (
     <Router>
-      <ScrollToTop /> {/* Ensure page scrolls to top on route change */}
+      <ScrollToTop />
       <ScrollToTopButton />
       <div>
-        <Navbar /> {/* Navbar will appear on all pages */}
+        <Navbar />
         <Routes>
           <Route path="/" element={<Beranda />} />
           <Route path="/karir" element={<Karir />} />
@@ -30,11 +30,11 @@ function App() {
           <Route path="/kebijakan-privasi" element={<KebijakanPrivasi />} />
           <Route path="/layanan" element={<Layanan />} />
           <Route path="/blog" element={<Blog />} />
-          <Route path="/blog-kategori" element={<BlogKategori />} />
-          <Route path="/blog-post" element={<BlogPost />} />
+          <Route path="/blog-kategori/:categorySlug" element={<BlogKategori />} /> {/* Route for category */}
+          <Route path="/blog-post/:id" element={<BlogPost />} />
           <Route path="/tentang-kami" element={<TentangKami />} />
         </Routes>
-        <Footer /> {/* Footer will appear on all pages */}
+        <Footer />
       </div>
     </Router>
   );
