@@ -33,7 +33,7 @@ const CategoryRecentPostSection = ({ category }) => {
             author: article.penulis_artikel?.NamaPenulis || 'Unknown Author',
             date: article.TglArtikel ? new Date(article.TglArtikel).toLocaleDateString() : 'Unknown Date',
             excerpt: article.ExcerptArtikel || '',
-            link: `/post/${article.id}`,
+            link: `/blog-post/${article.documentId}`, // Updated link to use documentId
           };
         });
 
@@ -74,11 +74,14 @@ const CategoryRecentPostSection = ({ category }) => {
               <small className="custom-post-author-date">
                 {post.author} • {post.date}
               </small>
-              <h3 className="custom-post-title">{post.title}</h3>
+              {/* Use Link for the title to navigate to the post */}
+              <h3 className="custom-post-title">
+                <Link to={post.link}>{post.title}</Link>
+              </h3>
               <p className="custom-post-excerpt">{post.excerpt}</p>
-              <a href={post.link} className="custom-post-detail-button">
+              <Link to={post.link} className="custom-post-detail-button">
                 Lihat Detail
-              </a>
+              </Link>
             </div>
           </div>
         ))}

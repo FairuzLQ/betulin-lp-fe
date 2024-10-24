@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { Carousel } from 'react-responsive-carousel';
+import { Link } from 'react-router-dom'; // Import Link for navigation
 import 'react-responsive-carousel/lib/styles/carousel.min.css'; // Import the CSS
 import '../styles/RecentPostCarouselSection.css'; // Custom styles
 
@@ -15,8 +16,6 @@ const RecentPostCarouselSection = () => {
           `${process.env.REACT_APP_API_URL}/api/artikels?populate=*&sort=TglArtikel:desc&pagination[limit]=3`
         );
         const data = await response.json();
-
-        console.log('API Response:', data); // Debugging the response structure
 
         const baseUrl = process.env.REACT_APP_API_URL; // Base URL for images
 
@@ -36,7 +35,7 @@ const RecentPostCarouselSection = () => {
               ? new Date(article.TglArtikel).toLocaleDateString()
               : 'Unknown Date',
             category: article.kategori_artikel?.NamaKategori || 'Uncategorized',
-            link: `/post/${article.id}`, // Dynamic article link
+            link: `/blog-post/${article.documentId}`, // Dynamic article link using documentId
             authorLink: `/author/${article.penulis_artikel?.id}`, // Dynamic author link
             categoryLink: `/blog-kategori/${article.kategori_artikel?.SlugKategori}`, // Dynamic category link
           };
@@ -70,22 +69,22 @@ const RecentPostCarouselSection = () => {
         {posts.map((post, index) => (
           <div key={index} className="post-card">
             <div className="post-image">
-              <a href={post.categoryLink} className="post-category">
+              <Link to={post.categoryLink} className="post-category">
                 {post.category}
-              </a>
+              </Link>
               {post.image ? (
                 <img src={post.image} alt={post.title} />
               ) : (
                 <div className="no-image-placeholder">No Image Available</div>
               )}
               <div className="post-details">
-                <a href={post.link} className="post-title">
+                <Link to={post.link} className="post-title">
                   <h3>{post.title}</h3>
-                </a>
+                </Link>
                 <p>
-                  <a href={post.authorLink} className="post-author">
+                  <Link to={post.authorLink} className="post-author">
                     {post.author}
-                  </a>{' '}
+                  </Link>{' '}
                   • {post.date}
                 </p>
               </div>
