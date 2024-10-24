@@ -59,7 +59,10 @@ const PostSection = ({ post }) => {
           {/* Post Content */}
           <div className="post-section-content" data-aos="fade-up" data-aos-delay="400">
             {post.DetailArtikel.map((block, index) => (
-              <p key={index}>{block.children[0].text}</p>
+              <div key={index}>
+                <p>{block.children[0].text}</p>
+                <br /> {/* Add line break between each paragraph */}
+              </div>
             ))}
           </div>
 
