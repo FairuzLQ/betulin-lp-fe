@@ -1,51 +1,60 @@
-import React, { useEffect } from 'react';
-import AOS from 'aos'; // Import AOS
-import 'aos/dist/aos.css'; // Import AOS styles
-import '../styles/CategoryRecentPostSection.css'; // Keeping the file name the same
-import image1 from '../assets/images/layanan-img.png';
-import image2 from '../assets/images/layanan-img.png';
-import image3 from '../assets/images/layanan-img.png';
+import React, { useEffect, useState } from 'react';
+import AOS from 'aos'; 
+import 'aos/dist/aos.css'; 
+import '../styles/CategoryRecentPostSection.css'; 
 
-const CategoryRecentPostSection = () => {
-  // Initialize AOS
+const CategoryRecentPostSection = ({ category }) => {
+  const [posts, setPosts] = useState([]);
+  const [loading, setLoading] = useState(true);
+
   useEffect(() => {
     AOS.init({
-      duration: 1000, // Animation duration
-      once: true, // Trigger animation only once when scrolled into view
+      duration: 1000, 
+      once: true, 
     });
   }, []);
 
-  const posts = [
-    {
-      image: image1,
-      title: 'Post 1',
-      author: 'John Doe',
-      date: 'October 12, 2024',
-      excerpt: 'This is a short description of post 1 from the category.',
-      link: '/post-1',
-    },
-    {
-      image: image2,
-      title: 'Post 2',
-      author: 'Jane Smith',
-      date: 'October 13, 2024',
-      excerpt: 'This is a short description of post 2 from the category.',
-      link: '/post-2',
-    },
-    {
-      image: image3,
-      title: 'Post 3',
-      author: 'Alice Johnson',
-      date: 'October 14, 2024',
-      excerpt: 'This is a short description of post 3 from the category.',
-      link: '/post-3',
-    },
-  ];
+  useEffect(() => {
+    const fetchCategoryPosts = async () => {
+      try {
+        const response = await fetch(`${process.env.REACT_APP_API_URL}/api/artikels?filters[kategori_artikel][id]=${category.id}&populate=*`);
+        const data = await response.json();
+        
+        const baseUrl = process.env.REACT_APP_API_URL;
+
+        const formattedPosts = data.data.slice(0, 3).map((article) => {
+          const imageFormats = article.FeaturedImage?.formats || {};
+          const imageUrl = imageFormats.large?.url || imageFormats.medium?.url || imageFormats.small?.url || article.FeaturedImage?.url;
+
+          return {
+            image: imageUrl ? `${baseUrl}${imageUrl}` : null,
+            title: article.TitleArtikel || 'Untitled',
+            author: article.penulis_artikel?.NamaPenulis || 'Unknown Author',
+            date: article.TglArtikel ? new Date(article.TglArtikel).toLocaleDateString() : 'Unknown Date',
+            excerpt: article.ExcerptArtikel || '',
+            link: `/post/${article.id}`,
+          };
+        });
+
+        setPosts(formattedPosts);
+        setLoading(false);
+      } catch (error) {
+        console.error('Error fetching category posts:', error);
+        setLoading(false);
+      }
+    };
+
+    fetchCategoryPosts();
+  }, [category.id]);
+
+  if (loading) {
+    return <p>Loading posts for {category.NamaKategori}...</p>;
+  }
 
   return (
     <section className="custom-category-recent-post" data-aos="fade-up">
       <div className="custom-category-header" data-aos="fade-right">
-        <h2>Technology</h2>
+        <h2>{category.NamaKategori}</h2>
         <div className="custom-underline"></div>
       </div>
       <div className="custom-category-posts">
@@ -60,7 +69,7 @@ const CategoryRecentPostSection = () => {
               </small>
               <h3 className="custom-post-title">{post.title}</h3>
               <p className="custom-post-excerpt">{post.excerpt}</p>
-              <a href="/blog-post" className="custom-post-detail-button">
+              <a href={post.link} className="custom-post-detail-button">
                 Lihat Detail
               </a>
             </div>
@@ -68,7 +77,7 @@ const CategoryRecentPostSection = () => {
         ))}
       </div>
       <div className="custom-category-more" data-aos="fade-up">
-        <a href="/blog-kategori" className="custom-more-link">
+        <a href={`/category/${category.SlugKategori}`} className="custom-more-link">
           Lainnya &gt;
         </a>
       </div>
