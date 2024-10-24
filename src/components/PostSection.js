@@ -41,6 +41,7 @@ const PostSection = ({ post }) => {
                 alt={post.TitleArtikel}
                 className="post-section-featured-image"
               />
+              <div className='post-section-image-source'>Sumber: Pexels </div>
             </div>
           )}
 
