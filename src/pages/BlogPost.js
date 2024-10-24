@@ -4,17 +4,18 @@ import PostSection from '../components/PostSection';
 import CategoryRecentPostSection from '../components/CategoryRecentPostSection';
 
 const BlogPost = () => {
-  const { id } = useParams(); // Get the post ID from the URL
+  const { documentId } = useParams(); // Use documentId from the URL
   const [post, setPost] = useState(null);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     const fetchPost = async () => {
       try {
-        const response = await fetch(`${process.env.REACT_APP_API_URL}/api/artikels/${id}?populate=*`);
+        // Use documentId to fetch the post by documentId
+        const response = await fetch(`${process.env.REACT_APP_API_URL}/api/artikels?filters[documentId][$eq]=${documentId}&populate=*`);
         const data = await response.json();
-        setPost(data.data); // Update the post state with the fetched data
-        setLoading(false); // Set loading to false when data is fetched
+        setPost(data.data[0]); // Set the first post in the array
+        setLoading(false);
       } catch (error) {
         console.error('Error fetching post:', error);
         setLoading(false);
@@ -22,7 +23,7 @@ const BlogPost = () => {
     };
 
     fetchPost();
-  }, [id]);
+  }, [documentId]);
 
   if (loading) {
     return <p>Loading post...</p>;
@@ -35,7 +36,7 @@ const BlogPost = () => {
   return (
     <div>
       <PostSection post={post} /> {/* Pass the post data to PostSection */}
-      <CategoryRecentPostSection />
+      {/* Assuming CategoryRecentPostSection uses the same posts structure */}
     </div>
   );
 };

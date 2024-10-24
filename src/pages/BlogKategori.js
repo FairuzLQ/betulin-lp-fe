@@ -95,7 +95,7 @@ const BlogKategori = () => {
                 />
                 <div className="blog-kategori-post-details">
                   <h2>
-                    <Link to={`/blog-post/${post.id}`}>{post.TitleArtikel}</Link>
+                    <Link to={`/blog-post/${post.documentId}`}>{post.TitleArtikel}</Link>
                   </h2>
                   <p className="author-date">
                     {post.penulis_artikel?.NamaPenulis} |{' '}

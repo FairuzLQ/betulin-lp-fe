@@ -7,6 +7,7 @@
   background-color: white;
   position: relative;
   overflow: hidden;
+  margin-top: 60px;
 }
 
 /* Left Content Styling */
@@ -101,6 +102,7 @@
 @media (max-width: 1024px) {
   .layanan-hero-section {
     padding: 50px 40px;
+    margin-top: 60px;
   }
 
   .layanan-hero-title {
