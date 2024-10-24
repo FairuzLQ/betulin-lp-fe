@@ -3,7 +3,7 @@ import { FaFacebook, FaTwitter, FaInstagram } from 'react-icons/fa'; // Font Awe
 import AOS from 'aos'; // Import AOS
 import 'aos/dist/aos.css'; // Import AOS styles
 import '../styles/BlogKategori.css'; // Custom CSS
-import { useParams } from 'react-router-dom'; // To fetch category slug
+import { useParams, Link } from 'react-router-dom'; // To fetch category slug and link to BlogPost
 
 const BlogKategori = () => {
   const { categorySlug } = useParams(); // Get category slug from URL
@@ -22,14 +22,12 @@ const BlogKategori = () => {
   };
 
   const formattedCategoryName = formatCategoryTitle(categorySlug);
-
   // Dummy Data for blog posts (for the right side)
   const dummyPosts = [
     { id: 1, title: "5 Tips for Home Improvement", excerpt: "Improve your home with these top 5 tips. From DIY repairs to smart renovations, we have you covered.", author: "admin", date: "Rabu, 12 Oktober 2024", image: "https://via.placeholder.com/300x200?text=Home+Improvement" },
     { id: 2, title: "Choosing the Best Paint Colors", excerpt: "Explore the latest trends in paint colors and find the perfect shade to transform your living space.", author: "admin", date: "Kamis, 13 Oktober 2024", image: "https://via.placeholder.com/300x200?text=Paint+Colors" },
     { id: 3, title: "Maximizing Small Spaces", excerpt: "Learn how to make the most of your small living spaces with smart furniture and organization.", author: "admin", date: "Jumat, 14 Oktober 2024", image: "https://via.placeholder.com/300x200?text=Small+Spaces" },
   ];
-
   useEffect(() => {
     AOS.init({
       duration: 1000, // Animation duration in milliseconds
@@ -97,7 +95,7 @@ const BlogKategori = () => {
                 />
                 <div className="blog-kategori-post-details">
                   <h2>
-                    <a href={`/blog-post/${post.id}`}>{post.TitleArtikel}</a>
+                    <Link to={`/blog-post/${post.id}`}>{post.TitleArtikel}</Link>
                   </h2>
                   <p className="author-date">
                     {post.penulis_artikel?.NamaPenulis} |{' '}
