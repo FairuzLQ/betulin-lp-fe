@@ -1,87 +1,71 @@
-import React, { useEffect } from 'react';
-import AOS from 'aos'; // Import AOS library
-import 'aos/dist/aos.css'; // Import AOS styles
-import '../styles/KebijakanPrivasiSection.css'; // Custom CSS for styling
+import React, { useEffect, useState } from 'react';
+import AOS from 'aos';
+import 'aos/dist/aos.css';
+import '../styles/KebijakanPrivasiSection.css';
 
 const KebijakanPrivasiSection = () => {
+  const [policy, setPolicy] = useState(null);
+  const [loading, setLoading] = useState(true);
+
   useEffect(() => {
-    AOS.init({
-      duration: 1000,  // Animation duration
-      once: true       // Ensures the animation only happens once
-    });
+    AOS.init({ duration: 1000, once: true });
+
+    const fetchLatestPolicy = async () => {
+      try {
+        const response = await fetch(`${process.env.REACT_APP_API_URL}/api/kebijakan-privasis?sort=UpdatedKebijakanPrivasi:desc&pagination[limit]=1`);
+        const data = await response.json();
+
+        if (data.data.length > 0) {
+          setPolicy(data.data[0]);
+        }
+        setLoading(false);
+      } catch (error) {
+        console.error("Error fetching privacy policy:", error);
+        setLoading(false);
+      }
+    };
+
+    fetchLatestPolicy();
   }, []);
+
+  if (loading) return <p>Loading...</p>;
 
   return (
     <section className="privacy-policy-section">
       <div className="privacy-header">
         <h2>Kebijakan Privasi</h2>
-        <p>Privasi Anda adalah prioritas kami. Pelajari cara kami melindungi informasi Anda.</p>
+        <p className="header-subtitle">{policy?.SubtitleKebijakanPrivasi || 'Privasi Anda adalah prioritas kami. Pelajari cara kami melindungi informasi Anda.'}</p>
       </div>
 
       <div className="privacy-timeline">
-        <div className="timeline-item" data-aos="fade-right">
-          <div className="timeline-icon">
-            <span>1</span>
-          </div>
-          <div className="timeline-content">
-            <h3>Pengumpulan Informasi</h3>
-            <p>Kami mengumpulkan data yang Anda berikan secara sukarela saat menggunakan layanan kami, termasuk nama, email, dan detail pembayaran.</p>
-          </div>
-        </div>
+        {policy?.DetailKebijakanPrivasi.reduce((acc, item, index) => {
+          const text = item.children[0]?.text.trim() || '';
 
-        <div className="timeline-item" data-aos="fade-left" data-aos-delay="100">
-          <div className="timeline-icon">
-            <span>2</span>
-          </div>
-          <div className="timeline-content">
-            <h3>Penggunaan Informasi</h3>
-            <p>Informasi yang dikumpulkan digunakan untuk memproses transaksi dan meningkatkan pengalaman layanan Anda.</p>
-          </div>
-        </div>
+          // Check if the text starts with "1.", "2.", etc., and strip out the number
+          if (/^\d+\.\s/.test(text)) {
+            const sectionNumber = text.split('.')[0];
+            const sectionTitle = text.replace(/^\d+\.\s/, ''); // Remove the number from the title
 
-        <div className="timeline-item" data-aos="fade-right" data-aos-delay="200">
-          <div className="timeline-icon">
-            <span>3</span>
-          </div>
-          <div className="timeline-content">
-            <h3>Keamanan Data</h3>
-            <p>Kami menerapkan enkripsi dan langkah-langkah keamanan untuk melindungi informasi pribadi Anda dari akses yang tidak sah.</p>
-          </div>
-        </div>
-
-        <div className="timeline-item" data-aos="fade-left" data-aos-delay="300">
-          <div className="timeline-icon">
-            <span>4</span>
-          </div>
-          <div className="timeline-content">
-            <h3>Pengungkapan kepada Pihak Ketiga</h3>
-            <p>Data Anda tidak akan dibagikan tanpa persetujuan Anda, kecuali diperlukan oleh hukum atau peraturan pemerintah.</p>
-          </div>
-        </div>
-
-        <div className="timeline-item" data-aos="fade-right" data-aos-delay="400">
-          <div className="timeline-icon">
-            <span>5</span>
-          </div>
-          <div className="timeline-content">
-            <h3>Hak Akses dan Penghapusan Data</h3>
-            <p>Anda memiliki hak untuk mengakses, memperbarui, atau meminta penghapusan informasi pribadi Anda kapan saja.</p>
-          </div>
-        </div>
-
-        <div className="timeline-item" data-aos="fade-left" data-aos-delay="500">
-          <div className="timeline-icon">
-            <span>6</span>
-          </div>
-          <div className="timeline-content">
-            <h3>Perubahan Kebijakan</h3>
-            <p>Kami berhak untuk memperbarui kebijakan ini kapan saja dan akan memberikan pemberitahuan jika terjadi perubahan besar.</p>
-          </div>
-        </div>
+            acc.push(
+              <div className="timeline-item" key={index} data-aos={`fade-${index % 2 === 0 ? 'right' : 'left'}`} data-aos-delay={index * 100}>
+                <div className="timeline-icon">
+                  <span>{sectionNumber}</span> {/* Display section number */}
+                </div>
+                <div className="timeline-content">
+                  <h3>{sectionTitle}</h3> {/* Display title without number */}
+                  {policy.DetailKebijakanPrivasi[index + 1]?.children[0]?.text?.trim() && (
+                    <p>{policy.DetailKebijakanPrivasi[index + 1].children[0].text.trim()}</p>
+                  )}
+                </div>
+              </div>
+            );
+          }
+          return acc;
+        }, [])}
       </div>
 
       <div className="last-updated">
-        <p>Terakhir diperbarui: 15 Oktober 2024</p>
+        <p>Terakhir diperbarui: {new Date(policy?.UpdatedKebijakanPrivasi).toLocaleDateString()}</p>
       </div>
     </section>
   );
