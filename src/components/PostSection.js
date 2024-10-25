@@ -1,19 +1,34 @@
 import React, { useEffect } from 'react';
-import { FaFacebook, FaTwitter, FaInstagram, FaShareAlt } from 'react-icons/fa'; // Font Awesome Icons
-import AOS from 'aos'; // Import AOS
-import 'aos/dist/aos.css'; // Import AOS styles
-import '../styles/PostSection.css'; // Custom CSS for PostSection
+import { FaFacebook, FaTwitter, FaInstagram, FaShareAlt } from 'react-icons/fa';
+import AOS from 'aos';
+import 'aos/dist/aos.css';
+import '../styles/PostSection.css';
 
 const PostSection = ({ post }) => {
-  // Initialize AOS
   useEffect(() => {
     AOS.init({
-      duration: 1000, // Animation duration in milliseconds
-      once: true, // Trigger the animation only once when scrolling
+      duration: 1000,
+      once: true,
     });
   }, []);
 
   if (!post) return null;
+
+  // Copy link function
+  const copyLinkToClipboard = () => {
+    const postUrl = window.location.href;
+    const postDate = new Date(post.TglArtikel).toLocaleDateString();
+    const shareText = `Postingan ini dipublish oleh pihak Betulin dan merupakan properti PT. Rumah Masa Kini. ${postDate}`;
+    const textToCopy = `${postUrl}\n\n${shareText}`;
+
+    navigator.clipboard.writeText(textToCopy)
+      .then(() => {
+        alert("Link and message copied to clipboard!");
+      })
+      .catch((error) => {
+        console.error("Error copying text to clipboard:", error);
+      });
+  };
 
   // Dummy Data for trending posts
   const trendingPosts = [
@@ -25,15 +40,11 @@ const PostSection = ({ post }) => {
   return (
     <section className="post-section-page" data-aos="fade-up">
       <div className="post-section-content-wrapper">
-        {/* Left Side: Detailed Post Section */}
         <div className="post-section-left" data-aos="fade-up">
-          {/* Category */}
           <p className="post-section-category">{post.kategori_artikel?.NamaKategori}</p>
           
-          {/* Title */}
           <h1 className="post-section-title">{post.TitleArtikel}</h1>
 
-          {/* Featured Image */}
           {post.FeaturedImage?.formats?.large?.url && (
             <div className="post-section-image-container" data-aos="zoom-in">
               <img
@@ -45,28 +56,25 @@ const PostSection = ({ post }) => {
             </div>
           )}
 
-          {/* Author and Date */}
           <div className="post-section-meta" data-aos="fade-up" data-aos-delay="200">
             <p>
               By {post.penulis_artikel?.NamaPenulis} |{' '}
               {new Date(post.TglArtikel).toLocaleDateString()}
             </p>
-            <div className="post-section-share-post">
+            <div className="post-section-share-post" onClick={copyLinkToClipboard}>
               <FaShareAlt /> <span>Share this post</span>
             </div>
           </div>
 
-          {/* Post Content */}
           <div className="post-section-content" data-aos="fade-up" data-aos-delay="400">
             {post.DetailArtikel.map((block, index) => (
               <div key={index}>
                 <p>{block.children[0].text}</p>
-                <br /> {/* Add line break between each paragraph */}
+                <br />
               </div>
             ))}
           </div>
 
-          {/* Tags */}
           <div className="post-section-tags" data-aos="fade-up" data-aos-delay="600">
             {post.tag_artikels.map((tag, index) => (
               <span key={index} className="post-section-tag">
@@ -76,9 +84,7 @@ const PostSection = ({ post }) => {
           </div>
         </div>
 
-        {/* Right Side: Trending Posts, Social Media, Banners */}
         <div className="post-section-right" data-aos="fade-left">
-          {/* Trending Posts */}
           <div className="post-section-trending-posts" data-aos="fade-up" data-aos-delay="200">
             <h3>Post Terpopuler</h3>
             {trendingPosts && trendingPosts.map((trendingPost) => (
@@ -92,7 +98,6 @@ const PostSection = ({ post }) => {
             ))}
           </div>
 
-          {/* Social Media Section */}
           <div className="post-section-social-media-section" data-aos="fade-up" data-aos-delay="300">
             <h3>Follow Us</h3>
             <ul className="post-section-social-media-list">
@@ -102,7 +107,6 @@ const PostSection = ({ post }) => {
             </ul>
           </div>
 
-          {/* Banners */}
           <div className="post-section-banner-section">
             <div className="post-section-banner" data-aos="fade-up" data-aos-delay="400">
               <h4>Special Offers!</h4>
