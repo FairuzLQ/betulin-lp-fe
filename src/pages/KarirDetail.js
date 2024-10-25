@@ -1,107 +1,68 @@
-import React, { useEffect } from 'react';
-import { FaFacebook, FaTwitter, FaInstagram, FaShareAlt, FaMapMarkerAlt, FaClock, FaCalendarAlt, FaBriefcase, FaCalendarDay, FaEnvelope } from 'react-icons/fa'; // Font Awesome Icons
-import AOS from 'aos'; // Import AOS
-import 'aos/dist/aos.css'; // Import AOS styles
-import '../styles/KarirDetail.css'; // Custom CSS for KarirDetail
+import React, { useEffect, useState } from 'react';
+import { useParams } from 'react-router-dom';
+import { FaMapMarkerAlt, FaClock, FaCalendarAlt, FaBriefcase, FaCalendarDay, FaEnvelope } from 'react-icons/fa';
+import AOS from 'aos';
+import 'aos/dist/aos.css';
+import '../styles/KarirDetail.css';
 
 const KarirDetail = () => {
-  // Initialize AOS
+  const { documentId } = useParams();
+  const [job, setJob] = useState(null);
+  const [loading, setLoading] = useState(true);
+
   useEffect(() => {
-    AOS.init({
-      duration: 1000, // Animation duration in milliseconds
-      once: true, // Trigger the animation only once when scrolling
-    });
-  }, []);
+    AOS.init({ duration: 1000, once: true });
 
-  // Dummy Data for a career detail
-  const selectedPosition = {
-    id: 1,
-    position: 'Frontend Developer',
-    datePosted: 'Rabu, 12 Oktober 2024',
-    division: 'Engineering',
-    content: [
-      {
-        title: 'Who Are We Looking For',
-        description: 'We are looking for talented individuals who can work independently and as part of a team. You should have excellent communication skills and a passion for frontend development.',
-      },
-      {
-        title: 'What You Will Be Doing',
-        description: 'You will be responsible for building and maintaining the frontend of our web applications, working closely with designers and backend developers to create a seamless user experience.',
-      },
-      {
-        title: 'Skills You Should Have',
-        description: 'Experience with React, JavaScript, HTML, CSS, and responsive design. Familiarity with version control systems like Git is also required.',
-      },
-    ],
-  };
+    const fetchJobDetails = async () => {
+      try {
+        const response = await fetch(`${process.env.REACT_APP_API_URL}/api/lowongan-kerjas?filters[documentId][$eq]=${documentId}&populate=*`);
+        const data = await response.json();
+        setJob(data.data[0]);
+        setLoading(false);
+      } catch (error) {
+        console.error("Error fetching job details:", error);
+        setLoading(false);
+      }
+    };
 
-  // Dummy Data for job summary
-  const jobSummary = {
-    location: 'Jakarta Selatan',
-    jobType: 'Full time',
-    datePosted: '3 hari yang lalu',
-    experience: '1 tahun',
-    workingHours: '09.00-17.00',
-    workingDays: 'Senin-Jumat',
-    email: 'jobs@company.com', // Company email for Apply Now button
-  };
+    fetchJobDetails();
+  }, [documentId]);
+
+  if (loading) return <p>Loading...</p>;
+  if (!job) return <p>Job not found</p>;
 
   return (
     <section className="karir-detail-page" data-aos="fade-up">
       <div className="karir-detail-content-wrapper">
-        {/* Left Side: Position Detail Section */}
         <div className="karir-detail-left" data-aos="fade-right">
-          <h1 className="karir-detail-position">{selectedPosition.position}</h1>
-          <p className="karir-detail-date-posted">Posted on: {selectedPosition.datePosted}</p>
-          <p className="karir-detail-division">Division: {selectedPosition.division}</p>
+          <h1 className="karir-detail-position">{job.RoleKerja}</h1>
+          <p className="karir-detail-date-posted">Posted on: {new Date(job.TglPosting).toLocaleDateString()}</p>
+          <p className="karir-detail-division">Division: {job.DivisiKerja}</p>
 
           <div className="karir-detail-content">
-            {selectedPosition.content.map((section, index) => (
-              <div key={index} className="karir-detail-section" data-aos="fade-up" data-aos-delay={`${index * 200}`}>
-                <h2 className="karir-detail-section-title">{section.title}</h2>
-                <p className="karir-detail-section-description">{section.description}</p>
-              </div>
+            {job.DeskripsiPekerjaan.map((section, index) => (
+              <React.Fragment key={index}>
+                <p className="karir-detail-section-description" data-aos="fade-up" data-aos-delay={`${index * 200}`}>
+                  {section.children[0]?.text || ''}
+                </p>
+                <br /> {/* Additional line break after each paragraph */}
+              </React.Fragment>
             ))}
           </div>
         </div>
 
-        {/* Right Side: Job Summary, Apply Button, and Social Media */}
         <div className="karir-detail-right" data-aos="fade-left">
-          {/* Job Summary Card */}
           <div className="karir-detail-job-summary-card" data-aos="fade-up" data-aos-delay="200">
             <h3 className="karir-detail-job-summary-title">Job Summary</h3>
             <div className="karir-detail-job-summary-content">
-              <p><FaMapMarkerAlt /> Lokasi: {jobSummary.location}</p>
-              <p><FaBriefcase /> Job Type: {jobSummary.jobType}</p>
-              <p><FaCalendarAlt /> Date Posted: {jobSummary.datePosted}</p>
-              <p><FaClock /> Experience: {jobSummary.experience}</p>
-              <p><FaClock /> Working Hours: {jobSummary.workingHours}</p>
-              <p><FaCalendarDay /> Working Days: {jobSummary.workingDays}</p>
+              <p><FaMapMarkerAlt /> Lokasi: {job.LokasiPekerjaan}</p>
+              <p><FaBriefcase /> Job Type: {job.TipePekerjaan}</p>
+              <p><FaCalendarAlt /> Date Posted: {new Date(job.TglPosting).toLocaleDateString()}</p>
+              <p><FaClock /> Experience: {job.MinimalPengalaman}</p>
+              <p><FaClock /> Working Hours: {job.JamKerja}</p>
+              <p><FaCalendarDay /> Working Days: {job.HariKerja}</p>
             </div>
-            {/* Apply Now Button */}
-            <a href={`mailto:${jobSummary.email}`} className="karir-detail-apply-btn">Apply Now</a>
-          </div>
-
-          {/* Social Media Section */}
-          <div className="karir-detail-social-media-section" data-aos="fade-up" data-aos-delay="400">
-            <h3>Follow Us</h3>
-            <ul className="karir-detail-social-media-list">
-              <li><FaFacebook /> <a href="https://facebook.com">Facebook</a></li>
-              <li><FaTwitter /> <a href="https://twitter.com">Twitter</a></li>
-              <li><FaInstagram /> <a href="https://instagram.com">Instagram</a></li>
-            </ul>
-          </div>
-
-          {/* Banners */}
-          <div className="karir-detail-banner-section">
-            <div className="karir-detail-banner" data-aos="fade-up" data-aos-delay="600">
-              <h4>Special Offers!</h4>
-              <a href="/offers" className="karir-detail-banner-btn">Check Offers</a>
-            </div>
-            <div className="karir-detail-banner" data-aos="fade-up" data-aos-delay="800">
-              <h4>Get a Free Quote!</h4>
-              <a href="/quote" className="karir-detail-banner-btn">Request Quote</a>
-            </div>
+            <a href={`mailto:jobs@company.com`} className="karir-detail-apply-btn">Apply Now</a>
           </div>
         </div>
       </div>

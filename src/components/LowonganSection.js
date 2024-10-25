@@ -1,44 +1,46 @@
 import React, { useState, useEffect } from 'react';
-import '../styles/LowonganSection.css'; // Custom CSS for the section
-import { FaBriefcase, FaSadTear } from 'react-icons/fa'; // Icons for job and no jobs
+import '../styles/LowonganSection.css';
+import { FaBriefcase, FaSadTear } from 'react-icons/fa';
 import AOS from 'aos';
-import 'aos/dist/aos.css'; // Import AOS styles
-
-const jobs = [
-  { id: 1, title: 'Frontend Developer', type: 'Kontrak', location: 'WFO' },
-  { id: 2, title: 'Backend Developer', type: 'Kontrak', location: 'WFO' },
-  { id: 3, title: 'UX Designer', type: 'Kontrak', location: 'Remote' },
-  { id: 4, title: 'Project Manager', type: 'Full-time', location: 'WFO' },
-  { id: 5, title: 'DevOps Engineer', type: 'Full-time', location: 'WFO' },
-  { id: 6, title: 'QA Engineer', type: 'Full-time', location: 'WFO' },
-  { id: 3, title: 'UX Designer', type: 'Kontrak', location: 'Remote' },
-  { id: 4, title: 'Project Manager', type: 'Full-time', location: 'WFO' },
-  { id: 5, title: 'DevOps Engineer', type: 'Full-time', location: 'WFO' },
-  { id: 6, title: 'QA Engineer', type: 'Full-time', location: 'WFO' },
-  // Add more jobs as needed
-];
+import 'aos/dist/aos.css';
+import { Link } from 'react-router-dom';
 
 const LowonganSection = () => {
-  const [visibleJobs, setVisibleJobs] = useState(6); // Show 6 jobs by default
+  const [jobs, setJobs] = useState([]);
+  const [visibleJobs, setVisibleJobs] = useState(6);
+  const [loading, setLoading] = useState(true);
 
-  // Initialize AOS
   useEffect(() => {
-    AOS.init({
-      once: true, // Animate only once
-      duration: 800, // Duration of animation
-    });
+    AOS.init({ once: true, duration: 800 });
+
+    const fetchOpenJobs = async () => {
+      try {
+        const response = await fetch(`${process.env.REACT_APP_API_URL}/api/lowongan-kerjas`);
+        const data = await response.json();
+
+        const openJobs = data.data.filter((job) => job.StatusLowongan === "open");
+        setJobs(openJobs);
+        setLoading(false);
+      } catch (error) {
+        console.error("Error fetching jobs:", error);
+        setLoading(false);
+      }
+    };
+
+    fetchOpenJobs();
   }, []);
 
   const loadMoreJobs = () => {
-    setVisibleJobs(prevVisibleJobs => prevVisibleJobs + 6); // Load 6 more jobs
+    setVisibleJobs((prevVisibleJobs) => prevVisibleJobs + 6);
   };
 
+  if (loading) return <p>Loading...</p>;
+
   return (
-    <section className="lowongan-section" data-aos="fade-up"> {/* Apply AOS animation */}
+    <section className="lowongan-section" data-aos="fade-up">
       <h2 className="section-title-lowongan" data-aos="fade-right">Lowongan Tersedia</h2>
       <div className="underline" data-aos="fade-right"></div>
 
-      {/* Show this message if no jobs are available */}
       {jobs.length === 0 ? (
         <div className="no-jobs" data-aos="fade-up">
           <FaSadTear size={100} />
@@ -47,19 +49,19 @@ const LowonganSection = () => {
       ) : (
         <>
           <div className="job-cards-container">
-            {jobs.slice(0, visibleJobs).map(job => (
-              <div className="job-card" key={job.id} data-aos="fade-up">
+            {jobs.slice(0, visibleJobs).map((job) => (
+              <div className="job-card" key={job.documentId} data-aos="fade-up">
                 <FaBriefcase className="job-icon" />
-                <h3 className="job-title">{job.title}</h3>
+                <h3 className="job-title">{job.RoleKerja}</h3>
                 <p className="job-details">
-                  {job.type} <span className="divider">|</span> {job.location}
+                  {job.TipePekerjaan} <span className="divider">|</span> {job.LokasiPekerjaan}
                 </p>
-                <button className="apply-btn"><a href='/karir-detail'>Lamar</a></button>
+                {/* Link to job detail using documentId */}
+                <Link to={`/karir-detail/${job.documentId}`} className="apply-btn">Lamar</Link>
               </div>
             ))}
           </div>
 
-          {/* Show the Load More button if there are more jobs to load */}
           {visibleJobs < jobs.length && (
             <button className="load-more-btn" onClick={loadMoreJobs} data-aos="fade-up">
               Load More...
