@@ -29,7 +29,7 @@ const calculateDistance = (lat1, lon1, lat2, lon2) => {
 };
 
 // Threshold distance for grouping (in kilometers)
-const GROUP_DISTANCE_THRESHOLD = 100;
+const GROUP_DISTANCE_THRESHOLD = 50;
 
 const LokasiLayananSection = () => {
   const [locations, setLocations] = useState([]);
