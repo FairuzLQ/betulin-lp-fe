@@ -30,6 +30,14 @@ const PostSection = ({ post }) => {
       });
   };
 
+    // Check if REACT_APP_API_URL is defined
+    const apiUrl = process.env.REACT_APP_API_URL || '';
+    const featuredImageUrl = post.FeaturedImage?.formats?.large?.url
+      ? `${apiUrl}${post.FeaturedImage.formats.large.url}`
+      : post.FeaturedImage?.url
+      ? `${apiUrl}${post.FeaturedImage.url}`
+      : null;
+
   // Dummy Data for trending posts
   const trendingPosts = [
     { id: 1, title: "Maximizing Small Spaces", author: "admin", date: "Jumat, 14 Oktober 2024", image: "https://via.placeholder.com/300x200?text=Small+Spaces" },
@@ -45,14 +53,16 @@ const PostSection = ({ post }) => {
           
           <h1 className="post-section-title">{post.TitleArtikel}</h1>
 
-          {post.FeaturedImage?.formats?.large?.url && (
+          {featuredImageUrl && (
             <div className="post-section-image-container" data-aos="zoom-in">
               <img
-                src={`${process.env.REACT_APP_API_URL}${post.FeaturedImage.formats.large.url}`}
+                src={featuredImageUrl}
                 alt={post.TitleArtikel}
                 className="post-section-featured-image"
               />
-              <div className='post-section-image-source'>Sumber: Pexels </div>
+              <div className='post-section-image-source'>
+                Sumber: {post.SumberFoto}
+              </div>
             </div>
           )}
 
