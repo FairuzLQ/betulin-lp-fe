@@ -38,7 +38,7 @@ const LowonganSection = () => {
 
   return (
     <section className="lowongan-section" data-aos="fade-up">
-      <h2 className="section-title-lowongan" data-aos="fade-right">Lowongan Tersedia</h2>
+      <h2 id="lowonganAda" className="section-title-lowongan" data-aos="fade-right">Lowongan Tersedia</h2>
       <div className="underline" data-aos="fade-right"></div>
 
       {jobs.length === 0 ? (
