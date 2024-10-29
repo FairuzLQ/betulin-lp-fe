@@ -1,29 +1,47 @@
-import React, { useEffect } from 'react';
-import AOS from 'aos'; // Import AOS
-import 'aos/dist/aos.css'; // Import AOS styles
-import '../styles/AboutUsHeroSection.css'; // Custom CSS for this component
+import React, { useEffect, useState } from 'react';
+import AOS from 'aos';
+import 'aos/dist/aos.css';
+import '../styles/AboutUsHeroSection.css';
+import axios from 'axios';
 
 const AboutUsHeroSection = () => {
-  // Initialize AOS
+  const [title, setTitle] = useState('');
+  const [subtitle, setSubtitle] = useState('');
+  const [imageUrl, setImageUrl] = useState('');
+
   useEffect(() => {
+    // Initialize AOS
     AOS.init({
-      duration: 1000, // Animation duration
-      once: true, // Only animate once while scrolling
+      duration: 1000,
+      once: true,
     });
+
+    // Fetch data from the API
+    axios.get(`${process.env.REACT_APP_API_URL}/api/tentang-kami-hero-section?populate=*`)
+      .then(response => {
+        const data = response.data.data;
+        setTitle(data.TentangKamiTitle);
+        setSubtitle(data.TentangKamiSubtitle);
+        setImageUrl(`${process.env.REACT_APP_API_URL}${data.TentangKamiImage.url}`);
+      })
+      .catch(error => {
+        console.error('Error fetching About Us data:', error);
+      });
   }, []);
 
   return (
     <section className="about-us-hero-section">
       <div className="hero-content" data-aos="fade-up">
-        <h1 className="hero-title" data-aos="fade-down">About Us</h1>
+        <h1 className="hero-title" data-aos="fade-down">{title || 'About Us'}</h1>
         <p className="hero-subtitle" data-aos="fade-up" data-aos-delay="200">
-          We are committed to delivering the best services to help you thrive in your journey.
+          {subtitle || 'We are committed to delivering the best services to help you thrive in your journey.'}
         </p>
         <img
-          src={require('../assets/images/tim.png')} // Adjust this path to your image
+          src={imageUrl || require('../assets/images/tim.png')}
           alt="About Us"
           className="hero-image"
-          data-aos="zoom-in" data-aos-delay="400"
+          data-aos="zoom-in"
+          data-aos-delay="400"
         />
       </div>
     </section>
