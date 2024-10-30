@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import DownloadSection from '../components/DownloadSection';
 import RecentPostCarouselSection from '../components/RecentPostCarouselSection';
 import CategoryRecentPostSection from '../components/CategoryRecentPostSection';
-import NewCategoryShowcaseSection from '../components/NewCategoryShowcaseSection';
+//import NewCategoryShowcaseSection from '../components/NewCategoryShowcaseSection';
 
 const Blog = () => {
   const [categories, setCategories] = useState([]);
@@ -37,7 +37,7 @@ const Blog = () => {
         <CategoryRecentPostSection key={category.id} category={category} />
       ))}
 
-      <NewCategoryShowcaseSection />
+      {/*<NewCategoryShowcaseSection />*/}
       <DownloadSection />
     </div>
   );

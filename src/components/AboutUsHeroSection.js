@@ -3,11 +3,13 @@ import AOS from 'aos';
 import 'aos/dist/aos.css';
 import '../styles/AboutUsHeroSection.css';
 import axios from 'axios';
+import { useLoading } from '../contexts/LoadingContext';
 
 const AboutUsHeroSection = () => {
   const [title, setTitle] = useState('');
   const [subtitle, setSubtitle] = useState('');
   const [imageUrl, setImageUrl] = useState('');
+  const { showLoading, hideLoading } = useLoading();
 
   useEffect(() => {
     // Initialize AOS
@@ -15,6 +17,9 @@ const AboutUsHeroSection = () => {
       duration: 1000,
       once: true,
     });
+
+    // Show loading before the request
+    showLoading();
 
     // Fetch data from the API
     axios.get(`${process.env.REACT_APP_API_URL}/api/tentang-kami-hero-section?populate=*`)
@@ -26,8 +31,12 @@ const AboutUsHeroSection = () => {
       })
       .catch(error => {
         console.error('Error fetching About Us data:', error);
+      })
+      .finally(() => {
+        // Hide loading after the request is complete, whether successful or failed
+        hideLoading();
       });
-  }, []);
+  }, [showLoading, hideLoading]);
 
   return (
     <section className="about-us-hero-section">

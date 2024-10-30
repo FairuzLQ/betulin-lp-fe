@@ -3,6 +3,7 @@ import '../styles/KarirHeroSection.css'; // Custom CSS for the section
 import AOS from 'aos';
 import 'aos/dist/aos.css'; // Import AOS styles
 import axios from 'axios';
+import { useLoading } from '../contexts/LoadingContext';
 
 const KarirHeroSection = () => {
   const [title, setTitle] = useState('Bergabung dengan kami!');
@@ -10,7 +11,12 @@ const KarirHeroSection = () => {
   const [buttonText, setButtonText] = useState('Lihat Lowongan');
   const [imageUrl, setImageUrl] = useState(require('../assets/images/karir-tim-hero.png')); // Default image
 
+  const { showLoading, hideLoading } = useLoading();
+
   useEffect(() => {
+    // Show loading when the component mounts and start fetching data
+    showLoading();
+
     AOS.init({
       duration: 1000,
       once: true, // Animation occurs only once
@@ -31,8 +37,12 @@ const KarirHeroSection = () => {
       })
       .catch(error => {
         console.error('Error fetching Karir Hero data:', error);
+      })
+      .finally(() => {
+        // Hide loading indicator after the request is complete
+        hideLoading();
       });
-  }, []);
+  }, [showLoading, hideLoading]);
 
   return (
     <section className="karir-hero-section">

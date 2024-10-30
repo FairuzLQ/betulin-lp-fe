@@ -3,14 +3,17 @@ import { Carousel } from 'react-responsive-carousel';
 import { Link } from 'react-router-dom'; // Import Link for navigation
 import 'react-responsive-carousel/lib/styles/carousel.min.css'; // Import the CSS
 import '../styles/RecentPostCarouselSection.css'; // Custom styles
+import { useLoading } from '../contexts/LoadingContext';
 
 const RecentPostCarouselSection = () => {
   const [posts, setPosts] = useState([]);
   const [loading, setLoading] = useState(true);
+  const { showLoading, hideLoading } = useLoading();
 
   // Fetch recent posts from the API
   useEffect(() => {
     const fetchRecentPosts = async () => {
+      showLoading();
       try {
         const response = await fetch(
           `${process.env.REACT_APP_API_URL}/api/artikels?populate=*&sort=TglArtikel:desc&pagination[limit]=3`
@@ -47,6 +50,7 @@ const RecentPostCarouselSection = () => {
         console.error('Error fetching posts:', error);
         setLoading(false);
       }
+      hideLoading();
     };
 
     fetchRecentPosts();
