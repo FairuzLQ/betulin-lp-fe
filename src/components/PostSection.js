@@ -4,15 +4,18 @@ import { Link } from 'react-router-dom';
 import AOS from 'aos';
 import 'aos/dist/aos.css';
 import '../styles/PostSection.css';
+import { useLoading } from '../contexts/LoadingContext';
 
 const PostSection = ({ post }) => {
   const [randomArticles, setRandomArticles] = useState([]);
   const apiUrl = process.env.REACT_APP_API_URL || '';
+  const { showLoading, hideLoading } = useLoading();
 
   useEffect(() => {
     AOS.init({ duration: 1000, once: true });
-    
+
     const fetchRandomArticles = async () => {
+      showLoading();
       try {
         const totalResponse = await fetch(`${apiUrl}/api/artikels?pagination[pageSize]=1`);
         const totalData = await totalResponse.json();
@@ -28,6 +31,8 @@ const PostSection = ({ post }) => {
         setRandomArticles(data.data);
       } catch (error) {
         console.error('Error fetching random articles:', error);
+      } finally {
+        hideLoading();
       }
     };
 
