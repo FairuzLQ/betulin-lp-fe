@@ -1,14 +1,17 @@
 import React, { useState, useEffect } from 'react';
 import '../styles/LayananHeroSection.css'; // Custom CSS for this section
+import { useLoading } from '../contexts/LoadingContext';
 
 const LayananHeroSection = () => {
   const [heroData, setHeroData] = useState(null); // State to store API data
   const [isLoading, setIsLoading] = useState(true); // State to track loading status
   const [error, setError] = useState(null); // State to track errors
+  const { showLoading, hideLoading } = useLoading();
 
   useEffect(() => {
     // Fetch data from the API when the component loads
     const fetchHeroData = async () => {
+      showLoading();
       try {
         const response = await fetch(`${process.env.REACT_APP_API_URL}/api/layanan-hero-section?populate=*`);
         if (!response.ok) {
@@ -21,6 +24,7 @@ const LayananHeroSection = () => {
         setError(error.message); // Set error message if the fetch fails
         setIsLoading(false);
       }
+      hideLoading();
     };
 
     fetchHeroData();
