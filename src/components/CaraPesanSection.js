@@ -24,12 +24,14 @@ const CaraPesanSection = () => {
             try {
                 const response = await axios.get(`${apiUrl}/api/cara-pesans`);
                 if (response.data && response.data.data) {
-                    // Map the API response to extract the necessary fields
-                    const stepsData = response.data.data.map((step) => ({
-                        step: step.caraPesanNo,
-                        title: step.caraPesanTitle,
-                        description: step.caraPesanSubtitle,
-                    }));
+                    // Map and sort the API response by step number in ascending order
+                    const stepsData = response.data.data
+                        .map((step) => ({
+                            step: step.caraPesanNo,
+                            title: step.caraPesanTitle,
+                            description: step.caraPesanSubtitle,
+                        }))
+                        .sort((a, b) => a.step - b.step); // Sort by step number
                     setSteps(stepsData);
                 } else {
                     throw new Error('Invalid API response');
