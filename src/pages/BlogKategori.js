@@ -1,45 +1,39 @@
 import React, { useState, useEffect } from 'react';
-import { FaFacebook, FaTwitter, FaInstagram } from 'react-icons/fa'; // Font Awesome Icons
-import AOS from 'aos'; // Import AOS
-import 'aos/dist/aos.css'; // Import AOS styles
-import '../styles/BlogKategori.css'; // Custom CSS
-import { useParams, Link } from 'react-router-dom'; // To fetch category slug and link to BlogPost
+import { FaFacebook, FaTwitter, FaInstagram } from 'react-icons/fa';
+import AOS from 'aos';
+import 'aos/dist/aos.css';
+import '../styles/BlogKategori.css';
+import { useParams, Link } from 'react-router-dom';
 
 const BlogKategori = () => {
-  const { categorySlug } = useParams(); // Get category slug from URL
+  const { categorySlug } = useParams();
   const [posts, setPosts] = useState([]);
+  const [randomArticles, setRandomArticles] = useState([]);
   const [loading, setLoading] = useState(true);
   const [currentPage, setCurrentPage] = useState(1);
+  const apiUrl = process.env.REACT_APP_API_URL || '';
+  const postsPerPage = 3;
 
-  const postsPerPage = 3; // Number of posts to display per page
-
-  // Helper function to convert slug into normal text
   const formatCategoryTitle = (slug) => {
     return slug
-      .split('-') // Split by hyphen
-      .map((word) => word.charAt(0).toUpperCase() + word.slice(1)) // Capitalize first letter of each word
-      .join(' '); // Join them back with spaces
+      .split('-')
+      .map((word) => word.charAt(0).toUpperCase() + word.slice(1))
+      .join(' ');
   };
 
   const formattedCategoryName = formatCategoryTitle(categorySlug);
-  // Dummy Data for blog posts (for the right side)
-  const dummyPosts = [
-    { id: 1, title: "5 Tips for Home Improvement", excerpt: "Improve your home with these top 5 tips. From DIY repairs to smart renovations, we have you covered.", author: "admin", date: "Rabu, 12 Oktober 2024", image: "https://via.placeholder.com/300x200?text=Home+Improvement" },
-    { id: 2, title: "Choosing the Best Paint Colors", excerpt: "Explore the latest trends in paint colors and find the perfect shade to transform your living space.", author: "admin", date: "Kamis, 13 Oktober 2024", image: "https://via.placeholder.com/300x200?text=Paint+Colors" },
-    { id: 3, title: "Maximizing Small Spaces", excerpt: "Learn how to make the most of your small living spaces with smart furniture and organization.", author: "admin", date: "Jumat, 14 Oktober 2024", image: "https://via.placeholder.com/300x200?text=Small+Spaces" },
-  ];
+
   useEffect(() => {
     AOS.init({
-      duration: 1000, // Animation duration in milliseconds
-      once: true, // Ensure animation occurs only once
+      duration: 1000,
+      once: true,
     });
   }, []);
 
-  // Fetch posts based on category
   useEffect(() => {
     const fetchCategoryPosts = async () => {
       try {
-        const response = await fetch(`${process.env.REACT_APP_API_URL}/api/artikels?filters[kategori_artikel][SlugKategori][$eq]=${categorySlug}&populate=*`);
+        const response = await fetch(`${apiUrl}/api/artikels?filters[kategori_artikel][SlugKategori][$eq]=${categorySlug}&populate=*`);
         const data = await response.json();
         setPosts(data.data);
         setLoading(false);
@@ -50,9 +44,30 @@ const BlogKategori = () => {
     };
 
     fetchCategoryPosts();
-  }, [categorySlug]);
+  }, [categorySlug, apiUrl]);
 
-  // Pagination logic
+  useEffect(() => {
+    const fetchRandomArticles = async () => {
+      try {
+        const totalResponse = await fetch(`${apiUrl}/api/artikels?pagination[pageSize]=1`);
+        const totalData = await totalResponse.json();
+        const totalArticles = totalData.meta.pagination.total;
+        const totalPages = Math.ceil(totalArticles / 3);
+        const randomPage = Math.floor(Math.random() * totalPages) + 1;
+
+        const response = await fetch(
+          `${apiUrl}/api/artikels?populate=*&pagination[page]=${randomPage}&pagination[pageSize]=3`
+        );
+        const data = await response.json();
+        setRandomArticles(data.data);
+      } catch (error) {
+        console.error('Error fetching random articles:', error);
+      }
+    };
+
+    fetchRandomArticles();
+  }, [apiUrl]);
+
   const indexOfLastPost = currentPage * postsPerPage;
   const indexOfFirstPost = indexOfLastPost - postsPerPage;
   const currentPosts = posts.slice(indexOfFirstPost, indexOfLastPost);
@@ -89,7 +104,7 @@ const BlogKategori = () => {
                 data-aos-delay={`${index * 200}`}
               >
                 <img
-                  src={`${process.env.REACT_APP_API_URL}${post.FeaturedImage?.formats?.small?.url || post.FeaturedImage?.url}`}
+                  src={`${apiUrl}${post.FeaturedImage?.formats?.small?.url || post.FeaturedImage?.url}`}
                   alt={post.TitleArtikel}
                   className="blog-kategori-post-image"
                 />
@@ -121,19 +136,27 @@ const BlogKategori = () => {
           </div>
         </div>
 
-        {/* Right Side: Trending Posts, Social Media, Banners */}
+        {/* Right Side: Baca Juga Ini, Social Media, Banners */}
         <div className="blog-kategori-right" data-aos="fade-left">
-          {/* Trending Posts */}
+          {/* Baca Juga Ini Section */}
           <div className="trending-posts">
-            <h3>Post Terpopuler</h3>
-            {dummyPosts.slice(0, 3).map((post, index) => (
-              <div className="trending-post" key={post.id} data-aos="fade-right" data-aos-delay={`${index * 200}`}>
-                <img src={post.image} alt={post.title} className="trending-post-image" />
-                <div className="trending-post-details">
-                  <h4>{post.title}</h4>
-                  <p className="author-date">{post.author} | {post.date}</p>
+            <h3>Baca Juga Ini</h3>
+            {randomArticles.map((post, index) => (
+              <Link to={`/blog-post/${post.documentId}`} key={post.id} className="trending-post-link">
+                <div className="trending-post" data-aos="fade-right" data-aos-delay={`${index * 200}`}>
+                  <img
+                    src={`${apiUrl}${post.FeaturedImage?.formats?.small?.url || post.FeaturedImage?.url}`}
+                    alt={post.TitleArtikel}
+                    className="trending-post-image"
+                  />
+                  <div className="trending-post-details">
+                    <h4>{post.TitleArtikel}</h4>
+                    <p className="author-date">
+                      {post.penulis_artikel?.NamaPenulis} | {new Date(post.TglArtikel).toLocaleDateString()}
+                    </p>
+                  </div>
                 </div>
-              </div>
+              </Link>
             ))}
           </div>
 
