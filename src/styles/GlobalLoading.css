@@ -1,0 +1,51 @@
+/* Global Loading CSS */
+.global-loading-container {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background-color: rgba(255, 255, 255, 0.8);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 9999; /* Ensure it overlays everything */
+}
+
+.global-loading-spinner {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+}
+
+.spinner-circle {
+    width: 15px;
+    height: 15px;
+    border-radius: 50%;
+    background-color: #06479d;
+    animation: pulse 0.6s infinite alternate;
+}
+
+.spinner-circle1 {
+    animation-delay: 0s;
+}
+
+.spinner-circle2 {
+    animation-delay: 0.2s;
+}
+
+.spinner-circle3 {
+    animation-delay: 0.4s;
+}
+
+@keyframes pulse {
+    0% {
+        transform: scale(1);
+        opacity: 1;
+    }
+    100% {
+        transform: scale(1.5);
+        opacity: 0.3;
+    }
+}

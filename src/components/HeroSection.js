@@ -3,8 +3,10 @@ import axios from 'axios';
 import AOS from 'aos';
 import 'aos/dist/aos.css';
 import '../styles/HeroSection.css';
+import { useLoading } from '../contexts/LoadingContext';
 
 const HeroSection = () => {
+    const { showLoading, hideLoading } = useLoading();
     // State to store data from API
     const [heroData, setHeroData] = useState({
         berandaHeroTitle: 'Loading...',
@@ -21,8 +23,8 @@ const HeroSection = () => {
         const apiUrl = process.env.REACT_APP_API_URL; // Access the environment variable
 
         // Log the API URL to check if it's working
-        console.log('API URL:', apiUrl);
-
+        // console.log('API URL:', apiUrl);
+        showLoading();
         const fetchHeroData = async () => {
             try {
                 const response = await axios.get(`${apiUrl}/api/beranda-hero-section`); // Use the API URL from env
@@ -49,6 +51,7 @@ const HeroSection = () => {
                 console.error('Error fetching hero section data:', err);
                 setError('Failed to load hero section data.');
             }
+            hideLoading();
         };
 
         fetchHeroData();

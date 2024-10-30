@@ -15,29 +15,34 @@ import TentangKami from './pages/TentangKami';
 import ScrollToTop from './components/ScrollToTop';
 import './styles/global.css';
 import ScrollToTopButton from './components/ScrollToTopButton';
+import { LoadingProvider } from './contexts/LoadingContext';
+import GlobalLoading from './components/GlobalLoading';
 
 function App() {
   return (
-    <Router>
-      <ScrollToTop />
-      <ScrollToTopButton />
-      <div>
-        <Navbar />
-        <Routes>
-          <Route path="/" element={<Beranda />} />
-          <Route path="/karir" element={<Karir />} />
-          <Route path="/karir-detail/:documentId" element={<KarirDetail />} /> {/* Updated route */}
-          <Route path="/syarat-ketentuan" element={<SyaratKetentuan />} />
-          <Route path="/kebijakan-privasi" element={<KebijakanPrivasi />} />
-          <Route path="/layanan" element={<Layanan />} />
-          <Route path="/blog" element={<Blog />} />
-          <Route path="/blog-kategori/:categorySlug" element={<BlogKategori />} />
-          <Route path="/blog-post/:documentId" element={<BlogPost />} />
-          <Route path="/tentang-kami" element={<TentangKami />} />
-        </Routes>
-        <Footer />
-      </div>
-    </Router>
+    <LoadingProvider>
+      <Router>
+        <ScrollToTop />
+        <ScrollToTopButton />
+        <GlobalLoading />
+        <div>
+          <Navbar />
+          <Routes>
+            <Route path="/" element={<Beranda />} />
+            <Route path="/karir" element={<Karir />} />
+            <Route path="/karir-detail/:documentId" element={<KarirDetail />} /> {/* Updated route */}
+            <Route path="/syarat-ketentuan" element={<SyaratKetentuan />} />
+            <Route path="/kebijakan-privasi" element={<KebijakanPrivasi />} />
+            <Route path="/layanan" element={<Layanan />} />
+            <Route path="/blog" element={<Blog />} />
+            <Route path="/blog-kategori/:categorySlug" element={<BlogKategori />} />
+            <Route path="/blog-post/:documentId" element={<BlogPost />} />
+            <Route path="/tentang-kami" element={<TentangKami />} />
+          </Routes>
+          <Footer />
+        </div>
+      </Router>
+    </LoadingProvider>
   );
 }
 

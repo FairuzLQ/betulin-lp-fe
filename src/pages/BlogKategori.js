@@ -4,6 +4,7 @@ import AOS from 'aos';
 import 'aos/dist/aos.css';
 import '../styles/BlogKategori.css';
 import { useParams, Link } from 'react-router-dom';
+import { useLoading } from '../contexts/LoadingContext';
 
 const BlogKategori = () => {
   const { categorySlug } = useParams();
@@ -13,6 +14,7 @@ const BlogKategori = () => {
   const [currentPage, setCurrentPage] = useState(1);
   const apiUrl = process.env.REACT_APP_API_URL || '';
   const postsPerPage = 3;
+  const { showLoading, hideLoading } = useLoading();
 
   const formatCategoryTitle = (slug) => {
     return slug
@@ -32,6 +34,7 @@ const BlogKategori = () => {
 
   useEffect(() => {
     const fetchCategoryPosts = async () => {
+      showLoading();
       try {
         const response = await fetch(`${apiUrl}/api/artikels?filters[kategori_artikel][SlugKategori][$eq]=${categorySlug}&populate=*`);
         const data = await response.json();
@@ -41,6 +44,7 @@ const BlogKategori = () => {
         console.error('Error fetching category posts:', error);
         setLoading(false);
       }
+      hideLoading();
     };
 
     fetchCategoryPosts();
