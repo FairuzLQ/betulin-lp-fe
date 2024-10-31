@@ -36,7 +36,7 @@ const AboutUsHeroSection = () => {
         // Hide loading after the request is complete, whether successful or failed
         hideLoading();
       });
-  }, [showLoading, hideLoading]);
+  });
 
   return (
     <section className="about-us-hero-section">

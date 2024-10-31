@@ -42,7 +42,7 @@ const KarirHeroSection = () => {
         // Hide loading indicator after the request is complete
         hideLoading();
       });
-  }, [showLoading, hideLoading]);
+  });
 
   return (
     <section className="karir-hero-section">
