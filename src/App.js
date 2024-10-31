@@ -36,7 +36,7 @@ function App() {
             <Route path="/layanan" element={<Layanan />} />
             <Route path="/blog" element={<Blog />} />
             <Route path="/blog-kategori/:categorySlug" element={<BlogKategori />} />
-            <Route path="/blog-post/:documentId" element={<BlogPost />} />
+            <Route path="/blog-post/:slug" element={<BlogPost />} />
             <Route path="/tentang-kami" element={<TentangKami />} />
           </Routes>
           <Footer />

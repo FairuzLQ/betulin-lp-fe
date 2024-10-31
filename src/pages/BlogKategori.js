@@ -114,7 +114,7 @@ const BlogKategori = () => {
                 />
                 <div className="blog-kategori-post-details">
                   <h2>
-                    <Link to={`/blog-post/${post.documentId}`}>{post.TitleArtikel}</Link>
+                    <Link to={`/blog-post/${post.ArtikelSlug}`}>{post.TitleArtikel}</Link>
                   </h2>
                   <p className="author-date">
                     {post.penulis_artikel?.NamaPenulis} |{' '}
@@ -146,7 +146,7 @@ const BlogKategori = () => {
           <div className="trending-posts">
             <h3>Baca Juga Ini</h3>
             {randomArticles.map((post, index) => (
-              <Link to={`/blog-post/${post.documentId}`} key={post.id} className="trending-post-link">
+              <Link to={`/blog-post/${post.ArtikelSlug}`} key={post.id} className="trending-post-link">
                 <div className="trending-post" data-aos="fade-right" data-aos-delay={`${index * 200}`}>
                   <img
                     src={`${apiUrl}${post.FeaturedImage?.formats?.small?.url || post.FeaturedImage?.url}`}

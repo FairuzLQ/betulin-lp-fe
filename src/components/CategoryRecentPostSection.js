@@ -33,7 +33,7 @@ const CategoryRecentPostSection = ({ category }) => {
             author: article.penulis_artikel?.NamaPenulis || 'Unknown Author',
             date: article.TglArtikel ? new Date(article.TglArtikel).toLocaleDateString() : 'Unknown Date',
             excerpt: article.ExcerptArtikel || '',
-            link: `/blog-post/${article.documentId}`, // Updated link to use documentId
+            link: `/blog-post/${article.ArtikelSlug}`, 
           };
         });
 

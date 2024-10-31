@@ -103,7 +103,7 @@ const PostSection = ({ post }) => {
           <div className="post-section-trending-posts" data-aos="fade-up" data-aos-delay="200">
             <h3>Baca Juga Ini</h3>
             {randomArticles.map((randomPost) => (
-              <Link to={`/blog-post/${randomPost.documentId}`} key={randomPost.id} className="post-section-trending-post-link">
+              <Link to={`/blog-post/${randomPost.ArtikelSlug}`} key={randomPost.id} className="post-section-trending-post-link">
                 <div className="post-section-trending-post" data-aos="fade-right" data-aos-delay="400">
                   <img
                     src={`${apiUrl}${randomPost.FeaturedImage?.formats?.small?.url || ''}`}

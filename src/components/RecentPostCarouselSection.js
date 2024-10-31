@@ -38,7 +38,7 @@ const RecentPostCarouselSection = () => {
               ? new Date(article.TglArtikel).toLocaleDateString()
               : 'Unknown Date',
             category: article.kategori_artikel?.NamaKategori || 'Uncategorized',
-            link: `/blog-post/${article.documentId}`, // Dynamic article link using documentId
+            link: `/blog-post/${article.ArtikelSlug}`, // Dynamic article link using documentId
             authorLink: `/author/${article.penulis_artikel?.id}`, // Dynamic author link
             categoryLink: `/blog-kategori/${article.kategori_artikel?.SlugKategori}`, // Dynamic category link
           };
