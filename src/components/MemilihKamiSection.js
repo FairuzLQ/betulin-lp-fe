@@ -1,15 +1,14 @@
 import React, { useEffect, useState } from 'react';
 import AOS from 'aos';
 import 'aos/dist/aos.css';
-import '../styles/MemilihKamiSection.css'; // Custom CSS for this section
+import '../styles/MemilihKamiSection.css';
 import axios from 'axios';
-import { FaCrown, FaHandshake, FaShieldAlt, FaRegSmile } from 'react-icons/fa'; // Icons
+import { FaCrown, FaHandshake, FaShieldAlt, FaRegSmile } from 'react-icons/fa';
 
-// Mapping of icons to use as placeholders
-const icons = [<FaCrown className="reason-icon" />, <FaHandshake className="reason-icon" />, <FaShieldAlt className="reason-icon" />, <FaRegSmile className="reason-icon" />];
+const defaultIcons = [<FaCrown className="reason-icon" />, <FaHandshake className="reason-icon" />, <FaShieldAlt className="reason-icon" />, <FaRegSmile className="reason-icon" />];
 
 const MemilihKamiSection = () => {
-  const [reasons, setReasons] = useState([]); // Initialize reasons as an empty array
+  const [reasons, setReasons] = useState([]);
 
   useEffect(() => {
     AOS.init({ duration: 1000, once: true });
@@ -20,11 +19,12 @@ const MemilihKamiSection = () => {
         const fetchedData = response.data.data;
 
         if (fetchedData.length > 0) {
-          // Map API data to include icons for each reason
           const updatedReasons = fetchedData.map((item, index) => ({
             title: item.KenapaMemilihKamiTitle,
             subtitle: item.KenapaMemilihKamiSubtitle,
-            icon: icons[index % icons.length] // Cycle through icons as needed
+            icon: item.KenapaMemilihKamiIcon?.url
+              ? <img src={`${process.env.REACT_APP_API_URL}${item.KenapaMemilihKamiIcon.url}`} alt="icon" className="reason-icon" />
+              : defaultIcons[index % defaultIcons.length]
           }));
           setReasons(updatedReasons);
         }
