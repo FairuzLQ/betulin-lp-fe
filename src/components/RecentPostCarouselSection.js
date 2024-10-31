@@ -86,9 +86,9 @@ const RecentPostCarouselSection = () => {
                   <h3>{post.title}</h3>
                 </Link>
                 <p>
-                  <Link to={post.authorLink} className="post-author">
+                  
                     {post.author}
-                  </Link>{' '}
+                  
                   • {post.date}
                 </p>
               </div>
