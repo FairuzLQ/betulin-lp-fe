@@ -1,17 +1,26 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import '../styles/PrinsipKamiSection.css'; // Import the CSS file for styling
-import img1 from '../assets/images/ex-prinsip1.png'; // Import your images
-import img2 from '../assets/images/ex-prinsip2.png';
-import img3 from '../assets/images/ex-prinsip1.png';
-import img4 from '../assets/images/ex-prinsip2.png';
+import axios from 'axios';
 
 const PrinsipKamiSection = () => {
-    const principles = [
-        { image: img1, title: 'Kualitas', subtitle: 'Selalu menjaga kualitas terbaik' },
-        { image: img2, title: 'Integritas', subtitle: 'Jujur dan dapat dipercaya' },
-        { image: img3, title: 'Kecepatan', subtitle: 'Cepat dalam memberikan layanan' },
-        { image: img4, title: 'Inovasi', subtitle: 'Terus berinovasi untuk kemajuan' },
-    ];
+    const [principles, setPrinciples] = useState([]);
+
+    useEffect(() => {
+        const fetchPrinciples = async () => {
+            try {
+                const response = await axios.get(`${process.env.REACT_APP_API_URL}/api/prinsip-sections?populate=*`);
+                const fetchedPrinciples = response.data.data.map(principle => ({
+                    imageUrl: `${process.env.REACT_APP_API_URL}${principle.PrinsipImage.formats.medium.url}`, // Use 'medium' size image
+                    title: principle.PrinsipTitle,
+                    subtitle: principle.PrinsipSubtitle
+                }));
+                setPrinciples(fetchedPrinciples);
+            } catch (error) {
+                console.error("Error fetching principles:", error);
+            }
+        };
+        fetchPrinciples();
+    }, []);
 
     return (
         <section className="prinsip-kami-section">
@@ -19,7 +28,7 @@ const PrinsipKamiSection = () => {
             <div className="prinsip-kami-grid">
                 {principles.map((principle, index) => (
                     <div key={index} className="prinsip-kami-card">
-                        <img src={principle.image} alt={principle.title} className="prinsip-kami-image" />
+                        <img src={principle.imageUrl} alt={principle.title} className="prinsip-kami-image" />
                         <div className="prinsip-kami-overlay">
                             <h3 className="prinsip-kami-caption">{principle.title}</h3>
                             <p className="prinsip-kami-subcaption">{principle.subtitle}</p>

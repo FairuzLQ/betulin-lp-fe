@@ -18,22 +18,33 @@
 /* Grid for Images */
 .prinsip-kami-grid {
     display: grid;
-    grid-template-columns: repeat(4, 1fr); /* 4 columns */
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); /* Adjusts columns based on available space */
     gap: 30px;
+    place-items: center; /* Centers items horizontally */
+    max-width: 1200px; /* Optional: set max width for grid */
+    margin: 0 auto; /* Centers the entire grid */
 }
+
 
 /* Image Card */
 .prinsip-kami-card {
     position: relative;
     overflow: hidden;
     border-radius: 10px;
+    width: 300px;
+    height: 400px; /* Fixed height for consistent card size */
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
+/* Ensure the image covers the card */
 .prinsip-kami-image {
     width: 100%;
-    height: auto;
+    height: 100%;
+    object-fit: cover; /* Ensures the image fills the card without stretching */
     border-radius: 10px;
-    transition: transform 0.3s ease; /* Add hover effect */
+    transition: transform 0.3s ease; /* Hover effect */
 }
 
 /* Dark overlay for the image */
