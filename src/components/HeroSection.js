@@ -73,7 +73,7 @@ const HeroSection = () => {
         <div className="hero-section__container">
             {/* Video Background */}
             <video autoPlay muted loop className="hero-section__video-background">
-                <source src={require('../assets/videos/back.mp4')} type="video/mp4" />
+                <source src={require('../assets/videos/hero-background.mp4')} type="video/mp4" />
                 Your browser does not support the video tag.
             </video>
 
