@@ -6,6 +6,7 @@ import CaraPesanSection from '../components/CaraPesanSection';
 import HubungiKamiSection from '../components/HubungiKamiSection';
 import PrinsipKamiSection from '../components/PrinsipKamiSection';
 import DownloadSection from '../components/DownloadSection';
+import FlyingIconsBackground from '../components/FlyingIconsBackground';
 
 const Beranda = () => {
     return (
@@ -16,6 +17,7 @@ const Beranda = () => {
             <CaraPesanSection />
             <HubungiKamiSection />
             <PrinsipKamiSection />
+            <FlyingIconsBackground />
             <DownloadSection />
             {/* Other sections of Beranda can be added here */}
         </div>
