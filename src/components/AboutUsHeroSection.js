@@ -8,8 +8,8 @@ import defaultImage from '../assets/images/tim.png';
 
 const AboutUsHeroSection = () => {
   const [heroData, setHeroData] = useState({
-    title: 'About Us', // Default title
-    subtitle: 'We are committed to delivering the best services to help you thrive in your journey.', // Default subtitle
+    title: 'Tentang Kami', // Default title
+    subtitle: 'Kami berkomitmen untuk memberikan layanan terbaik untuk membantu Anda berkembang dalam perjalanan Anda.', // Default subtitle
     imageUrl: defaultImage, // Default image
   });
   const [error, setError] = useState(null); // Error state to capture fetch issues

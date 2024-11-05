@@ -3,8 +3,21 @@ import AOS from 'aos';
 import 'aos/dist/aos.css';
 import '../styles/SyaratKetentuanSection.css';
 
+const defaultTerms = {
+  SubtitleSyaratKetentuan: 'Mohon baca dengan seksama sebelum menggunakan layanan kami.',
+  UpdatedSyaratKetentuan: new Date(),
+  DetailSyaratKetentuan: [
+    { children: [{ text: '1. Penggunaan Layanan' }] },
+    { children: [{ text: 'Anda setuju untuk menggunakan layanan ini dengan bertanggung jawab dan mematuhi hukum yang berlaku.' }] },
+    { children: [{ text: '2. Pembatasan Tanggung Jawab' }] },
+    { children: [{ text: 'Kami tidak bertanggung jawab atas kerusakan atau kerugian yang timbul dari penggunaan layanan kami.' }] },
+    { children: [{ text: '3. Privasi Pengguna' }] },
+    { children: [{ text: 'Kami menghormati privasi Anda dan melindungi informasi pribadi yang Anda berikan kepada kami.' }] },
+  ],
+};
+
 const SyaratKetentuanSection = () => {
-  const [terms, setTerms] = useState(null);
+  const [terms, setTerms] = useState(defaultTerms);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
@@ -18,9 +31,9 @@ const SyaratKetentuanSection = () => {
         if (data.data.length > 0) {
           setTerms(data.data[0]);
         }
-        setLoading(false);
       } catch (error) {
         console.error("Error fetching the latest terms:", error);
+      } finally {
         setLoading(false);
       }
     };
@@ -34,12 +47,14 @@ const SyaratKetentuanSection = () => {
     <section className="syarat-ketentuan-section">
       <div className="syarat-ketentuan-header">
         <h2>Syarat dan Ketentuan</h2>
-        <p className="header-subtitle">{terms?.SubtitleSyaratKetentuan || 'Mohon baca dengan seksama sebelum menggunakan layanan kami.'}</p>
-        <p className="last-update">Terakhir diperbarui: {new Date(terms?.UpdatedSyaratKetentuan).toLocaleDateString()}</p>
+        <p className="header-subtitle">{terms.SubtitleSyaratKetentuan}</p>
+        <p className="last-update">
+          Terakhir diperbarui: {new Date(terms.UpdatedSyaratKetentuan).toLocaleDateString()}
+        </p>
       </div>
 
       <div className="syarat-ketentuan-content">
-        {terms?.DetailSyaratKetentuan.reduce((acc, item, index) => {
+        {terms.DetailSyaratKetentuan.reduce((acc, item, index) => {
           const text = item.children[0]?.text?.trim() || '';
 
           if (/^\d+\.\s/.test(text)) { // If it's a numbered title
