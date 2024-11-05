@@ -1,0 +1,90 @@
+/* src/styles/NotFound.css */
+.not-found {
+    text-align: center;
+    color: #333;
+    margin-top: 100px;
+    position: relative;
+    z-index: 2;
+    font-family: 'Arial', sans-serif;
+    
+  }
+  
+  .not-found-title {
+    font-size: 120px;
+    font-weight: 700;
+    color: #06479d;
+    margin: 0;
+  }
+  
+  .not-found-message {
+    font-size: 24px;
+    color: #555;
+    margin: 20px 0;
+  }
+  
+  .not-found-home-link {
+    display: inline-block;
+    margin-top: 20px;
+    padding: 10px 20px;
+    background-color: #06479d;
+    color: #fff;
+    font-size: 18px;
+    font-weight: bold;
+    text-decoration: none;
+    border-radius: 5px;
+    transition: background-color 0.3s ease;
+    margin-bottom: 20px;
+  }
+  
+  .not-found-home-link:hover {
+    background-color: #06479d;
+  }
+  
+  .not-found-bg-animation {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    z-index: -1;
+  }
+  
+  .bg-circle {
+    position: absolute;
+    width: 200px;
+    height: 200px;
+    background-color: #06479d;
+    border-radius: 50%;
+    animation: circle-animation 8s infinite ease-in-out;
+  }
+  
+  .bg-circle:nth-child(1) {
+    top: 10%;
+    left: 20%;
+    animation-delay: 0s;
+  }
+  
+  .bg-circle:nth-child(2) {
+    top: 50%;
+    left: 70%;
+    animation-delay: 2s;
+  }
+  
+  .bg-circle:nth-child(3) {
+    top: 80%;
+    left: 30%;
+    animation-delay: 4s;
+  }
+  
+  @keyframes circle-animation {
+    0%, 100% {
+      transform: scale(1);
+      opacity: 0.5;
+    }
+    50% {
+      transform: scale(1.3);
+      opacity: 1;
+    }
+  }
+  

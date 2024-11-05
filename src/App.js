@@ -12,6 +12,7 @@ import Blog from './pages/Blog';
 import BlogKategori from './pages/BlogKategori';
 import BlogPost from './pages/BlogPost';
 import TentangKami from './pages/TentangKami';
+import NotFound from './pages/NotFound'; // Import the NotFound component
 import ScrollToTop from './components/ScrollToTop';
 import './styles/global.css';
 import ScrollToTopButton from './components/ScrollToTopButton';
@@ -30,7 +31,7 @@ function App() {
           <Routes>
             <Route path="/" element={<Beranda />} />
             <Route path="/karir" element={<Karir />} />
-            <Route path="/karir-detail/:documentId" element={<KarirDetail />} /> {/* Updated route */}
+            <Route path="/karir-detail/:documentId" element={<KarirDetail />} />
             <Route path="/syarat-ketentuan" element={<SyaratKetentuan />} />
             <Route path="/kebijakan-privasi" element={<KebijakanPrivasi />} />
             <Route path="/layanan" element={<Layanan />} />
@@ -38,6 +39,9 @@ function App() {
             <Route path="/blog-kategori/:categorySlug" element={<BlogKategori />} />
             <Route path="/blog-post/:slug" element={<BlogPost />} />
             <Route path="/tentang-kami" element={<TentangKami />} />
+            
+            {/* Catch-all route for undefined paths */}
+            <Route path="*" element={<NotFound />} />
           </Routes>
           <Footer />
         </div>
