@@ -18,7 +18,16 @@ const customMarkerIcon = new L.Icon({
 
 const BASE_RADIUS = 10000; // Base radius for circles in meters
 
-// Function to calculate distance between two points using Haversine formula
+// Default locations if API data is unavailable
+const defaultLocations = [
+  { id: 1, KotaLayanan: 'Jakarta', LatitudeKota: -6.2088, LongitudeKota: 106.8456, DeskripsiPerLokasi: 'Layanan di Jakarta' },
+  { id: 2, KotaLayanan: 'Bogor', LatitudeKota: -6.595, LongitudeKota: 106.8167, DeskripsiPerLokasi: 'Layanan di Bogor' },
+  { id: 3, KotaLayanan: 'Depok', LatitudeKota: -6.4025, LongitudeKota: 106.7942, DeskripsiPerLokasi: 'Layanan di Depok' },
+  { id: 4, KotaLayanan: 'Tangerang', LatitudeKota: -6.1783, LongitudeKota: 106.6319, DeskripsiPerLokasi: 'Layanan di Tangerang' },
+  { id: 5, KotaLayanan: 'Bekasi', LatitudeKota: -6.2416, LongitudeKota: 106.992, DeskripsiPerLokasi: 'Layanan di Bekasi' }
+];
+
+// Function to calculate distance between two points using the Haversine formula
 const calculateDistance = (lat1, lon1, lat2, lon2) => {
   const R = 6371; // Radius of Earth in kilometers
   const dLat = (lat2 - lat1) * (Math.PI / 180);
@@ -32,7 +41,7 @@ const calculateDistance = (lat1, lon1, lat2, lon2) => {
 const GROUP_DISTANCE_THRESHOLD = 50;
 
 const LokasiLayananSection = () => {
-  const [locations, setLocations] = useState([]);
+  const [locations, setLocations] = useState(defaultLocations);
   const [circles, setCircles] = useState([]);
 
   useEffect(() => {
@@ -41,11 +50,16 @@ const LokasiLayananSection = () => {
     axios.get(`${process.env.REACT_APP_API_URL}/api/lokasi-layanan-sections`)
       .then(response => {
         const locationsData = response.data.data;
-        setLocations(locationsData);
-        groupLocations(locationsData);
+        if (locationsData && locationsData.length > 0) {
+          setLocations(locationsData);
+          groupLocations(locationsData);
+        } else {
+          groupLocations(defaultLocations);
+        }
       })
       .catch(error => {
         console.error('Error fetching locations:', error);
+        groupLocations(defaultLocations); // Use default locations in case of error
       });
   }, []);
 
@@ -94,16 +108,16 @@ const LokasiLayananSection = () => {
   return (
     <section className="lokasi-layanan-section" data-aos="fade-up">
       <div className="lokasi-header" data-aos="fade-down">
-        <h2>Kami tersedia di Jabodetabek</h2>
+        <h2>Kami tersedia di Kota-kota Berikut Ini</h2>
         <div className="lokasi-subtext" data-aos="fade-up" data-aos-delay="200">
           <div className="subtext-item">
-            <span className="subtext-number">100</span>
-            <span className="subtext-text">Tukang</span>
+            <span className="subtext-number">Mitra Terbaik</span>
+            <span className="subtext-text">Ahli di Bidangnya</span>
           </div>
           <div className="subtext-divider">|</div>
           <div className="subtext-item">
-            <span className="subtext-number">30</span>
-            <span className="subtext-text">Kecamatan</span>
+            <span className="subtext-number">Lebih dari 50+</span>
+            <span className="subtext-text">Mitra</span>
           </div>
         </div>
       </div>
@@ -126,7 +140,7 @@ const LokasiLayananSection = () => {
             <React.Fragment key={index}>
               <Circle
                 center={group.center}
-                radius={BASE_RADIUS * group.locations.length} // Scale radius by the number of grouped markers
+                radius={BASE_RADIUS * group.locations.length}
                 color="#06479D"
                 fillColor="#ABCFFF"
                 fillOpacity={0.5}

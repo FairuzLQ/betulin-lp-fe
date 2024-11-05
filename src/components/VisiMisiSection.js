@@ -1,19 +1,25 @@
 import React, { useState, useEffect } from 'react';
-import AOS from 'aos'; // Import AOS
-import 'aos/dist/aos.css'; // Import AOS styles
-import '../styles/VisiMisiSection.css'; // Custom CSS for the section
-import { FaLightbulb, FaRocket } from 'react-icons/fa'; // Default icons
+import AOS from 'aos';
+import 'aos/dist/aos.css';
+import '../styles/VisiMisiSection.css';
+import { FaLightbulb, FaRocket } from 'react-icons/fa';
 import axios from 'axios';
 
 const VisiMisiSection = () => {
   const [activeTab, setActiveTab] = useState('visi');
-  const [sectionTitle, setSectionTitle] = useState('');
-  const [visionTitle, setVisionTitle] = useState('');
-  const [missionTitle, setMissionTitle] = useState('');
-  const [visionDescription, setVisionDescription] = useState('');
-  const [missionItems, setMissionItems] = useState([]);
-  const [visionButton, setVisionButton] = useState('Vision');
-  const [missionButton, setMissionButton] = useState('Mission');
+  const [sectionTitle, setSectionTitle] = useState('Visi & Misi Kami');
+  const [visionTitle, setVisionTitle] = useState('Visi Kami');
+  const [missionTitle, setMissionTitle] = useState('Misi Kami');
+  const [visionDescription, setVisionDescription] = useState(
+    'Menjadi pemimpin global dalam inovasi, memberdayakan masyarakat untuk mencapai lebih banyak melalui teknologi dan solusi kreatif.'
+  );
+  const [missionItems, setMissionItems] = useState([
+    '1. Memberikan solusi yang bermanfaat bagi masyarakat.',
+    '2. Mengutamakan kualitas dan integritas.',
+    '3. Menciptakan teknologi yang ramah lingkungan.',
+  ]);
+  const [visionButton, setVisionButton] = useState('Visi');
+  const [missionButton, setMissionButton] = useState('Misi');
   const [visionIcon, setVisionIcon] = useState(<FaLightbulb />);
   const [missionIcon, setMissionIcon] = useState(<FaRocket />);
 
@@ -23,31 +29,48 @@ const VisiMisiSection = () => {
       once: true,
     });
 
-    // Fetch data from the API
-    axios.get(`${process.env.REACT_APP_API_URL}/api/visi-section?populate=*`)
-      .then(response => {
+    axios
+      .get(`${process.env.REACT_APP_API_URL}/api/visi-section?populate=*`)
+      .then((response) => {
         const data = response.data.data;
+        setSectionTitle(data.GeneralVisiMisiTitle || 'Visi & Misi Kami');
+        setVisionTitle(data.VisiTitle || 'Visi Kami');
+        setMissionTitle(data.MisiTitle || 'Misi Kami');
+        setVisionDescription(
+          data.VisiDescription ||
+          'Menjadi pemimpin global dalam inovasi, memberdayakan masyarakat untuk mencapai lebih banyak melalui teknologi dan solusi kreatif.'
+        );
 
-        setSectionTitle(data.GeneralVisiMisiTitle || 'Our Vision & Mission');
-        setVisionTitle(data.VisiTitle || 'Our Vision');
-        setMissionTitle(data.MisiTitle || 'Our Mission');
-        setVisionDescription(data.VisiDescription || 'To be a global leader in innovation, empowering people to achieve more through cutting-edge technology and creative solutions.');
-
-        // Map through mission items to only include those with valid text
+        // Check and set mission items or fallback to default
         const missions = data.MisiSection
-          .filter(item => item.type === 'paragraph' && item.children[0].text)
-          .map(item => item.children[0].text);
-        
-        setMissionItems(missions);
+          ? data.MisiSection.filter((item) => item.type === 'paragraph' && item.children[0].text)
+              .map((item) => item.children[0].text)
+          : [
+              '1. Memberikan solusi yang bermanfaat bagi masyarakat.',
+              '2. Mengutamakan kualitas dan integritas.',
+              '3. Menciptakan teknologi yang ramah lingkungan.',
+            ];
 
+        setMissionItems(missions);
         setVisionButton(data.VisiButton || 'Visi');
         setMissionButton(data.MisiButton || 'Misi');
 
-        // Check if icons are provided, otherwise use default icons
-        setVisionIcon(data.VisiIcon ? <img src={data.VisiIcon.url} alt="Vision Icon" /> : <FaLightbulb />);
-        setMissionIcon(data.MisiIcon ? <img src={data.MisiIcon.url} alt="Mission Icon" /> : <FaRocket />);
+        setVisionIcon(
+          data.VisiIcon ? (
+            <img src={`${process.env.REACT_APP_API_URL}${data.VisiIcon.url}`} alt="Ikon Visi" />
+          ) : (
+            <FaLightbulb />
+          )
+        );
+        setMissionIcon(
+          data.MisiIcon ? (
+            <img src={`${process.env.REACT_APP_API_URL}${data.MisiIcon.url}`} alt="Ikon Misi" />
+          ) : (
+            <FaRocket />
+          )
+        );
       })
-      .catch(error => {
+      .catch((error) => {
         console.error('Error fetching data:', error);
       });
   }, []);
@@ -95,7 +118,7 @@ const VisiMisiSection = () => {
                   );
                 })
               ) : (
-                <p>No mission items available.</p>
+                <p>Data misi tidak tersedia.</p>
               )}
             </ul>
           </div>
