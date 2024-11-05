@@ -1,66 +1,72 @@
 import React, { useState, useEffect } from 'react';
-import '../styles/LayananHeroSection.css'; // Custom CSS for this section
+import '../styles/LayananHeroSection.css';
 import { useLoading } from '../contexts/LoadingContext';
+import layananHeroSectionImage from '../assets/hero-default/layanan-hero-img.svg';
 
 const LayananHeroSection = () => {
-  const [heroData, setHeroData] = useState(null); // State to store API data
-  const [isLoading, setIsLoading] = useState(true); // State to track loading status
-  const [error, setError] = useState(null); // State to track errors
+  const [heroData, setHeroData] = useState({
+    LayananHeroTitle: 'Layanan Terbaik Kami', // Default title
+    LayananHeroSubtitle: 'Kami siap memberikan layanan terbaik dengan kualitas terjamin.', // Default subtitle
+    LayananHeroButton: 'Jelajahi Layanan Kami', // Default button text
+    LayananHeroImage: { url: layananHeroSectionImage }, // Default image
+  });
+  const [isFetched, setIsFetched] = useState(false); // Track if fetch has been attempted
+  const [error, setError] = useState(null);
   const { showLoading, hideLoading } = useLoading();
 
   useEffect(() => {
-    // Fetch data from the API when the component loads
-    const fetchHeroData = async () => {
-      showLoading();
-      try {
-        const response = await fetch(`${process.env.REACT_APP_API_URL}/api/layanan-hero-section?populate=*`);
-        if (!response.ok) {
-          throw new Error('Failed to fetch hero section data');
+    // Only fetch if we haven't fetched yet
+    if (!isFetched) {
+      const fetchHeroData = async () => {
+        showLoading();
+        
+        try {
+          const response = await fetch(`${process.env.REACT_APP_API_URL}/api/layanan-hero-section?populate=*`);
+          if (!response.ok) {
+            throw new Error('Failed to fetch hero section data');
+          }
+          const data = await response.json();
+          
+          // Check if API data is valid
+          if (data.data) {
+            setHeroData({
+              LayananHeroTitle: data.data.LayananHeroTitle || 'Layanan Terbaik Kami',
+              LayananHeroSubtitle: data.data.LayananHeroSubtitle || 'Kami siap memberikan layanan terbaik dengan kualitas terjamin.',
+              LayananHeroButton: data.data.LayananHeroButton || 'Jelajahi Layanan Kami',
+              LayananHeroImage: data.data.LayananHeroImage || { url: layananHeroSectionImage },
+            });
+          }
+        } catch (error) {
+          console.error('Error fetching hero section data:', error);
+          setError('Failed to load hero section data.');
+        } finally {
+          hideLoading();
+          setIsFetched(true); // Mark fetch as completed
         }
-        const data = await response.json();
-        setHeroData(data.data); // Set the fetched data
-        setIsLoading(false); // Set loading to false once data is fetched
-      } catch (error) {
-        setError(error.message); // Set error message if the fetch fails
-        setIsLoading(false);
-      }
-      hideLoading();
-    };
+      };
 
-    fetchHeroData();
-  }, []);
-
-  // While the data is loading
-  if (isLoading) {
-    return <p>Loading...</p>;
-  }
-
-  // If there is an error
-  if (error) {
-    return <p>Error: {error}</p>;
-  }
-
-  // Extract data from the heroData state
-  const { LayananHeroTitle, LayananHeroSubtitle, LayananHeroButton, LayananHeroImage } = heroData;
+      fetchHeroData();
+    }
+  }, [isFetched, showLoading, hideLoading]);
 
   return (
     <section className="layanan-hero-section">
       <div className="layanan-hero-content">
         <h1 className="layanan-hero-title">
-          {LayananHeroTitle.split(' ').map((word, index) => (
+          {heroData.LayananHeroTitle.split(' ').map((word, index) => (
             <span key={index} className={word.toLowerCase() === 'terbaik' ? 'highlight-text' : ''}>
               {word + ' '}
             </span>
           ))}
         </h1>
-        <p className="layanan-hero-subtitle">
-          {LayananHeroSubtitle}
-        </p>
-        <a href="#services" className="layanan-hero-btn">{LayananHeroButton}</a>
+        <p className="layanan-hero-subtitle">{heroData.LayananHeroSubtitle}</p>
+        <a href="#services" className="layanan-hero-btn">{heroData.LayananHeroButton}</a>
       </div>
       <div className="layanan-hero-image">
-        <img src={`${process.env.REACT_APP_API_URL}${LayananHeroImage.url}`} alt="Layanan Hero" />
+        <img src={heroData.LayananHeroImage.url} alt="Layanan Hero" />
       </div>
+      
+      
     </section>
   );
 };

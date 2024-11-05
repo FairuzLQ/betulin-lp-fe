@@ -1,17 +1,17 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
-import AOS from 'aos'; // Import AOS
-import 'aos/dist/aos.css'; // Import AOS styles
-import '../styles/HubungiKamiSection.css'; // Import the CSS for styling
-import csImage from '../assets/images/cs-image.png'; // Import the customer service image
+import AOS from 'aos';
+import 'aos/dist/aos.css';
+import '../styles/HubungiKamiSection.css';
+import csImage from '../assets/images/cs-image.png';
 
 const HubungiKamiSection = () => {
-  // State to store the fetched data
+  // State to store the fetched data with defaults
   const [hubungiKamiData, setHubungiKamiData] = useState({
-    HubungiKamiTitle: 'Loading...',
-    HubungiKamiSubtitle: '',
-    HubungiKamiButton: '',
-    HubungiKamiButtonSmall: '',
+    HubungiKamiTitle: 'Hubungi Kami',
+    HubungiKamiSubtitle: 'Kami siap membantu Anda dengan layanan pelanggan terbaik.',
+    HubungiKamiButton: 'Kontak Kami',
+    HubungiKamiButtonSmall: 'Hubungi Sekarang',
   });
 
   // State for handling errors
@@ -34,10 +34,10 @@ const HubungiKamiSection = () => {
           } = response.data.data;
 
           setHubungiKamiData({
-            HubungiKamiTitle,
-            HubungiKamiSubtitle,
-            HubungiKamiButton,
-            HubungiKamiButtonSmall,
+            HubungiKamiTitle: HubungiKamiTitle || 'Hubungi Kami',
+            HubungiKamiSubtitle: HubungiKamiSubtitle || 'Kami siap membantu Anda dengan layanan pelanggan terbaik.',
+            HubungiKamiButton: HubungiKamiButton || 'Kontak Kami',
+            HubungiKamiButtonSmall: HubungiKamiButtonSmall || 'Hubungi Sekarang',
           });
         } else {
           throw new Error('Invalid API response format');
@@ -54,14 +54,10 @@ const HubungiKamiSection = () => {
   // Initialize AOS for animations
   useEffect(() => {
     AOS.init({
-      duration: 1200, // Animation duration
-      once: true, // Trigger animation only once when scrolled into view
+      duration: 1200,
+      once: true,
     });
   }, []);
-
-  if (error) {
-    return <div>Error: {error}</div>;
-  }
 
   return (
     <section className="unique-hubungi-kami-section" data-aos="fade-up">
@@ -75,6 +71,7 @@ const HubungiKamiSection = () => {
           <img src={csImage} alt="Customer Service" />
         </div>
       </div>
+      
     </section>
   );
 };

@@ -7,29 +7,30 @@ import { useLoading } from '../contexts/LoadingContext';
 
 const HeroSection = () => {
     const { showLoading, hideLoading } = useLoading();
-    // State to store data from API
-    const [heroData, setHeroData] = useState({
-        berandaHeroTitle: 'Loading...',
-        berandaHeroSubtitle: '...',
-        berandaHeroButton1: '',
-        berandaHeroButton2: ''
-    });
+
+    // Default content for Hero Section in Indonesian
+    const defaultHeroData = {
+        berandaHeroTitle: 'Selamat Datang di Betulin',
+        berandaHeroSubtitle: 'Solusi modern untuk kebutuhan rumah Anda',
+        berandaHeroButton1: 'Lihat Layanan Kami',
+        berandaHeroButton2: 'Hubungi Kami'
+    };
+
+    // State to store API data or fallback to defaults
+    const [heroData, setHeroData] = useState(defaultHeroData);
 
     // State for error handling
     const [error, setError] = useState(null);
 
     // Fetch data from the Strapi API
     useEffect(() => {
-        const apiUrl = process.env.REACT_APP_API_URL; // Access the environment variable
+        const apiUrl = process.env.REACT_APP_API_URL;
 
-        // Log the API URL to check if it's working
-        // console.log('API URL:', apiUrl);
         showLoading();
         const fetchHeroData = async () => {
             try {
-                const response = await axios.get(`${apiUrl}/api/beranda-hero-section`); // Use the API URL from env
+                const response = await axios.get(`${apiUrl}/api/beranda-hero-section`);
 
-                // Directly access the fields from response.data.data
                 if (response.data && response.data.data) {
                     const {
                         berandaHeroTitle,
@@ -39,16 +40,18 @@ const HeroSection = () => {
                     } = response.data.data;
 
                     setHeroData({
-                        berandaHeroTitle,
-                        berandaHeroSubtitle,
-                        berandaHeroButton1,
-                        berandaHeroButton2
+                        berandaHeroTitle: berandaHeroTitle || defaultHeroData.berandaHeroTitle,
+                        berandaHeroSubtitle: berandaHeroSubtitle || defaultHeroData.berandaHeroSubtitle,
+                        berandaHeroButton1: berandaHeroButton1 || defaultHeroData.berandaHeroButton1,
+                        berandaHeroButton2: berandaHeroButton2 || defaultHeroData.berandaHeroButton2
                     });
                 } else {
-                    throw new Error('Invalid API response format');
+                    setHeroData(defaultHeroData); // Fallback to defaults
+                    setError('Invalid API response format');
                 }
             } catch (err) {
                 console.error('Error fetching hero section data:', err);
+                setHeroData(defaultHeroData); // Fallback to defaults
                 setError('Failed to load hero section data.');
             }
             hideLoading();
@@ -57,17 +60,12 @@ const HeroSection = () => {
         fetchHeroData();
     }, []);
 
-    // Initialize AOS
     useEffect(() => {
         AOS.init({
             duration: 1200,
             once: true,
         });
     }, []);
-
-    if (error) {
-        return <div>Error: {error}</div>;
-    }
 
     return (
         <div className="hero-section__container">
