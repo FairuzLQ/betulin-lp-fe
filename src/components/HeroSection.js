@@ -3,12 +3,24 @@ import axios from 'axios';
 import AOS from 'aos';
 import 'aos/dist/aos.css';
 import '../styles/HeroSection.css';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import {
+    faHammer,
+    faWrench,
+    faScrewdriver,
+    faBolt,
+    faCogs,
+    faToolbox,
+    faDraftingCompass,
+    faHardHat,
+    faPencilRuler,
+} from '@fortawesome/free-solid-svg-icons';
 import { useLoading } from '../contexts/LoadingContext';
 
 const HeroSection = () => {
     const { showLoading, hideLoading } = useLoading();
 
-    // Default content for Hero Section in Indonesian
+    // Default content for Hero Section
     const defaultHeroData = {
         berandaHeroTitle: 'Selamat Datang di Betulin',
         berandaHeroSubtitle: 'Solusi modern untuk kebutuhan rumah Anda',
@@ -16,29 +28,31 @@ const HeroSection = () => {
         berandaHeroButton2: 'Hubungi Kami'
     };
 
-    // State to store API data or fallback to defaults
     const [heroData, setHeroData] = useState(defaultHeroData);
-
-    // State for error handling
     const [error, setError] = useState(null);
 
-    // Fetch data from the Strapi API
+    const icons = [
+        faHammer,
+        faWrench,
+        faScrewdriver,
+        faBolt,
+        faCogs,
+        faToolbox,
+        faDraftingCompass,
+        faHardHat,
+        faPencilRuler,
+    ];
+
+    // Fetch data from the API
     useEffect(() => {
         const apiUrl = process.env.REACT_APP_API_URL;
-
         showLoading();
+
         const fetchHeroData = async () => {
             try {
                 const response = await axios.get(`${apiUrl}/api/beranda-hero-section`);
-
                 if (response.data && response.data.data) {
-                    const {
-                        berandaHeroTitle,
-                        berandaHeroSubtitle,
-                        berandaHeroButton1,
-                        berandaHeroButton2,
-                    } = response.data.data;
-
+                    const { berandaHeroTitle, berandaHeroSubtitle, berandaHeroButton1, berandaHeroButton2 } = response.data.data;
                     setHeroData({
                         berandaHeroTitle: berandaHeroTitle || defaultHeroData.berandaHeroTitle,
                         berandaHeroSubtitle: berandaHeroSubtitle || defaultHeroData.berandaHeroSubtitle,
@@ -46,12 +60,12 @@ const HeroSection = () => {
                         berandaHeroButton2: berandaHeroButton2 || defaultHeroData.berandaHeroButton2
                     });
                 } else {
-                    setHeroData(defaultHeroData); // Fallback to defaults
+                    setHeroData(defaultHeroData);
                     setError('Invalid API response format');
                 }
             } catch (err) {
                 console.error('Error fetching hero section data:', err);
-                setHeroData(defaultHeroData); // Fallback to defaults
+                setHeroData(defaultHeroData);
                 setError('Failed to load hero section data.');
             }
             hideLoading();
@@ -61,19 +75,19 @@ const HeroSection = () => {
     }, []);
 
     useEffect(() => {
-        AOS.init({
-            duration: 1200,
-            once: true,
-        });
+        AOS.init({ duration: 1200, once: true });
     }, []);
 
     return (
-        <div className="hero-section__container">
-            {/* Video Background */}
-            <video autoPlay muted loop className="hero-section__video-background">
-                <source src={require('../assets/videos/hero-background.mp4')} type="video/mp4" />
-                Your browser does not support the video tag.
-            </video>
+        <div className="hero-section__container icon-background">
+            {/* Background Grid Pattern */}
+            <div className="floating-icons">
+                {icons.map((icon, index) => (
+                    <div key={index} className={`floating-icon icon-${index}`}>
+                        <FontAwesomeIcon icon={icon} />
+                    </div>
+                ))}
+            </div>
 
             {/* Hero Section Content */}
             <div className="hero-section__content" data-aos="fade-up">

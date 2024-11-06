@@ -60,6 +60,7 @@
     gap: 50px; /* Space between buttons */
     opacity: 0;
     animation: fadeInUp 2s ease-out forwards;
+    z-index: 99;
 }
 
 /* Button base styling */
@@ -146,3 +147,4 @@
         padding: 10px 20px; /* Adjust padding for smaller screens */
     }
 }
+

@@ -17,7 +17,6 @@ const Beranda = () => {
             <CaraPesanSection />
             <HubungiKamiSection />
             <PrinsipKamiSection />
-            <FlyingIconsBackground />
             <DownloadSection />
             {/* Other sections of Beranda can be added here */}
         </div>

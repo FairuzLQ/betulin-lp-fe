@@ -49,7 +49,7 @@
     animation: float 6s ease-in-out infinite alternate;
     transition: transform 0.3s ease, font-size 0.3s ease;
     position: absolute;
-    z-index: 2; /* Ensure icons are in front of background lines */
+    z-index: 1; /* Ensure icons are in front of background lines */
     top: var(--top);
     left: var(--left);
     animation-delay: calc(-1s * var(--random-delay, 1));
