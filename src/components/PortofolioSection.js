@@ -1,8 +1,49 @@
 import React, { useState, useEffect } from 'react';
 import AOS from 'aos';
-import 'aos/dist/aos.css'; // Import AOS styles
+import 'aos/dist/aos.css';
 import '../styles/PortofolioSection.css';
-import { FaSadTear } from 'react-icons/fa'; // Importing icon for no results
+import { FaSadTear } from 'react-icons/fa';
+
+// Default image for services
+const defaultBackgroundImage = 'https://via.placeholder.com/400x300?text=Service+Image'; // A placeholder image
+
+// Default categories and services
+const defaultCategories = [
+  {
+    name: 'Perbaikan Rumah',
+    services: [
+      {
+        id: 1,
+        name: 'Servis AC',
+        details: ['Perbaikan dan perawatan AC untuk ruangan yang lebih nyaman'],
+        background: defaultBackgroundImage,
+      },
+      {
+        id: 2,
+        name: 'Perbaikan Pipa',
+        details: ['Perbaikan pipa bocor dan instalasi pipa baru'],
+        background: defaultBackgroundImage,
+      },
+    ],
+  },
+  {
+    name: 'Instalasi Listrik',
+    services: [
+      {
+        id: 3,
+        name: 'Instalasi Listrik',
+        details: ['Instalasi listrik dan pengecekan keamanan jaringan listrik'],
+        background: defaultBackgroundImage,
+      },
+      {
+        id: 4,
+        name: 'Pemasangan Lampu',
+        details: ['Pemasangan lampu untuk interior dan eksterior rumah'],
+        background: defaultBackgroundImage,
+      },
+    ],
+  },
+];
 
 const PortfolioSection = () => {
   const [categories, setCategories] = useState([]);
@@ -10,37 +51,37 @@ const PortfolioSection = () => {
   const [searchQuery, setSearchQuery] = useState('');
   const [isDesktop, setIsDesktop] = useState(window.innerWidth >= 1024);
 
-  // Fetch services and categories from the API
   useEffect(() => {
     const fetchServices = async () => {
       try {
         const response = await fetch(`${process.env.REACT_APP_API_URL}/api/layanans?populate=*`);
         const result = await response.json();
-        
-        const baseUrl = process.env.REACT_APP_API_URL; // Get the base URL for images
 
-        const data = result.data.map(item => {
-          // Select the appropriate image URL, fallback to default if not available
-          const backgroundImage = item.BackgroundLayanan?.formats?.large?.url ||
-                                  item.BackgroundLayanan?.formats?.medium?.url ||
-                                  item.BackgroundLayanan?.formats?.small?.url ||
-                                  item.BackgroundLayanan?.url ||
-                                  ''; // Ensure there's a valid image URL or empty
+        const baseUrl = process.env.REACT_APP_API_URL;
 
-          // Create absolute URL if background image is a relative path
+        const data = result.data.map((item) => {
+          const backgroundImage =
+            item.BackgroundLayanan?.formats?.large?.url ||
+            item.BackgroundLayanan?.formats?.medium?.url ||
+            item.BackgroundLayanan?.formats?.small?.url ||
+            item.BackgroundLayanan?.url ||
+            defaultBackgroundImage;
+
           const fullBackgroundImage = backgroundImage.startsWith('/') ? `${baseUrl}${backgroundImage}` : backgroundImage;
 
           return {
             id: item.id,
             name: item.NamaLayanan,
-            details: item.DetailLayanan.map(detail => detail.children.map(child => child.text).join(' ')), // Map through DetailLayanan to extract text
-            category: item.kategori_layanan.NamaKategori,
-            background: fullBackgroundImage, // Use the full background image URL
+            details: item.DetailLayanan.map((detail) =>
+              detail.children.map((child) => child.text).join(' ')
+            ),
+            category: item.kategori_layanan?.NamaKategori || 'Layanan Lainnya',
+            background: fullBackgroundImage,
           };
         });
 
         const groupedCategories = data.reduce((acc, service) => {
-          const category = acc.find(cat => cat.name === service.category);
+          const category = acc.find((cat) => cat.name === service.category);
           if (category) {
             category.services.push(service);
           } else {
@@ -49,10 +90,12 @@ const PortfolioSection = () => {
           return acc;
         }, []);
 
-        setCategories(groupedCategories);
-        setSelectedCategory(groupedCategories[0]); // Set the first category as the default
+        setCategories(groupedCategories.length > 0 ? groupedCategories : defaultCategories);
+        setSelectedCategory(groupedCategories.length > 0 ? groupedCategories[0] : defaultCategories[0]);
       } catch (error) {
         console.error('Error fetching services:', error);
+        setCategories(defaultCategories); // Use default data if API fails
+        setSelectedCategory(defaultCategories[0]);
       }
     };
 
@@ -60,17 +103,9 @@ const PortfolioSection = () => {
   }, []);
 
   useEffect(() => {
-    // Initialize AOS
     AOS.init({ once: true });
-
-    // Listen for window resize events to determine if it's desktop or not
-    const handleResize = () => {
-      setIsDesktop(window.innerWidth >= 1024);
-    };
-
+    const handleResize = () => setIsDesktop(window.innerWidth >= 1024);
     window.addEventListener('resize', handleResize);
-
-    // Cleanup the event listener on component unmount
     return () => window.removeEventListener('resize', handleResize);
   }, []);
 
@@ -78,31 +113,28 @@ const PortfolioSection = () => {
     return <p>Loading...</p>;
   }
 
-  const filteredServices = selectedCategory.services.filter(service =>
+  const filteredServices = selectedCategory.services.filter((service) =>
     service.name.toLowerCase().includes(searchQuery.toLowerCase())
   );
 
   const handleCategoryChange = (categoryName) => {
-    const category = categories.find(cat => cat.name === categoryName);
+    const category = categories.find((cat) => cat.name === categoryName);
     setSelectedCategory(category);
-    setSearchQuery(''); // Reset search query when category changes
+    setSearchQuery('');
   };
 
-  // Calculate the number of rows required based on the number of services (3 services per row)
   const numberOfRows = Math.ceil(filteredServices.length / 3);
-
-  // Dynamically adjust the section height based on the number of rows for desktop screens only
-  const sectionHeight = isDesktop ? 600 + (numberOfRows - 1) * 250 : 'auto'; // Base height is 600px, with 250px added for each additional row
+  const sectionHeight = isDesktop ? 600 + (numberOfRows - 1) * 250 : 'auto';
 
   return (
     <div id="services" className="portfolio-section" style={{ height: sectionHeight }}>
       <div className="portfolio-carousel">
-        {categories.map(category => (
+        {categories.map((category) => (
           <div
             key={category.name}
             className={`carousel-item ${selectedCategory.name === category.name ? 'active' : ''}`}
             onClick={() => handleCategoryChange(category.name)}
-            data-aos="fade-right" // AOS animation on carousel items
+            data-aos="fade-right"
           >
             <h3>{category.name}</h3>
           </div>
@@ -122,17 +154,17 @@ const PortfolioSection = () => {
 
         {filteredServices.length > 0 ? (
           <div className="portfolio-services" data-aos="fade-up">
-            {filteredServices.map(service => (
+            {filteredServices.map((service) => (
               <div className="service-card" key={service.id} data-aos="zoom-in">
                 <div className="card-inner">
                   <div
                     className="card-front"
-                    style={{ backgroundImage: `url(${service.background})` }} // Set background image dynamically
+                    style={{ backgroundImage: `url(${service.background})` }}
                   >
                     <h4>{service.name}</h4>
                   </div>
                   <div className="card-back">
-                    <p>{service.details.join(' ')}</p> {/* Join the details text to display */}
+                    <p>{service.details.join(' ')}</p>
                   </div>
                 </div>
               </div>
