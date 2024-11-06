@@ -1,17 +1,44 @@
-import React from 'react';
-import { Link } from 'react-router-dom'; // Assuming you're using React Router for navigation
-import '../styles/Footer.css'; // Create and import CSS file for styling
-import logo from '../assets/images/logo-hz.png'; // Make sure your image path is correct
-import { FaFacebook, FaTwitter, FaInstagram } from 'react-icons/fa'; // Example social media icons
+import React, { useState, useEffect } from 'react';
+import { Link } from 'react-router-dom';
+import '../styles/Footer.css';
+import logo from '../assets/images/logo-hz.png';
+import { FaFacebook, FaTwitter, FaInstagram } from 'react-icons/fa';
 
 const Footer = () => {
+  const [isBlogAvailable, setIsBlogAvailable] = useState(false);
+
+  // Check if Blog API is available
+  useEffect(() => {
+    const checkBlogAvailability = async () => {
+      try {
+        const response = await fetch(`${process.env.REACT_APP_API_URL}/api/artikels`);
+        if (response.ok) {
+          const result = await response.json();
+          // Check if there are any articles in the response data
+          if (result.data && result.data.length > 0) {
+            setIsBlogAvailable(true); // API is available and has articles
+          } else {
+            setIsBlogAvailable(false); // API available but no articles
+          }
+        } else {
+          setIsBlogAvailable(false); // API not available
+        }
+      } catch (error) {
+        console.error('Error checking blog API:', error);
+        setIsBlogAvailable(false);
+      }
+    };
+
+    checkBlogAvailability();
+  }, []);
+
   return (
     <footer className="footer">
       <div className="footer__container">
         {/* Column 1: Logo and Motto */}
         <div className="footer__column">
           <div className="footer__logo">
-            <img src={logo} alt="Logo" /> {/* Replace with actual logo if needed */}
+            <img src={logo} alt="Logo" />
           </div>
           <p className="footer__motto">Apapun kerusakan, betulin aja!</p>
         </div>
@@ -37,9 +64,11 @@ const Footer = () => {
             <li>
               <Link to="/karir">Karir</Link>
             </li>
-            <li>
-              <Link to="/blog">Blog</Link>
-            </li>
+            {isBlogAvailable && (
+              <li>
+                <Link to="/blog">Blog</Link>
+              </li>
+            )}
           </ul>
         </div>
 
