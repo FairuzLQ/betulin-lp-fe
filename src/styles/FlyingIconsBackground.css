@@ -4,6 +4,40 @@
     height: 100vh;
     overflow: hidden;
     background-color: #06479d;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+/* House pattern background */
+.icon-background::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 200%;
+    height: 200%;
+    background-image: 
+        /* House shape made with multiple divs forming a grid-like effect */
+        linear-gradient(45deg, rgba(255, 255, 255, 0.1) 25%, transparent 25%),
+        linear-gradient(-45deg, rgba(255, 255, 255, 0.1) 25%, transparent 25%),
+        linear-gradient(45deg, transparent 75%, rgba(255, 255, 255, 0.1) 75%),
+        linear-gradient(-45deg, transparent 75%, rgba(255, 255, 255, 0.1) 75%);
+    background-size: 40px 40px; /* Size of each house shape */
+    background-position: 0 0, 20px 0, 20px -20px, 0px 20px;
+    animation: moveBackground 15s linear infinite;
+    z-index: 1; /* Send it behind floating icons */
+    opacity: 0.2;
+}
+
+/* Background animation */
+@keyframes moveBackground {
+    from {
+        transform: translate(0, 0);
+    }
+    to {
+        transform: translate(-80px, -80px);
+    }
 }
 
 /* Floating effect with randomized animation delays */
@@ -15,7 +49,7 @@
     animation: float 6s ease-in-out infinite alternate;
     transition: transform 0.3s ease, font-size 0.3s ease;
     position: absolute;
-    /* Use custom positions for each icon */
+    z-index: 2; /* Ensure icons are in front of background lines */
     top: var(--top);
     left: var(--left);
     animation-delay: calc(-1s * var(--random-delay, 1));
@@ -41,16 +75,14 @@
 /* Floating animation */
 @keyframes float {
     0% { transform: translateY(0) translateX(0) rotate(0deg); }
-    50% { transform: translateY(-20px) translateX(20px) rotate(15deg); }
-    100% { transform: translateY(20px) translateX(-20px) rotate(-15deg); }
+    50% { transform: translateY(-100px) translateX(100px) rotate(15deg); }
+    100% { transform: translateY(100px) translateX(-100px) rotate(-15deg); }
 }
 
 /* Centered main content styling */
 .content {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
+    position: relative;
+    z-index: 3; /* Content stays on top */
+    color: #fff;
     text-align: center;
-    z-index: 10;
 }
