@@ -33,6 +33,7 @@
     "react-simple-maps": "^3.0.0",
     "react-slick": "^0.30.2",
     "react-tsparticles": "^2.12.2",
+    "sitemap-generator": "^8.5.1",
     "slick-carousel": "^1.8.1",
     "three": "^0.169.0",
     "tsparticles": "^3.5.0",
@@ -40,9 +41,10 @@
   },
   "scripts": {
     "start": "react-scripts start",
-    "build": "react-scripts build",
+    "build": "npm run generate-sitemap && react-scripts build",
     "test": "react-scripts test",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "generate-sitemap": "node generate-sitemap.js"
   },
   "eslintConfig": {
     "extends": [
