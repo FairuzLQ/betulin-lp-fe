@@ -43,7 +43,7 @@ const LowonganSection = () => {
 
       {jobs.length === 0 ? (
         <div className="no-jobs" data-aos="fade-up">
-          <FaSadTear size={100} />
+          <FaSadTear size={100} color='#06479d' />
           <p>Belum ada lowongan yang tersedia saat ini.</p>
         </div>
       ) : (
