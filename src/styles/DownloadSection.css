@@ -4,7 +4,7 @@
     justify-content: space-between;
     align-items: center;
     padding: 60px 20px;
-    background-color: #F2F0EC; /* Light background color */
+    background-color: #F2F0EC !important; /* Light background color */
     color: #06479D;
     position: relative;
     opacity: 0;

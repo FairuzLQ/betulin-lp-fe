@@ -9,6 +9,7 @@
   
   html {
     scroll-behavior: smooth;
+    overflow-x: hidden;
   }
   
   /* Variabel CSS untuk warna dan font */
@@ -27,9 +28,10 @@
   /* Gaya global untuk seluruh aplikasi */
   body {
     font-family: var(--font-family);
-    background-color: var(--background-color);
+    background-color: var(--background-color) !important;
     color: var(--font-color-black);
     line-height: 1.6;
+    overflow-x: hidden;
   }
   
   a {
@@ -38,7 +40,7 @@
   }
   
   a:hover {
-    color: var(--secondary-color);
+    color: var(--secondary-color) !important;
   }
   
   button {

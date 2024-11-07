@@ -1,7 +1,7 @@
 /* BlogKategori Section */
 .blog-kategori-section {
     padding: 70px;
-    background-color: white;
+    background-color: white !important;
 }
 
 /* BlogKategori Header */

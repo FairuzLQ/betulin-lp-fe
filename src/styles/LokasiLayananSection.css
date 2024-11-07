@@ -1,6 +1,6 @@
 /* Overall section styling */
 .lokasi-layanan-section {
-    background-color: white;
+    background-color: white !important;
     padding: 60px 20px;
     text-align: center;
     opacity: 0;

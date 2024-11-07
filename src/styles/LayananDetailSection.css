@@ -1,7 +1,7 @@
 /* Overall Section */
 .layanan-detail-section {
   padding: 80px;
-  background-color: #fff;
+  background-color: #fff !important;
 }
 
 /* Service Category Buttons */

@@ -1,7 +1,7 @@
 /* Overall Section Styling */
 .lowongan-section {
     text-align: left;
-    background-color: white;
+    background-color: white !important;
     padding: 50px 80px;
   }
   

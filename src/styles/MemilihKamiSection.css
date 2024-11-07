@@ -1,5 +1,5 @@
 .memilih-kami-section {
-    background: linear-gradient(135deg, #f0f8ff, #e0eaff);
+    background: linear-gradient(135deg, #f0f8ff, #e0eaff) !important;
     padding: 60px 60px;
     text-align: center;
     animation: fadeInSection 1s ease-in-out;

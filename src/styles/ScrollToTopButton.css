@@ -6,11 +6,11 @@
   }
   
   .scroll-to-top-btn {
-    background-color: #06479D;
+    background-color: #06479D !important;
     border: none;
     padding: 10px 15px;
     border-radius: 50%;
-    color: white;
+    color: white !important;
     cursor: pointer;
     font-size: 18px;
     transition: opacity 0.3s, transform 0.3s;

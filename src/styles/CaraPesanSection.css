@@ -1,6 +1,6 @@
 /* Cara Pesan Section Styles */
 .cara-pesan-section {
-    background-color: #ffffff;
+    background-color: #ffffff !important;
     padding: 60px 20px;
     display: flex;
     justify-content: center;

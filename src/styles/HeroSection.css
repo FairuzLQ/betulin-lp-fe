@@ -26,7 +26,7 @@
     position: relative;
     z-index: 1; /* Ensure content is on top of the video */
     text-align: center;
-    color: white;
+    color: white !important;
     padding: 100px;
     animation: fadeInUp 1s ease-out forwards;
     opacity: 0; /* Initially hidden for animation */
@@ -36,7 +36,7 @@
 .hero-section__title {
     font-size: 54px;
     font-weight: bold;
-    color: #FFFFFF; /* White text */
+    color: #FFFFFF !important; /* White text */
     margin-bottom: 20px;
     margin-top: 80px;
     animation: fadeInDown 1.2s ease-out forwards;
@@ -46,7 +46,7 @@
 /* Subtitle styling with smooth effect */
 .hero-section__subtitle {
     font-size: 18px;
-    color: #E0D7D7; /* Light grey subtitle */
+    color: #E0D7D7 !important; /* Light grey subtitle */
     margin-bottom: 80px;
     opacity: 0;
     animation: fadeInUp 1.5s ease-out forwards;
@@ -67,13 +67,15 @@
 .hero-section__primary-btn,
 .hero-section__secondary-btn {
     padding: 15px 30px;
-    border: none;
+    min-width: 180px; /* Ensure consistent button width */
     font-size: 1.2rem;
+    border: none;
     font-weight: bold;
     cursor: pointer;
     border-radius: 50px;
     transition: all 0.3s ease;
 }
+
 
 /* Primary Button */
 .hero-section__primary-btn {

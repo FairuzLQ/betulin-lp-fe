@@ -25,7 +25,7 @@
     position: relative;
     z-index: 1; /* Ensure content is on top of the video */
     text-align: center;
-    color: white;
+    color: white !important;
     padding: 100px;
 }
 
@@ -33,7 +33,7 @@
 .hero-title {
     font-size: 54px;
     font-weight: bold;
-    color: #FFFFFF; /* White text */
+    color: #FFFFFF !important; /* White text */
     margin-bottom: 20px;
 }
 

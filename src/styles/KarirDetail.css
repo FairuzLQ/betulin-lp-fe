@@ -1,7 +1,7 @@
 /* KarirDetail Styling */
 .karir-detail-page {
     padding: 70px;
-    background-color: white;
+    background-color: white !important;
     margin-top: 80px;
   }
   
