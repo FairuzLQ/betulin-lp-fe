@@ -63,19 +63,24 @@
     z-index: 99;
 }
 
-/* Button base styling */
+/* Button base styling with fixed width and center alignment */
 .hero-section__primary-btn,
 .hero-section__secondary-btn {
-    padding: 15px 30px;
-    min-width: 180px; /* Ensure consistent button width */
+    width: 230px; /* Fixed width for consistent size */
+    padding: 15px;
     font-size: 1.2rem;
     border: none;
     font-weight: bold;
     cursor: pointer;
     border-radius: 50px;
     transition: all 0.3s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    -webkit-appearance: none; /* Remove default styles on mobile browsers */
+    appearance: none;
 }
-
 
 /* Primary Button */
 .hero-section__primary-btn {
@@ -147,6 +152,6 @@
     .hero-section__secondary-btn {
         font-size: 14px; /* Reduce font size for buttons */
         padding: 10px 20px; /* Adjust padding for smaller screens */
+        width: 100%; /* Full width on smaller screens for easier tapping */
     }
 }
-
