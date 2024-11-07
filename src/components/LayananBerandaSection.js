@@ -23,6 +23,12 @@ const defaultServices = [
     { icon: iconCMobil, title: "Cuci Mobil", description: "Layanan cuci mobil dengan standar tinggi." },
     { icon: iconCMotor, title: "Cuci Motor", description: "Layanan cuci motor yang cepat dan bersih." },
     { icon: iconKeramik, title: "Pemasangan Keramik", description: "Layanan pemasangan keramik lantai dan dinding." },
+    { icon: iconKloset, title: "Perbaikan Kloset", description: "Perbaikan dan perawatan kloset untuk rumah Anda." },
+    { icon: iconPipa, title: "Perbaikan Pipa", description: "Layanan perbaikan pipa yang bocor dan tersumbat." },
+    { icon: iconPlafon, title: "Perbaikan Plafon", description: "Layanan perbaikan plafon untuk mempercantik ruangan Anda." },
+    { icon: iconAtapRumah, title: "Perbaikan Atap", description: "Layanan perbaikan dan pemasangan atap rumah Anda." },
+    { icon: iconSMotor, title: "Servis Motor", description: "Layanan servis motor untuk performa optimal." },
+    { icon: iconSMobil, title: "Servis Mobil", description: "Layanan servis mobil untuk perawatan kendaraan Anda." },
 ];
 
 const LayananBerandaSection = () => {
@@ -67,7 +73,7 @@ const LayananBerandaSection = () => {
 
     return (
         <section className="layanan-section" data-aos="fade-up">
-            <div className="layanan-card">
+            <div id="layanan-betulin" className="layanan-card">
                 <h2 className="layanan-title" data-aos="fade-up">Layanan</h2>
                 <p className="layanan-subtitle" data-aos="fade-up">Kami menyediakan berbagai layanan perbaikan dan instalasi terbaik untuk Anda.</p>
                 

@@ -94,7 +94,7 @@ const HeroSection = () => {
                 <h1 className="hero-section__title">{heroData.berandaHeroTitle}</h1>
                 <p className="hero-section__subtitle">{heroData.berandaHeroSubtitle}</p>
                 <div className="hero-section__buttons" data-aos="zoom-in">
-                    <button className="hero-section__primary-btn">{heroData.berandaHeroButton1}</button>
+                    <a href='#layanan-betulin'><button className="hero-section__primary-btn">{heroData.berandaHeroButton1}</button></a>
                     <button className="hero-section__secondary-btn">{heroData.berandaHeroButton2}</button>
                 </div>
             </div>
