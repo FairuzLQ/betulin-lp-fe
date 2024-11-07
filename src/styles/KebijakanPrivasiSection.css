@@ -1,155 +1,56 @@
 /* Section Styling */
 .privacy-policy-section {
-    padding: 60px 20px; /* Reduced padding for smaller screens */
+    padding: 60px 20px;
     background-color: #f7f9fc;
     text-align: center;
     margin-top: 60px;
 }
-  
-/* Header Styling */
+
 .privacy-header h2 {
-    font-size: 2.5rem; /* Adjusted size for smaller screens */
+    font-size: 2.5rem;
     color: #06479d;
     margin-bottom: 10px;
-    margin-top: 60px; /* Adjusted for consistency */
 }
-  
+
 .privacy-header p {
-    font-size: 1.1rem; /* Slightly reduced for readability */
+    font-size: 1.1rem;
     color: #555;
-    margin-bottom: 40px;
+    margin-bottom: 20px;
 }
-  
-/* Timeline Styling */
-.privacy-timeline {
-    position: relative;
+
+.last-updated {
+    color: #777;
+    font-size: 0.9rem;
+    margin-top: 10px;
+}
+
+.privacy-content {
+    text-align: justify;
+    font-size: 1rem;
+    color: #555;
+    line-height: 1.6;
+    max-width: 800px;
     margin: 0 auto;
-    padding: 20px 0;
-    max-width: 1000px;
 }
-  
-.timeline-item {
-    position: relative;
-    margin-bottom: 50px;
-    display: flex;
-    align-items: center;
-    flex-wrap: wrap; /* Wrap content in case of smaller screens */
-}
-  
-.timeline-icon {
-    width: 50px; /* Reduced size for smaller devices */
-    height: 50px;
-    border-radius: 50%;
-    background-color: #06479d;
-    color: white;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 1.5rem;
-    font-weight: bold;
-    position: relative;
-    z-index: 1;
-}
-  
-.timeline-content {
-    background-color: white;
-    padding: 15px 25px; /* Slightly reduced padding for compactness */
-    border-radius: 12px;
-    margin-left: 20px;
-    box-shadow: 0 8px 15px rgba(0, 0, 0, 0.1);
-    text-align: left;
-    flex: 1;
-    position: relative;
-}
-  
-.timeline-content h3 {
-    font-size: 1.4rem; /* Slightly smaller to fit better on small screens */
+
+/* Additional Styling for HTML Elements */
+.privacy-content h3 {
+    font-size: 1.2rem;
     color: #06479d;
+    margin-top: 20px;
     margin-bottom: 10px;
 }
-  
-.timeline-content p {
-    font-size: 1rem; /* Adjusted for better readability */
-    color: #555;
-}
-  
-/* Alternating Styles */
-.timeline-item:nth-child(even) .timeline-content {
-    margin-left: 0;
-    margin-right: 20px;
-}
-  
-.timeline-item:nth-child(even) .timeline-icon {
-    order: 2;
-}
-  
-.timeline-item:nth-child(even) .timeline-content {
-    text-align: right;
-}
-  
-/* Last Updated */
-.last-updated {
-    margin-top: 50px;
-    color: #777;
-    font-size: 1rem;
-}
-  
-/* Responsive Styling */
-@media (max-width: 768px) {
-    .privacy-policy-section {
-        padding: 40px 20px;
-    }
 
-    .privacy-header h2 {
-        font-size: 2rem; /* Reduced title size */
-        margin-top: 40px;
-    }
-
-    .privacy-header p {
-        font-size: 1rem; /* Smaller text for readability */
-        margin-bottom: 30px;
-    }
-
-    .timeline-item {
-        flex-direction: column; /* Stack items vertically on mobile */
-        align-items: flex-start; /* Align items to the start */
-    }
-
-    .timeline-content {
-        margin-left: 0;
-        margin-right: 0;
-        text-align: left; /* Keep left alignment for readability */
-    }
-
-    .timeline-item:nth-child(even) .timeline-content {
-        text-align: left; /* Keep left alignment for consistency */
-    }
-
-    .timeline-icon {
-        width: 40px; /* Reduced size for smaller devices */
-        height: 40px;
-    }
-
-    .timeline-content h3 {
-        font-size: 1.2rem; /* Smaller title */
-    }
-
-    .timeline-content p {
-        font-size: 0.9rem; /* Smaller text */
-    }
-
-    .last-updated {
-        font-size: 0.9rem;
-        margin-top: 30px; /* Reduced margin */
-    }
+.privacy-content ul {
+    padding-left: 20px;
+    margin-bottom: 20px;
 }
 
-@media (max-width: 480px) {
-    .timeline-content h3 {
-        font-size: 1rem; /* Further reduced for extra small screens */
-    }
+.privacy-content ol {
+    padding-left: 20px;
+    margin-bottom: 20px;
+}
 
-    .timeline-content p {
-        font-size: 0.8rem; /* Further reduced for extra small screens */
-    }
+.privacy-content li {
+    margin-bottom: 10px;
 }
