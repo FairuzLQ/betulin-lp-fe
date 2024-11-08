@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
-import { FaMapMarkerAlt, FaClock, FaCalendarAlt, FaBriefcase, FaCalendarDay, FaEnvelope } from 'react-icons/fa';
+import { FaMapMarkerAlt, FaClock, FaCalendarAlt, FaBriefcase, FaCalendarDay } from 'react-icons/fa';
 import AOS from 'aos';
 import 'aos/dist/aos.css';
 import '../styles/KarirDetail.css';
