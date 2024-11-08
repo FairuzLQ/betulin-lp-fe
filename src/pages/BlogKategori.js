@@ -177,12 +177,12 @@ const BlogKategori = () => {
           {/* Banners */}
           <div className="banner-section" data-aos="fade-left">
             <div className="banner">
-              <h4>Special Offers!</h4>
-              <a href="/offers" className="banner-btn">Check Offers</a>
+              <h4>Kamu Bingung? Hubungi CS Kami</h4>
+              <a href="/offers" className="banner-btn">Hubungi</a>
             </div>
             <div className="banner">
-              <h4>Get a Free Quote!</h4>
-              <a href="/quote" className="banner-btn">Request Quote</a>
+              <h4>Yuk, Download Betulin dan dapatkan voucher menarik!</h4>
+              <a href="/quote" className="banner-btn">Download</a>
             </div>
           </div>
         </div>
