@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from 'react';
 import { FaFacebook, FaTwitter, FaInstagram, FaShareAlt } from 'react-icons/fa';
-import { Link, useNavigate } from 'react-router-dom';
 import AOS from 'aos';
 import 'aos/dist/aos.css';
 import '../styles/PostSection.css';
@@ -230,12 +229,12 @@ const PostSection = ({ post }) => {
 
           <div className="post-section-banner-section">
             <div className="post-section-banner" data-aos="fade-up" data-aos-delay="400">
-              <h4>Special Offers!</h4>
-              <a href="/offers" className="post-section-banner-btn">Check Offers</a>
+              <h4>Kamu Bingung? Hubungi CS Kami</h4>
+              <a href="/offers" className="post-section-banner-btn">Hubungi</a>
             </div>
             <div className="post-section-banner" data-aos="fade-up" data-aos-delay="600">
-              <h4>Get a Free Quote!</h4>
-              <a href="/quote" className="post-section-banner-btn">Request Quote</a>
+              <h4>Yuk, Download Betulin dan dapatkan voucher menarik!</h4>
+              <a href="/quote" className="post-section-banner-btn">Download</a>
             </div>
           </div>
         </div>
