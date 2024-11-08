@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { FaFacebook, FaTwitter, FaInstagram, FaShareAlt } from 'react-icons/fa';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import AOS from 'aos';
 import 'aos/dist/aos.css';
 import '../styles/PostSection.css';
@@ -62,47 +62,84 @@ const PostSection = ({ post }) => {
     switch (detail.type) {
       case 'paragraph':
         return (
-          <p key={detail.children[0].text}>
-            {detail.children.map((child) => child.text).join('')}
-          </p>
+          <div key={detail.children[0].text}>
+            <p>
+              {detail.children.map((child) => (
+                <span
+                  key={child.text}
+                  style={child.bold ? { fontWeight: 'bold' } : child.italic ? { fontStyle: 'italic' } : child.strikethrough ? { textDecoration: 'line-through' } : child.underline ? { textDecoration: 'underline' } : {}}
+                >
+                  {child.text}
+                </span>
+              ))}
+            </p>
+            <br />
+          </div>
         );
       case 'heading':
         const HeadingTag = `h${detail.level}`;
         return (
-          <HeadingTag key={detail.children[0].text}>
-            {detail.children.map((child) => child.text).join('')}
-          </HeadingTag>
+          <div key={detail.children[0].text}>
+            <HeadingTag>
+              {detail.children.map((child) => (
+                <span key={child.text} style={child.bold ? { fontWeight: 'bold' } : child.italic ? { fontStyle: 'italic' } : {}}>
+                  {child.text}
+                </span>
+              ))}
+            </HeadingTag>
+            <br />
+          </div>
         );
       case 'list':
         const ListTag = detail.format === 'ordered' ? 'ol' : 'ul';
         return (
-          <ListTag key={detail.format}>
-            {detail.children.map((item, index) => (
-              <li key={index}>
-                {item.children.map((child) => child.text).join('')}
-              </li>
-            ))}
-          </ListTag>
+          <div key={detail.format}>
+            <ListTag>
+              {detail.children.map((item, index) => (
+                <li key={index}>
+                  {item.children.map((child) => (
+                    <span key={child.text} style={child.bold ? { fontWeight: 'bold' } : child.italic ? { fontStyle: 'italic' } : child.strikethrough ? { textDecoration: 'line-through' } : child.underline ? { textDecoration: 'underline' } : {}}>
+                      {child.text}
+                    </span>
+                  ))}
+                </li>
+              ))}
+            </ListTag>
+            <br />
+          </div>
         );
       case 'quote':
         return (
-          <blockquote key={detail.children[0].text} style={{ margin: '1em 0', padding: '0.5em 1em', borderLeft: '3px solid #ccc', color: '#555' }}>
-            {detail.children.map((child) => child.text).join('')}
-          </blockquote>
+          <div key={detail.children[0].text}>
+            <blockquote style={{ margin: '1em 0', padding: '0.5em 1em', borderLeft: '3px solid #ccc', color: '#555' }}>
+              {detail.children.map((child) => (
+                <span key={child.text} style={child.bold ? { fontWeight: 'bold' } : child.italic ? { fontStyle: 'italic' } : child.strikethrough ? { textDecoration: 'line-through' } : child.underline ? { textDecoration: 'underline' } : {}}>
+                  {child.text}
+                </span>
+              ))}
+            </blockquote>
+            <br />
+          </div>
         );
       case 'image':
         return (
-          <img
-            key={detail.image.url}
-            src={detail.image.url}
-            alt={detail.image.alternativeText}
-            style={{ maxWidth: '100%', height: 'auto' }}
-          />
+          <div key={detail.image.url}>
+            <img
+              src={detail.image.url}
+              alt={detail.image.alternativeText}
+              style={{ maxWidth: '100%', height: 'auto' }}
+            />
+            <br />
+          </div>
         );
       case 'link':
         return (
           <a key={detail.url} href={detail.url} target="_blank" rel="noopener noreferrer">
-            {detail.children.map((child) => child.text).join('')}
+            {detail.children.map((child) => (
+              <span key={child.text} style={child.bold ? { fontWeight: 'bold' } : child.italic ? { fontStyle: 'italic' } : {}}>
+                {child.text}
+              </span>
+            ))}
           </a>
         );
       default:
@@ -150,7 +187,21 @@ const PostSection = ({ post }) => {
           <div className="post-section-trending-posts" data-aos="fade-up" data-aos-delay="200">
             <h3>Baca Juga Ini</h3>
             {randomArticles.map((randomPost) => (
-              <Link to={`/blog-post/${randomPost.ArtikelSlug}`} key={randomPost.id} className="post-section-trending-post-link">
+              <div 
+                key={randomPost.id} 
+                className="post-section-trending-post-link"
+                onClick={() => {
+                  // Navigate to the new article and reload the page
+                  window.location.href = `/blog-post/${randomPost.ArtikelSlug}`;
+                }}
+                style={{ cursor: 'pointer', transition: 'transform 0.2s', padding: '10px', borderRadius: '5px' }}
+                onMouseEnter={(e) => {
+                  e.currentTarget.style.transform = 'scale(1.05)'; // Scale up on hover
+                }}
+                onMouseLeave={(e) => {
+                  e.currentTarget.style.transform = 'scale(1)'; // Scale back on mouse leave
+                }}
+              >
                 <div className="post-section-trending-post" data-aos="fade-right" data-aos-delay="400">
                   <img
                     src={`${apiUrl}${randomPost.FeaturedImage?.formats?.small?.url || ''}`}
@@ -164,7 +215,7 @@ const PostSection = ({ post }) => {
                     </p>
                   </div>
                 </div>
-              </Link>
+              </div>
             ))}
           </div>
 

@@ -135,7 +135,22 @@
     font-size: 1.1rem;
     margin-bottom: 5px;
   }
+
+  .post-section-trending-post-details h4:hover {
+    font-size: 1.1rem;
+    margin-bottom: 5px;
+    color: #06479d;
+  }
+
+  .post-section-trending-post-link {
+    transition: transform 0.2s; /* Smooth transition */
+    cursor: pointer; /* Change cursor to pointer */
+  }
   
+  .post-section-trending-post-link:hover {
+    transform: scale(1.05); /* Scale up on hover */
+  }
+
   /* Social Media Section */
   .post-section-social-media-section {
     margin-bottom: 30px;

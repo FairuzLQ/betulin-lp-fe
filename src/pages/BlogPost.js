@@ -3,33 +3,32 @@ import { useParams } from 'react-router-dom';
 import PostSection from '../components/PostSection';
 
 const BlogPost = () => {
-  const { slug } = useParams(); // Use slug from the URL
+  const { slug } = useParams(); // Get slug from the URL
   const [post, setPost] = useState(null);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     const fetchPost = async () => {
       try {
-        // Use slug to fetch the post by slug
         const response = await fetch(`${process.env.REACT_APP_API_URL}/api/artikels?filters[ArtikelSlug][$eq]=${slug}&populate=*`);
         const data = await response.json();
         setPost(data.data[0]); // Set the first post in the array
-        setLoading(false);
       } catch (error) {
         console.error('Error fetching post:', error);
-        setLoading(false);
+      } finally {
+        setLoading(false); // Set loading to false after fetch
       }
     };
 
     fetchPost();
-  }, [slug]);
+  }, [slug]); // Re-fetch when slug changes
 
   if (loading) {
-    return <p>Loading post...</p>;
+    return <p>Loading post...</p>; // Display loading message
   }
 
   if (!post) {
-    return <p>Post not found</p>;
+    return <p>Post not found</p>; // Display if post is not found
   }
 
   return (
