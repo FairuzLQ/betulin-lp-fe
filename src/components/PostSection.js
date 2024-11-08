@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react';
+import DOMPurify from 'dompurify'; // Import DOMPurify for sanitization
 import { FaFacebook, FaTwitter, FaInstagram, FaShareAlt } from 'react-icons/fa';
 import AOS from 'aos';
 import 'aos/dist/aos.css';
@@ -10,6 +11,7 @@ const PostSection = ({ post }) => {
   const apiUrl = process.env.REACT_APP_API_URL || '';
   const { showLoading, hideLoading } = useLoading();
 
+  // Initialize AOS for animations
   useEffect(() => {
     AOS.init({ duration: 1000, once: true });
 
@@ -26,7 +28,7 @@ const PostSection = ({ post }) => {
           `${apiUrl}/api/artikels?populate=*&pagination[page]=${randomPage}&pagination[pageSize]=3`
         );
         const data = await response.json();
-        
+
         setRandomArticles(data.data);
       } catch (error) {
         console.error('Error fetching random articles:', error);
@@ -38,8 +40,7 @@ const PostSection = ({ post }) => {
     fetchRandomArticles();
   }, [apiUrl]);
 
-  if (!post) return null;
-
+  // Function to copy post link to clipboard
   const copyLinkToClipboard = () => {
     const postUrl = window.location.href;
     const postDate = new Date(post.TglArtikel).toLocaleDateString();
@@ -51,12 +52,14 @@ const PostSection = ({ post }) => {
       .catch((error) => console.error("Error copying text to clipboard:", error));
   };
 
+  // Sanitize the featured image URL
   const featuredImageUrl = post.FeaturedImage?.formats?.large?.url
     ? `${apiUrl}${post.FeaturedImage.formats.large.url}`
     : post.FeaturedImage?.url
     ? `${apiUrl}${post.FeaturedImage.url}`
     : null;
 
+  // Function to render article details
   const renderDetailArtikel = (detail) => {
     switch (detail.type) {
       case 'paragraph':
@@ -66,10 +69,9 @@ const PostSection = ({ post }) => {
               {detail.children.map((child) => (
                 <span
                   key={child.text}
-                  style={child.bold ? { fontWeight: 'bold' } : child.italic ? { fontStyle: 'italic' } : child.strikethrough ? { textDecoration: 'line-through' } : child.underline ? { textDecoration: 'underline' } : {}}
-                >
-                  {child.text}
-                </span>
+                  style={child.bold ? { fontWeight: 'bold' } : child.italic ? { fontStyle: 'italic' } : {}}
+                  dangerouslySetInnerHTML={{ __html: DOMPurify.sanitize(child.text) }} // Sanitize before rendering
+                />
               ))}
             </p>
             <br />
@@ -82,7 +84,7 @@ const PostSection = ({ post }) => {
             <HeadingTag>
               {detail.children.map((child) => (
                 <span key={child.text} style={child.bold ? { fontWeight: 'bold' } : child.italic ? { fontStyle: 'italic' } : {}}>
-                  {child.text}
+                  {DOMPurify.sanitize(child.text)} {/* Sanitize heading text */}
                 </span>
               ))}
             </HeadingTag>
@@ -97,8 +99,8 @@ const PostSection = ({ post }) => {
               {detail.children.map((item, index) => (
                 <li key={index}>
                   {item.children.map((child) => (
-                    <span key={child.text} style={child.bold ? { fontWeight: 'bold' } : child.italic ? { fontStyle: 'italic' } : child.strikethrough ? { textDecoration: 'line-through' } : child.underline ? { textDecoration: 'underline' } : {}}>
-                      {child.text}
+                    <span key={child.text} style={child.bold ? { fontWeight: 'bold' } : child.italic ? { fontStyle: 'italic' } : {}}>
+                      {DOMPurify.sanitize(child.text)} {/* Sanitize list item text */}
                     </span>
                   ))}
                 </li>
@@ -112,8 +114,8 @@ const PostSection = ({ post }) => {
           <div key={detail.children[0].text}>
             <blockquote style={{ margin: '1em 0', padding: '0.5em 1em', borderLeft: '3px solid #ccc', color: '#555' }}>
               {detail.children.map((child) => (
-                <span key={child.text} style={child.bold ? { fontWeight: 'bold' } : child.italic ? { fontStyle: 'italic' } : child.strikethrough ? { textDecoration: 'line-through' } : child.underline ? { textDecoration: 'underline' } : {}}>
-                  {child.text}
+                <span key={child.text} style={child.bold ? { fontWeight: 'bold' } : child.italic ? { fontStyle: 'italic' } : {}}>
+                  {DOMPurify.sanitize(child.text)} {/* Sanitize quote text */}
                 </span>
               ))}
             </blockquote>
@@ -136,7 +138,7 @@ const PostSection = ({ post }) => {
           <a key={detail.url} href={detail.url} target="_blank" rel="noopener noreferrer">
             {detail.children.map((child) => (
               <span key={child.text} style={child.bold ? { fontWeight: 'bold' } : child.italic ? { fontStyle: 'italic' } : {}}>
-                {child.text}
+                {DOMPurify.sanitize(child.text)} {/* Sanitize link text */}
               </span>
             ))}
           </a>
