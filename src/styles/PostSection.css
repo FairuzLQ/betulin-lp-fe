@@ -74,6 +74,13 @@
     margin-bottom: 30px;
   }
   
+  /* PostSection.css */
+
+  .post-section-content ul,
+  .post-section-content ol {
+    margin: 0; /* Remove default margin */
+    padding-left: 40px; /* Indent the list */
+  }
   .post-section-tags {
     margin-top: 20px;
   }

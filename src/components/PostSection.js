@@ -58,6 +58,58 @@ const PostSection = ({ post }) => {
     ? `${apiUrl}${post.FeaturedImage.url}`
     : null;
 
+  const renderDetailArtikel = (detail) => {
+    switch (detail.type) {
+      case 'paragraph':
+        return (
+          <p key={detail.children[0].text}>
+            {detail.children.map((child) => child.text).join('')}
+          </p>
+        );
+      case 'heading':
+        const HeadingTag = `h${detail.level}`;
+        return (
+          <HeadingTag key={detail.children[0].text}>
+            {detail.children.map((child) => child.text).join('')}
+          </HeadingTag>
+        );
+      case 'list':
+        const ListTag = detail.format === 'ordered' ? 'ol' : 'ul';
+        return (
+          <ListTag key={detail.format}>
+            {detail.children.map((item, index) => (
+              <li key={index}>
+                {item.children.map((child) => child.text).join('')}
+              </li>
+            ))}
+          </ListTag>
+        );
+      case 'quote':
+        return (
+          <blockquote key={detail.children[0].text} style={{ margin: '1em 0', padding: '0.5em 1em', borderLeft: '3px solid #ccc', color: '#555' }}>
+            {detail.children.map((child) => child.text).join('')}
+          </blockquote>
+        );
+      case 'image':
+        return (
+          <img
+            key={detail.image.url}
+            src={detail.image.url}
+            alt={detail.image.alternativeText}
+            style={{ maxWidth: '100%', height: 'auto' }}
+          />
+        );
+      case 'link':
+        return (
+          <a key={detail.url} href={detail.url} target="_blank" rel="noopener noreferrer">
+            {detail.children.map((child) => child.text).join('')}
+          </a>
+        );
+      default:
+        return null;
+    }
+  };
+
   return (
     <section className="post-section-page" data-aos="fade-up">
       <div className="post-section-content-wrapper">
@@ -84,12 +136,7 @@ const PostSection = ({ post }) => {
           </div>
 
           <div className="post-section-content" data-aos="fade-up" data-aos-delay="400">
-            {post.DetailArtikel.map((block, index) => (
-              <div key={index}>
-                <p>{block.children[0].text}</p>
-                <br />
-              </div>
-            ))}
+            {post.DetailArtikel.map((block, index) => renderDetailArtikel(block))}
           </div>
 
           <div className="post-section-tags" data-aos="fade-up" data-aos-delay="600">
