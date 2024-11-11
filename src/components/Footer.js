@@ -84,6 +84,9 @@ const Footer = () => {
             <li>
               <Link to="/kebijakan-privasi">Kebijakan Privasi</Link>
             </li>
+            <li>
+              <Link to="/faq">Bantuan</Link>
+            </li>
           </ul>
         </div>
       </div>

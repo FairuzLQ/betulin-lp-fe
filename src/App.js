@@ -13,6 +13,7 @@ import BlogKategori from './pages/BlogKategori';
 import BlogPost from './pages/BlogPost';
 import TentangKami from './pages/TentangKami';
 import KontakKami from './pages/KontakKami';
+import FAQ from './pages/FAQ';
 import NotFound from './pages/NotFound'; // Import the NotFound component
 import ScrollToTop from './components/ScrollToTop';
 import './styles/global.css';
@@ -41,6 +42,7 @@ function App() {
             <Route path="/blog-post/:slug" element={<BlogPost />} />
             <Route path="/tentang-kami" element={<TentangKami />} />
             <Route path="/kontak-kami" element={<KontakKami />} />
+            <Route path="/faq" element={<FAQ />} />
             {/* Catch-all route for undefined paths */}
             <Route path="*" element={<NotFound />} />
           </Routes>
