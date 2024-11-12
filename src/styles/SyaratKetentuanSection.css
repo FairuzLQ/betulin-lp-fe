@@ -1,12 +1,15 @@
+/* SyaratKetentuanSection.css */
 .syarat-ketentuan-section {
-    background-color: #f7f9fc !important;
-    padding: 60px 40px;
-    text-align: center;
+    background-color: #f7f9fc;
+    padding: 60px 0;
+    color: #333;
+    margin-top: 70px;
 }
 
 .syarat-ketentuan-header {
-    margin-bottom: 50px;
-    margin-top: 80px;
+    text-align: center;
+    margin-bottom: 40px;
+    padding: 10px 60px;
 }
 
 .syarat-ketentuan-header h2 {
@@ -14,65 +17,57 @@
     color: #06479d;
 }
 
-.header-subtitle {
+.syarat-ketentuan-header .header-subtitle {
     font-size: 1.2rem;
+    margin-bottom: 20px;
     color: #555;
-    margin-top: 10px;
 }
 
-.last-update {
-    font-size: 0.9rem;
+.syarat-ketentuan-header .last-update {
+    font-size: 1rem;
     color: #888;
-    margin-top: 5px;
-    font-style: italic;
 }
 
 .syarat-ketentuan-content {
-    max-width: 900px;
-    margin: 0 auto;
+    font-size: 1.1rem;
+    color: #555;
+    line-height: 1.6;
     text-align: left;
+    padding: 10px 180px;
 }
 
-.terms-item {
-    background-color: white;
-    padding: 20px 30px;
-    margin-bottom: 30px;
-    border-radius: 10px;
-    box-shadow: 0 8px 15px rgba(0, 0, 0, 0.1);
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
-}
-
-.terms-item:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 12px 20px rgba(0, 0, 0, 0.2);
-}
-
-.terms-item h3 {
-    font-size: 1.6rem;
+.syarat-ketentuan-content h3 {
+    font-size: 1.8rem;
     color: #06479d;
     margin-bottom: 15px;
 }
 
-.terms-item p {
-    font-size: 1.1rem;
-    color: #555;
+.syarat-ketentuan-content ul {
+    list-style-type: disc;
+    margin-left: 20px;
 }
 
-/* Responsive Styling */
+.syarat-ketentuan-content ul li {
+    margin-bottom: 10px;
+}
+
+.syarat-ketentuan-content p {
+    margin-bottom: 20px;
+}
+
+/* Responsive design */
+@media (max-width: 1024px) {
+    .syarat-ketentuan-content {
+        padding: 10px 80px;
+    }
+}
+
 @media (max-width: 768px) {
-    .syarat-ketentuan-section {
-      padding: 40px 20px;
+    .syarat-ketentuan-content h3 {
+        font-size: 1.5rem;
     }
-  
-    .terms-item {
-      padding: 20px;
-    }
-  
-    .syarat-ketentuan-header h2 {
-      font-size: 2rem;
-    }
-  
-    .terms-item h3 {
-      font-size: 1.4rem;
+
+    .syarat-ketentuan-content {
+        padding: 10px 60px;
     }
 }
