@@ -1,19 +1,12 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import '../styles/FAQSection.css';
 
 const FAQSection = () => {
   const [activeIndex, setActiveIndex] = useState(null);
-  const [activeCategory, setActiveCategory] = useState('user'); // State to track which category (User or Partner) is active
+  const [activeCategory, setActiveCategory] = useState('user');
+  const [faqs, setFaqs] = useState({ user: [], partner: [] });
 
-  const toggleFAQ = (index) => {
-    if (activeIndex === index) {
-      setActiveIndex(null);
-    } else {
-      setActiveIndex(index);
-    }
-  };
-
-  const userFAQs = [
+  const defaultUserFAQs = [
     {
       question: "Apa itu Suar Disabilitas?",
       answer: "Suar Disabilitas adalah platform yang menyediakan informasi seputar edukasi disabilitas, berita terkini, tempat ramah difabel, kesehatan mental, serta tips untuk teman-teman difabilitas."
@@ -32,7 +25,7 @@ const FAQSection = () => {
     }
   ];
 
-  const partnerFAQs = [
+  const defaultPartnerFAQs = [
     {
       question: "Bagaimana cara menjadi mitra Suar Disabilitas?",
       answer: "Kami terbuka untuk kemitraan yang bertujuan untuk meningkatkan kualitas hidup bagi teman-teman difabel. Hubungi kami melalui email untuk informasi lebih lanjut."
@@ -46,6 +39,49 @@ const FAQSection = () => {
       answer: "Anda dapat membantu dengan menyebarkan informasi dari platform kami melalui media sosial atau berpartisipasi dalam program-program yang kami jalankan."
     }
   ];
+
+  // Fetch data from API for User and Partner FAQs
+  const fetchFAQs = async () => {
+    try {
+      const [userResponse, partnerResponse] = await Promise.all([
+        fetch(`${process.env.REACT_APP_API_URL}/api/faq-users/`),
+        fetch(`${process.env.REACT_APP_API_URL}/api/faq-mitras/`)
+      ]);
+
+      const userData = await userResponse.json();
+      const partnerData = await partnerResponse.json();
+
+      setFaqs({
+        user: userData.data.map(faq => ({
+          question: faq.FAQUserPertanyaan,
+          answer: faq.FAQUserJawaban
+        })),
+        partner: partnerData.data.map(faq => ({
+          question: faq.FAQMitraPertanyaan,
+          answer: faq.FAQMitraJawaban
+        }))
+      });
+    } catch (error) {
+      console.error("Error fetching FAQ data:", error);
+      // If the API fails, use default data
+      setFaqs({
+        user: defaultUserFAQs,
+        partner: defaultPartnerFAQs
+      });
+    }
+  };
+
+  useEffect(() => {
+    fetchFAQs();
+  }, []);
+
+  const toggleFAQ = (index) => {
+    if (activeIndex === index) {
+      setActiveIndex(null);
+    } else {
+      setActiveIndex(index);
+    }
+  };
 
   return (
     <section className="faq-section">
@@ -71,7 +107,7 @@ const FAQSection = () => {
 
         <div className="faq-list">
           {/* Display FAQs based on the selected category */}
-          {(activeCategory === 'user' ? userFAQs : partnerFAQs).map((faq, index) => (
+          {(activeCategory === 'user' ? faqs.user : faqs.partner).map((faq, index) => (
             <div
               key={index}
               className={`faq-item ${activeIndex === index ? 'active' : ''}`}
