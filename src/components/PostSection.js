@@ -232,11 +232,11 @@ const PostSection = ({ post }) => {
           <div className="post-section-banner-section">
             <div className="post-section-banner" data-aos="fade-up" data-aos-delay="400">
               <h4>Kamu Bingung? Hubungi CS Kami</h4>
-              <a href="/offers" className="post-section-banner-btn">Hubungi</a>
+              <a href="#" className="post-section-banner-btn">Hubungi</a>
             </div>
             <div className="post-section-banner" data-aos="fade-up" data-aos-delay="600">
               <h4>Yuk, Download Betulin dan dapatkan voucher menarik!</h4>
-              <a href="/quote" className="post-section-banner-btn">Download</a>
+              <a href="#" className="post-section-banner-btn">Download</a>
             </div>
           </div>
         </div>
