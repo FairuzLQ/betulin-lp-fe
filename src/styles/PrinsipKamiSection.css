@@ -20,9 +20,9 @@
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); /* Responsive columns */
     gap: 30px;
-    place-items: center; /* Centers items within the grid */
-    max-width: 1200px; /* Optional: set max width for grid */
-    margin: 0 auto; /* Centers the entire grid */
+    place-items: center;
+    max-width: 1200px;
+    margin: 0 auto;
 }
 
 /* Image Card */
@@ -30,8 +30,9 @@
     position: relative;
     overflow: hidden;
     border-radius: 20px;
-    width: 250px;
-    height: 350px; /* Fixed height for consistent card size */
+    width: 100%;
+    max-width: 250px;
+    height: 350px;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -41,9 +42,9 @@
 .prinsip-kami-image {
     width: 100%;
     height: 100%;
-    object-fit: cover; /* Ensures the image fills the card without stretching */
+    object-fit: cover;
     border-radius: 10px;
-    transition: transform 0.3s ease; /* Hover effect */
+    transition: transform 0.3s ease;
 }
 
 /* Dark overlay for the image */
@@ -52,8 +53,8 @@
     bottom: 0;
     left: 0;
     right: 0;
-    background: rgba(0, 0, 0, 0.5); /* Darken the image */
-    padding: 20px;
+    background: rgba(0, 0, 0, 0.5);
+    padding: 15px;
     text-align: center;
     color: #ffffff;
 }
@@ -71,35 +72,72 @@
 
 /* Image Hover Effect */
 .prinsip-kami-card:hover .prinsip-kami-image {
-    transform: scale(1.1); /* Slight zoom-in effect on hover */
+    transform: scale(1.1);
 }
 
-/* Responsive Design */
-@media screen and (max-width: 1114px) {
+/* Responsive Design for Tablets */
+@media screen and (max-width: 884px) {
     .prinsip-kami-grid {
-        grid-template-columns: repeat(2, 1fr); /* 2 columns on tablet */
+        grid-template-columns: repeat(2, 1fr); /* 2 columns on tablets */
+    }
+
+    .prinsip-kami-title {
+        font-size: 28px; /* Smaller title font size for tablets */
+        margin-bottom: 30px;
+    }
+
+    .prinsip-kami-card {
+        max-width: 220px;
+        height: 320px;
+    }
+
+    .prinsip-kami-caption {
+        font-size: 16px;
+    }
+
+    .prinsip-kami-subcaption {
+        font-size: 12px;
     }
 }
 
+/* Responsive Design for Mobile */
 @media screen and (max-width: 558px) {
     .prinsip-kami-grid {
         grid-template-columns: 1fr; /* 1 column on mobile */
     }
+
     .prinsip-kami-section {
-        background-color: #06479D;
-        padding: 30px 30px;
-        color: #ffffff;
-        text-align: center;
-        margin-top: 30px;
+        padding: 30px 20px;
+        margin-top: 20px;
     }
+
+    .prinsip-kami-title {
+        font-size: 24px;
+        margin-bottom: 20px;
+    }
+
+    .search-bar {
+        width: 90%;
+        font-size: 14px;
+        padding: 10px;
+        margin-bottom: 20px;
+    }
+
     /* Image Card */
     .prinsip-kami-card {
-        position: relative;
-        overflow: hidden;
-        width: 200px;
-        height: 300px; /* Fixed height for consistent card size */
-        display: flex;
-        align-items: center;
-        justify-content: center;
+        max-width: 200px;
+        height: 280px;
+    }
+
+    .prinsip-kami-caption {
+        font-size: 16px;
+    }
+
+    .prinsip-kami-subcaption {
+        font-size: 12px;
+    }
+
+    .prinsip-kami-overlay {
+        padding: 10px;
     }
 }
