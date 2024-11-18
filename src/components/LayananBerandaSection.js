@@ -69,7 +69,7 @@ const LayananBerandaSection = () => {
     };
 
     // Determine the number of services to show
-    const servicesToShow = showMore ? services : services.slice(0, 6);
+    const servicesToShow = showMore ? services : services.slice(0, 3);
 
     return (
         <section className="layanan-section" data-aos="fade-up">
@@ -90,7 +90,7 @@ const LayananBerandaSection = () => {
                 </div>
 
                 {/* Show more/less button */}
-                {services.length > 6 && (
+                {services.length > 3 && (
                     <div className="show-more-container" data-aos="fade-up">
                         <button className="show-more-btn" onClick={handleShowMore}>
                             {showMore ? 'Tampilkan Lebih Sedikit' : 'Tampilkan Lebih Banyak'}

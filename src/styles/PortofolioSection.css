@@ -107,7 +107,28 @@
     background-position: center; /* Center the image in the card */
     background-repeat: no-repeat; /* Prevents background repetition */
 }
-  
+
+
+/* Add an overlay to reduce visibility of the background image */
+.card-front::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5); /* Semi-transparent black overlay */
+    z-index: 1; /* Place overlay above the background but below the text */
+    border-radius: 10px;
+}
+
+.card-front h4 {
+    position: relative; /* Ensure text is above the overlay */
+    z-index: 2;
+    margin: 0;
+    text-align: center;
+}
+
 .card-back {
     background-color: #003A7D;
     transform: rotateY(180deg);
@@ -129,9 +150,97 @@
     margin-top: 20px;
     text-align: center;
   }
-  
+
+/* Styling for iPad (max-width: 884px) */
+@media screen and (max-width: 884px) {
+    .portfolio-section {
+        flex-direction: column; /* Stack items vertically */
+        padding: 20px;
+        height: auto; /* Adjust height for iPad */
+    }
+
+    .portfolio-carousel {
+        flex-direction: row;
+        justify-content: flex-start;
+        overflow-x: auto; /* Horizontal scrolling for the carousel */
+        width: 100%;
+        gap: 10px;
+        padding-bottom: 15px;
+        scrollbar-width: thin; /* Firefox */
+        scrollbar-color: #06479D #e0e0e0; /* Scrollbar colors for Firefox */
+    }
+
+    /* Webkit-based browsers like Chrome and Safari */
+    .portfolio-carousel::-webkit-scrollbar {
+        height: 8px; /* Customize scrollbar height */
+    }
+
+    .portfolio-carousel::-webkit-scrollbar-track {
+        background: #e0e0e0; /* Background of the scrollbar track */
+        border-radius: 10px;
+    }
+
+    .portfolio-carousel::-webkit-scrollbar-thumb {
+        background-color: #06479D; /* Color of the scrollbar */
+        border-radius: 10px; /* Round edges for scrollbar */
+        border: 2px solid #e0e0e0;
+    }
+
+    .carousel-item {
+        padding: 12px;
+        font-size: 16px; /* Adjust carousel item size */
+        min-width: 180px; /* Ensure carousel items have a minimum width */
+        text-align: center;
+        white-space: nowrap; /* Prevent text wrapping */
+    }
+
+    .portfolio-content h2 {
+        font-size: 28px; /* Adjust title size for iPad */
+        text-align: center;
+        margin-top: 20px;
+    }
+
+    .search-bar {
+        width: 80%; /* Adjust width for iPad */
+        font-size: 16px;
+        padding: 12px;
+        margin-bottom: 30px;
+    }
+
+    /* 2-column layout for service cards */
+    .portfolio-services {
+        grid-template-columns: repeat(2, 1fr); /* 2-column layout for iPad */
+        gap: 20px;
+        padding: 0 20px;
+    }
+
+    .service-card {
+        width: 100%;
+        margin-bottom: 20px;
+    }
+
+    .card-inner {
+        padding-top: 100%; /* Adjust the aspect ratio of service cards */
+        position: relative;
+    }
+
+    .card-front, .card-back {
+        font-size: 16px; /* Adjust font size for service cards */
+    }
+
+    .card-front h4, .card-back {
+        font-size: 28px; /* Smaller text for iPad */
+        text-align: center;
+        padding: 10px;
+    }
+
+    .no-services {
+        margin-top: 30px;
+    }
+}
+
 /* Custom Scrollbar for Mobile */
-@media screen and (max-width: 768px) {
+@media screen and (max-width: 600px) {
     .portfolio-section {
         flex-direction: column; /* Stack items vertically */
         padding: 20px;
@@ -201,6 +310,6 @@
     }
 
     .card-front h4, .card-back {
-        font-size: 14px; /* Smaller text inside service cards */
+        font-size: 24px; /* Smaller text inside service cards */
     }
 }
