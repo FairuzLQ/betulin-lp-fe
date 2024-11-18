@@ -43,7 +43,9 @@ const CompanyBackgroundSection = () => {
         setWhoAreWe({
           title: whoAreWe.WhoAreWeTitle || 'Kami adalah mantap',
           subtitle: whoAreWe.WhoAreWeSubtitle || 'Kami mantap banget',
-          iconUrl: `${process.env.REACT_APP_API_URL}${whoAreWe.WhoAreWeIcon?.url}` || ComBackImage,
+          iconUrl: whoAreWe.WhoAreWeIcon?.url 
+          ? `${process.env.REACT_APP_API_URL}${whoAreWe.WhoAreWeIcon.url}`
+          : ComBackImage,
         });
 
         // Fetch Prinsip Kami section data
