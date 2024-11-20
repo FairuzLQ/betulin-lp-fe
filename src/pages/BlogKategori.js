@@ -120,7 +120,11 @@ const BlogKategori = () => {
                     {post.penulis_artikel?.NamaPenulis} |{' '}
                     {new Date(post.TglArtikel).toLocaleDateString()}
                   </p>
-                  <p className="excerpt-post-category">{post.ExcerptArtikel}</p>
+                  <p className="excerpt-post-category">
+                      {post.ExcerptArtikel?.length > 70
+                      ? `${post.ExcerptArtikel.slice(0, 70)}...`
+                      : post.ExcerptArtikel}
+                  </p>
                 </div>
               </div>
             ))}

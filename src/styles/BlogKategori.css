@@ -42,17 +42,34 @@
     background-color: white;
     border-radius: 10px;
     overflow: hidden;
-    box-shadow: 0 8px 15px rgba(0, 0, 0, 0.1);
+    
 }
 
+/* Adjust Featured Image Size for Laptop */
 .blog-kategori-post-image {
-    width: 40%;
-    object-fit: cover;
+    width: 270px; /* Fixed width */
+    height: 210px; /* Fixed height */
+    object-fit: cover; /* Ensure the image maintains aspect ratio */
+    border-radius: 5px;
 }
 
+/* Adjust Post Details for Laptop */
 .blog-kategori-post-details {
     padding: 20px;
     flex: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: center; /* Vertically align text */
+}
+
+.blog-kategori-post-details h2 {
+    font-size: 1.5rem; /* Adjusted title size for laptops */
+    margin: 0 0 5px; /* Add spacing below the title */
+}
+
+.blog-kategori-post-details .excerpt-post-category {
+    font-size: 1rem; /* Adjusted excerpt size for laptops */
+    color: #555;
 }
 
 .blog-kategori-post-details h2 a {
@@ -68,10 +85,6 @@
 .blog-kategori-post-details .author-date {
     font-size: 0.9rem;
     color: #888;
-}
-
-.blog-kategori-post-details .excerpt-post-category {
-    margin-top: 30px;
 }
 
 /* Pagination Styling */
@@ -191,7 +204,7 @@
 }
 
 /* Responsive Design */
-@media (max-width: 1024px) {
+@media (max-width: 1200px) {
     .blog-kategori-content-wrapper {
         flex-direction: column;
     }
@@ -201,17 +214,67 @@
         padding-left: 0;
     }
 
-    /* Make the post cards vertical on mobile */
+    /* Post Card Layout for Smaller Screens */
     .blog-kategori-post-card {
-        flex-direction: column; /* Change to vertical layout */
+        flex-direction: column; /* Change layout to vertical */
+        margin-right: 50px;
+        margin-left: 50px;
     }
 
     .blog-kategori-post-image {
-        width: 100%; /* Make the image take full width */
-        height: auto; /* Ensure the image scales properly */
+        width: 100%; /* Full width for mobile */
+        height: auto; /* Maintain aspect ratio */
     }
 
     .blog-kategori-post-details {
         padding: 15px;
+        text-align: left; /* Align text to the left */
+    }
+
+    /* Smaller Title and Excerpt Font Sizes */
+    .blog-kategori-post-details h2 {
+        font-size: 1.5rem; /* Smaller title size */
+    }
+
+    .blog-kategori-post-details .excerpt-post-category {
+        font-size: 1.1rem; /* Smaller excerpt size */
+    }
+}
+
+/* Responsive Design */
+@media (max-width: 700px) {
+    .blog-kategori-content-wrapper {
+        flex-direction: column;
+    }
+
+    .blog-kategori-right {
+        margin-top: 30px;
+        padding-left: 0;
+    }
+
+    /* Post Card Layout for Smaller Screens */
+    .blog-kategori-post-card {
+        flex-direction: column; /* Change layout to vertical */
+        margin-right: 0px;
+        margin-left: 0px;
+    }
+
+    .blog-kategori-post-image {
+        width: 100%; /* Full width for mobile */
+        height: auto; /* Maintain aspect ratio */
+    }
+
+    .blog-kategori-post-details {
+        padding: 15px;
+        text-align: left; /* Align text to the left */
+    }
+
+    /* Smaller Title and Excerpt Font Sizes */
+    .blog-kategori-post-details h2 {
+        font-size: 1.2rem; /* Smaller title size */
+    }
+
+    .blog-kategori-post-details .excerpt-post-category {
+        font-size: 0.9rem; /* Smaller excerpt size */
     }
 }
