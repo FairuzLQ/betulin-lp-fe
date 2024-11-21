@@ -108,6 +108,8 @@
     background-size: cover; /* Ensure the image covers the entire card */
     background-position: center; /* Center the image in the card */
     background-repeat: no-repeat; /* Prevents background repetition */
+    z-index: 2; /* Ensure front is visible */
+    transform: rotateY(0deg);
 }
 
 

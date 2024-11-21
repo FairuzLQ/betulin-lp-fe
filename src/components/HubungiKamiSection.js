@@ -11,7 +11,7 @@ const HubungiKamiSection = () => {
     HubungiKamiTitle: 'Hubungi Kami',
     HubungiKamiSubtitle: 'Kami siap membantu Anda dengan layanan pelanggan terbaik.',
     HubungiKamiButton: 'Kontak Kami',
-    HubungiKamiButtonSmall: 'Hubungi Sekarang',
+    HubungiKamiLink: '#', // Default link
   });
 
   // State for handling errors
@@ -30,14 +30,14 @@ const HubungiKamiSection = () => {
             HubungiKamiTitle,
             HubungiKamiSubtitle,
             HubungiKamiButton,
-            HubungiKamiButtonSmall,
+            HubungiKamiLink,
           } = response.data.data;
 
           setHubungiKamiData({
             HubungiKamiTitle: HubungiKamiTitle || 'Hubungi Kami',
             HubungiKamiSubtitle: HubungiKamiSubtitle || 'Kami siap membantu Anda dengan layanan pelanggan terbaik.',
             HubungiKamiButton: HubungiKamiButton || 'Kontak Kami',
-            HubungiKamiButtonSmall: HubungiKamiButtonSmall || 'Hubungi Sekarang',
+            HubungiKamiLink: HubungiKamiLink || '#', // Fallback to default link
           });
         } else {
           throw new Error('Invalid API response format');
@@ -65,13 +65,19 @@ const HubungiKamiSection = () => {
         <div className="unique-hubungi-kami-content" data-aos="fade-right">
           <h2 className="unique-hubungi-kami-title">{hubungiKamiData.HubungiKamiTitle}</h2>
           <p className="unique-hubungi-kami-subtitle">{hubungiKamiData.HubungiKamiSubtitle}</p>
-          <button className="unique-hubungi-kami-btn">{hubungiKamiData.HubungiKamiButton}</button>
+          <a
+            href={hubungiKamiData.HubungiKamiLink}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="unique-hubungi-kami-btn-link"
+          >
+            <button className="unique-hubungi-kami-btn">{hubungiKamiData.HubungiKamiButton}</button>
+          </a>
         </div>
         <div className="unique-hubungi-kami-image" data-aos="fade-left">
           <img src={csImage} alt="Customer Service" />
         </div>
       </div>
-      
     </section>
   );
 };

@@ -25,7 +25,9 @@ const HeroSection = () => {
         berandaHeroTitle: 'Selamat Datang di Betulin',
         berandaHeroSubtitle: 'Solusi modern untuk kebutuhan rumah Anda',
         berandaHeroButton1: 'Lihat Layanan Kami',
-        berandaHeroButton2: 'Hubungi Kami'
+        berandaHeroButtonLink1: '#', // Default link
+        berandaHeroButton2: 'Hubungi Kami',
+        berandaHeroButtonLink2: '#', // Default link
     };
 
     const [heroData, setHeroData] = useState(defaultHeroData);
@@ -52,12 +54,22 @@ const HeroSection = () => {
             try {
                 const response = await axios.get(`${apiUrl}/api/beranda-hero-section`);
                 if (response.data && response.data.data) {
-                    const { berandaHeroTitle, berandaHeroSubtitle, berandaHeroButton1, berandaHeroButton2 } = response.data.data;
+                    const {
+                        berandaHeroTitle,
+                        berandaHeroSubtitle,
+                        berandaHeroButton1,
+                        berandaHeroButton2,
+                        berandaHeroButtonLink1,
+                        berandaHeroButtonLink2,
+                    } = response.data.data;
+
                     setHeroData({
                         berandaHeroTitle: berandaHeroTitle || defaultHeroData.berandaHeroTitle,
                         berandaHeroSubtitle: berandaHeroSubtitle || defaultHeroData.berandaHeroSubtitle,
                         berandaHeroButton1: berandaHeroButton1 || defaultHeroData.berandaHeroButton1,
-                        berandaHeroButton2: berandaHeroButton2 || defaultHeroData.berandaHeroButton2
+                        berandaHeroButton2: berandaHeroButton2 || defaultHeroData.berandaHeroButton2,
+                        berandaHeroButtonLink1: berandaHeroButtonLink1 || defaultHeroData.berandaHeroButtonLink1,
+                        berandaHeroButtonLink2: berandaHeroButtonLink2 || defaultHeroData.berandaHeroButtonLink2,
                     });
                 } else {
                     setHeroData(defaultHeroData);
@@ -94,8 +106,12 @@ const HeroSection = () => {
                 <h1 className="hero-section__title">{heroData.berandaHeroTitle}</h1>
                 <p className="hero-section__subtitle">{heroData.berandaHeroSubtitle}</p>
                 <div className="hero-section__buttons" data-aos="zoom-in">
-                    <a href='#layanan-betulin'><button className="hero-section__primary-btn">{heroData.berandaHeroButton1}</button></a>
-                    <button className="hero-section__secondary-btn">{heroData.berandaHeroButton2}</button>
+                    <a href={heroData.berandaHeroButtonLink1} target="_blank" rel="noopener noreferrer">
+                        <button className="hero-section__primary-btn">{heroData.berandaHeroButton1}</button>
+                    </a>
+                    <a href={heroData.berandaHeroButtonLink2} target="_blank" rel="noopener noreferrer">
+                        <button className="hero-section__secondary-btn">{heroData.berandaHeroButton2}</button>
+                    </a>
                 </div>
             </div>
         </div>
