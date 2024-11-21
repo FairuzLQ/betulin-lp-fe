@@ -101,7 +101,7 @@
 
 /* Step description */
 .step-description {
-    max-width: 150px;
+    max-width: 250px;
     opacity: 0;
     animation: fadeIn 2s forwards;
 }

@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import '../styles/Footer.css';
-import logo from '../assets/images/logo-hz.png';
+import logo from '../assets/images/logo-betulin-hd.png';
 import {
   FaFacebook,
   FaTwitter,
@@ -85,10 +85,10 @@ const Footer = () => {
       <div className="footer__container">
         {/* Column 1: Logo and Motto */}
         <div className="footer__column">
-          <div className="footer__logo">
-            <img src={logo} alt="Logo" />
+          <div className="footer__logo-container">
+            <img src={logo} alt="Logo" className="footer__logo" />
+            <p className="footer__motto">Apapun masalahnya, Betulin aja!</p>
           </div>
-          <p className="footer__motto">Apapun kerusakan, betulin aja!</p>
         </div>
 
         {/* Column 2: Menu 1 */}

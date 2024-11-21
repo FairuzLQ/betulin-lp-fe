@@ -15,27 +15,33 @@
 .footer__column {
   display: flex;
   flex-direction: column;
-  align-items: center;
+  align-items: center; /* Default alignment for all columns */
+}
+
+/* Specific styling for the logo column */
+.footer__logo-container {
+  display: flex;
+  flex-direction: column; /* Stack logo and motto vertically */
+  align-items: flex-start; /* Align items to the left */
+  justify-content: flex-start; /* Ensure horizontal alignment to the left */
+  width: 100%; /* Occupy full width */
+  margin-left: 70px;
 }
 
 .footer__logo {
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start; /* Align logo column to the left */
-}
-
-.footer__logo img {
-  max-width: 100%; /* Ensure the logo is responsive */
+  width: 65%; /* Set the width to fill its container */ /* Increase the maximum width to make the logo larger */
+  height: auto; /* Maintain aspect ratio */
 }
 
 .footer__motto {
   margin-top: 0.5rem;
-  font-size: 0.8rem;
+  font-size: 0.9rem;
   color: #06479D;
-  font-weight: lighter; 
-  text-align: left; /* Align text in the logo column to the left */
+  font-weight: lighter;
+  text-align: left; /* Ensure motto text is left-aligned */
 }
 
+/* Links and columns */
 .footer__list {
   list-style-type: none;
   padding: 0;
@@ -89,6 +95,18 @@
   color: var(--secondary-color);
 }
 
+@media screen and (max-width: 1114px) {
+  .footer__logo-container {
+    margin-left: 25px;
+  }
+}
+
+@media screen and (max-width: 900px) {
+  .footer__logo-container {
+    margin-left: 0px;
+  }
+}
+
 /* Responsive Design */
 @media screen and (max-width: 768px) {
   .footer__container {
@@ -101,11 +119,20 @@
     gap: 1rem;
   }
 
-  .footer__logo {
-    align-items: center; /* Center the logo on smaller screens */
+  .footer__logo-container {
+    display: flex;
+    flex-direction: column; /* Stack logo and motto vertically */
+    align-items: center; /* Align items to the left */
+    justify-content: center; /* Ensure horizontal alignment to the left */
+    width: 100%; /* Occupy full width */
+    margin-left: 0px;
   }
 
+  .footer__logo {
+    width: 45%; /* Set the width to fill its container */ /* Increase the maximum width to make the logo larger */
+    height: auto; /* Maintain aspect ratio */
+  }
   .footer__motto {
-    text-align: center; /* Center the motto on smaller screens */
+    text-align: center; /* Ensure motto stays centered */
   }
 }
