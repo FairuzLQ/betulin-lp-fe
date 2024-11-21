@@ -2,10 +2,20 @@ import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import '../styles/Footer.css';
 import logo from '../assets/images/logo-hz.png';
-import { FaFacebook, FaTwitter, FaInstagram } from 'react-icons/fa';
+import {
+  FaFacebook,
+  FaTwitter,
+  FaInstagram,
+  FaYoutube,
+  FaTiktok,
+  FaWhatsapp,
+  FaDiscord,
+  FaSpotify,
+} from 'react-icons/fa';
 
 const Footer = () => {
   const [isBlogAvailable, setIsBlogAvailable] = useState(false);
+  const [socialMediaLinks, setSocialMediaLinks] = useState([]);
 
   // Check if Blog API is available
   useEffect(() => {
@@ -14,14 +24,13 @@ const Footer = () => {
         const response = await fetch(`${process.env.REACT_APP_API_URL}/api/artikels`);
         if (response.ok) {
           const result = await response.json();
-          // Check if there are any articles in the response data
           if (result.data && result.data.length > 0) {
-            setIsBlogAvailable(true); // API is available and has articles
+            setIsBlogAvailable(true);
           } else {
-            setIsBlogAvailable(false); // API available but no articles
+            setIsBlogAvailable(false);
           }
         } else {
-          setIsBlogAvailable(false); // API not available
+          setIsBlogAvailable(false);
         }
       } catch (error) {
         console.error('Error checking blog API:', error);
@@ -31,6 +40,45 @@ const Footer = () => {
 
     checkBlogAvailability();
   }, []);
+
+  // Fetch Social Media Links
+  useEffect(() => {
+    const fetchSocialMediaLinks = async () => {
+      try {
+        const response = await fetch(`${process.env.REACT_APP_API_URL}/api/social-media-footers`);
+        const data = await response.json();
+        setSocialMediaLinks(data.data);
+      } catch (error) {
+        console.error('Error fetching social media links:', error);
+      }
+    };
+
+    fetchSocialMediaLinks();
+  }, []);
+
+  // Mapping Social Media API response to appropriate FontAwesome Icons
+  const getSocialMediaIcon = (socialMedia) => {
+    switch (socialMedia) {
+      case 'threads':
+        return <FaFacebook className="footer__social-icon" />;
+      case 'twitter':
+        return <FaTwitter className="footer__social-icon" />;
+      case 'instagram':
+        return <FaInstagram className="footer__social-icon" />;
+      case 'youtube':
+        return <FaYoutube className="footer__social-icon" />;
+      case 'tiktok':
+        return <FaTiktok className="footer__social-icon" />;
+      case 'whatsapp':
+        return <FaWhatsapp className="footer__social-icon" />;
+      case 'discord':
+        return <FaDiscord className="footer__social-icon" />;
+      case 'spotify':
+        return <FaSpotify className="footer__social-icon" />;
+      default:
+        return null;
+    }
+  };
 
   return (
     <footer className="footer">
@@ -99,15 +147,11 @@ const Footer = () => {
           <p>© 2024 PT Rumah Masa Kini. All rights reserved.</p>
         </div>
         <div className="footer__bottom-right">
-          <a href="https://facebook.com" target="_blank" rel="noopener noreferrer">
-            <FaFacebook className="footer__social-icon" />
-          </a>
-          <a href="https://twitter.com" target="_blank" rel="noopener noreferrer">
-            <FaTwitter className="footer__social-icon" />
-          </a>
-          <a href="https://instagram.com" target="_blank" rel="noopener noreferrer">
-            <FaInstagram className="footer__social-icon" />
-          </a>
+          {socialMediaLinks.map((link) => (
+            <a key={link.id} href={`https://${link.SocialMediaLink}`} target="_blank" rel="noopener noreferrer">
+              {getSocialMediaIcon(link.SocialMedia)}
+            </a>
+          ))}
         </div>
       </div>
     </footer>
