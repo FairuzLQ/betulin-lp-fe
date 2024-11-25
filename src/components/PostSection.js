@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import DOMPurify from 'dompurify'; // Import DOMPurify for sanitization
-import { FaFacebook, FaTwitter, FaInstagram, FaShareAlt } from 'react-icons/fa';
+import { FaFacebook, FaTwitter, FaInstagram, FaTiktok, FaShareAlt } from 'react-icons/fa';
 import AOS from 'aos';
 import 'aos/dist/aos.css';
 import '../styles/PostSection.css';
@@ -8,8 +8,17 @@ import { useLoading } from '../contexts/LoadingContext';
 
 const PostSection = ({ post }) => {
   const [randomArticles, setRandomArticles] = useState([]);
+  const [socialMediaLinks, setSocialMediaLinks] = useState([]);
   const apiUrl = process.env.REACT_APP_API_URL || '';
   const { showLoading, hideLoading } = useLoading();
+
+  // Map of social media names to icons
+  const socialMediaIcons = {
+    threads: <FaFacebook />,
+    twitter: <FaTwitter />,
+    instagram: <FaInstagram />,
+    tiktok: <FaTiktok />,
+  };
 
   // Initialize AOS for animations
   useEffect(() => {
@@ -37,7 +46,18 @@ const PostSection = ({ post }) => {
       }
     };
 
+    const fetchSocialMediaLinks = async () => {
+      try {
+        const response = await fetch(`${apiUrl}/api/social-media-footers`);
+        const data = await response.json();
+        setSocialMediaLinks(data.data);
+      } catch (error) {
+        console.error('Error fetching social media links:', error);
+      }
+    };
+
     fetchRandomArticles();
+    fetchSocialMediaLinks();
   }, [apiUrl]);
 
   // Function to copy post link to clipboard
@@ -203,7 +223,7 @@ const PostSection = ({ post }) => {
                   e.currentTarget.style.transform = 'scale(1)'; // Scale back on mouse leave
                 }}
               >
-                <div className="post-section-trending-post" data-aos="fade-right" data-aos-delay="400">
+                <div className="post-section-trending-post" key={randomPost.id}>
                   <img
                     src={`${apiUrl}${randomPost.FeaturedImage?.formats?.small?.url || ''}`}
                     alt={randomPost.TitleArtikel}
@@ -212,7 +232,8 @@ const PostSection = ({ post }) => {
                   <div className="post-section-trending-post-details">
                     <h4>{randomPost.TitleArtikel}</h4>
                     <p className="author-date">
-                      {randomPost.penulis_artikel?.NamaPenulis} | {new Date(randomPost.TglArtikel).toLocaleDateString()}
+                      <span>{randomPost.penulis_artikel?.NamaPenulis}</span> | 
+                      <span>{new Date(randomPost.TglArtikel).toLocaleDateString()}</span>
                     </p>
                   </div>
                 </div>
@@ -223,9 +244,14 @@ const PostSection = ({ post }) => {
           <div className="post-section-social-media-section" data-aos="fade-up" data-aos-delay="300">
             <h3>Follow Us</h3>
             <ul className="post-section-social-media-list">
-              <li><FaFacebook /> <a href="https://facebook.com">Facebook</a></li>
-              <li><FaTwitter /> <a href="https://twitter.com">Twitter</a></li>
-              <li><FaInstagram /> <a href="https://instagram.com">Instagram</a></li>
+              {socialMediaLinks.map((link) => (
+                <li key={link.id}>
+                  {socialMediaIcons[link.SocialMedia] || null} {/* Show icon if available */}
+                  <a href={`https://${link.SocialMediaLink}`} target="_blank" rel="noopener noreferrer">
+                    {link.SocialMedia.charAt(0).toUpperCase() + link.SocialMedia.slice(1)}
+                  </a>
+                </li>
+              ))}
             </ul>
           </div>
 

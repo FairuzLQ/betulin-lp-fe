@@ -2,6 +2,8 @@
 .blog-kategori-section {
     padding: 70px;
     background-color: white !important;
+    margin-left: 70px;
+    margin-right: 70px;
 }
 
 /* BlogKategori Header */
@@ -42,7 +44,6 @@
     background-color: white;
     border-radius: 10px;
     overflow: hidden;
-    
 }
 
 /* Adjust Featured Image Size for Laptop */
@@ -117,6 +118,7 @@
 /* Trending Posts */
 .trending-posts {
     margin-bottom: 30px;
+    
 }
 
 .trending-posts h3 {
@@ -129,48 +131,77 @@
 
 .trending-post {
     display: flex;
-    align-items: center;
-    background-color: white; /* Add card background */
+    flex-direction: column; /* Stack items vertically */
+    text-align: left;
+    background-color: white;
     padding: 15px;
     border-radius: 10px;
     box-shadow: 0 8px 15px rgba(0, 0, 0, 0.1);
     margin-bottom: 15px;
+    transition: transform 0.2s ease-in-out;
+}
+
+.trending-post:hover {
+    transform: scale(1.05);
 }
 
 .trending-post-image {
-    width: 70px;
-    height: 70px;
+    width: 100%;
+    height: auto;
     object-fit: cover;
     border-radius: 5px;
-    margin-right: 10px;
+    margin-bottom: 10px; /* Add spacing below the image */
 }
 
 .trending-post-details h4 {
-    font-size: 1.1rem;
-    margin-bottom: 5px;
+    font-size: 1.2rem;
+    margin: 10px 0; /* Spacing around the title */
+    color: #06479d;
+}
+
+.trending-post-details h4:hover {
+    color: #042f6c;
+}
+
+.trending-post-details .author-date {
+    font-size: 0.9rem;
+    color: #555;
+    display: flex;
+    gap: 5px;
 }
 
 /* Social Media */
+/* Social Media */
 .social-media-section {
     margin-bottom: 30px;
+    text-align: left; /* Center the entire section */
 }
 
 .social-media-list {
     list-style: none;
     padding: 0;
+    display: flex; /* Use flexbox for horizontal alignment */
+    justify-content: left; /* Center items horizontally */
+    gap: 20px; /* Add spacing between icons */
 }
 
 .social-media-list li {
     display: flex;
-    align-items: center;
+    align-items: self-start;
     gap: 10px;
-    margin-bottom: 10px;
 }
 
 .social-media-list a {
     text-decoration: none;
     color: #06479d;
+    font-size: 1.5rem; /* Make icons larger */
+    transition: color 0.3s ease;
 }
+
+.social-media-list a:hover {
+    color: #042f6c; /* Change color on hover */
+}
+
 
 /* Banners */
 .banner-section {
@@ -205,6 +236,10 @@
 
 /* Responsive Design */
 @media (max-width: 1200px) {
+    .blog-kategori-section {
+        margin-left: 40px;
+        margin-right: 40px;
+    }
     .blog-kategori-content-wrapper {
         flex-direction: column;
     }
@@ -214,7 +249,6 @@
         padding-left: 0;
     }
 
-    /* Post Card Layout for Smaller Screens */
     .blog-kategori-post-card {
         flex-direction: column; /* Change layout to vertical */
         margin-right: 50px;
@@ -231,7 +265,6 @@
         text-align: left; /* Align text to the left */
     }
 
-    /* Smaller Title and Excerpt Font Sizes */
     .blog-kategori-post-details h2 {
         font-size: 1.5rem; /* Smaller title size */
     }
@@ -241,8 +274,13 @@
     }
 }
 
-/* Responsive Design */
+/* Smaller Screens */
 @media (max-width: 700px) {
+    .blog-kategori-section {
+        margin-left: 0px;
+        margin-right: 0px;
+    }
+
     .blog-kategori-content-wrapper {
         flex-direction: column;
     }
@@ -252,7 +290,6 @@
         padding-left: 0;
     }
 
-    /* Post Card Layout for Smaller Screens */
     .blog-kategori-post-card {
         flex-direction: column; /* Change layout to vertical */
         margin-right: 0px;
@@ -269,7 +306,6 @@
         text-align: left; /* Align text to the left */
     }
 
-    /* Smaller Title and Excerpt Font Sizes */
     .blog-kategori-post-details h2 {
         font-size: 1.2rem; /* Smaller title size */
     }

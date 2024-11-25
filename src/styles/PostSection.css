@@ -3,6 +3,8 @@
     padding: 70px;
     background-color: white !important;
     margin-top: 80px;
+    margin-left: 70px;
+    margin-right: 70px;
   }
   
   /* Wrapper for both left and right sections */
@@ -104,42 +106,53 @@
   .post-section-trending-posts {
     margin-bottom: 30px;
   }
-  
   .post-section-trending-posts h3 {
-    font-size: 1.5rem;
-    color: #06479d;
-    margin-bottom: 15px;
-    border-bottom: 3px solid #06479d;
-    display: inline-block;
+      font-size: 1.5rem;
+      color: #06479d;
+      margin-bottom: 15px;
+      border-bottom: 3px solid #06479d; /* Add underline */
+      display: inline-block;
   }
-  
   .post-section-trending-post {
     display: flex;
-    align-items: center;
+    flex-direction: column; /* Stack items vertically */
+    text-align: left;
     background-color: white;
     padding: 15px;
     border-radius: 10px;
     box-shadow: 0 8px 15px rgba(0, 0, 0, 0.1);
     margin-bottom: 15px;
+    transition: transform 0.2s ease-in-out;
   }
-  
+
+  .post-section-trending-post:hover {
+    transform: scale(1.05);
+  }
+
   .post-section-trending-post-image {
-    width: 70px;
-    height: 70px;
+    width: 100%;
+    height: auto;
     object-fit: cover;
     border-radius: 5px;
-    margin-right: 10px;
+    margin-bottom: 10px; /* Add spacing below the image */
   }
-  
+
   .post-section-trending-post-details h4 {
-    font-size: 1.1rem;
-    margin-bottom: 5px;
+    font-size: 1.2rem;
+    margin: 10px 0; /* Spacing around the title */
+    color: #06479d;
   }
 
   .post-section-trending-post-details h4:hover {
-    font-size: 1.1rem;
-    margin-bottom: 5px;
-    color: #06479d;
+    color: #042f6c;
+  }
+
+  .post-section-trending-post-details .author-date {
+    font-size: 0.9rem;
+    color: #555;
+    display: flex;
+    justify-content: left; /* Center author and date */
+    gap: 5px;
   }
 
   .post-section-trending-post-link {
@@ -209,6 +222,12 @@
   
   /* Responsive Design */
   @media (max-width: 1024px) {
+    .post-section-page {
+      margin-top: 80px;
+      margin-left: 0px;
+      margin-right: 0px;
+    }
+
     .post-section-content-wrapper {
       flex-direction: column;
     }
@@ -216,6 +235,32 @@
     .post-section-right {
       margin-top: 30px;
       padding-left: 0;
+    }
+
+    .post-section-trending-post {
+      margin-left: 70px;
+      margin-right: 70px;
+    }
+  }
+
+  @media (max-width: 700px) {
+    .post-section-page {
+      margin-top: 80px;
+      margin-left: 0px;
+      margin-right: 0px;
+    }
+
+    .post-section-content-wrapper {
+      flex-direction: column;
+    }
+  
+    .post-section-right {
+      margin-top: 30px;
+      padding-left: 0;
+    }
+    .post-section-trending-post {
+      margin-left: 0px;
+      margin-right: 0px;
     }
   }
   
