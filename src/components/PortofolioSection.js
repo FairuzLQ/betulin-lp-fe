@@ -10,23 +10,6 @@ const defaultBackgroundImage = 'https://via.placeholder.com/400x300?text=Service
 // Default categories and services
 const defaultCategories = [
   {
-    name: 'Perbaikan Rumah',
-    services: [
-      {
-        id: 1,
-        name: 'Servis AC',
-        details: ['Perbaikan dan perawatan AC untuk ruangan yang lebih nyaman'],
-        background: defaultBackgroundImage,
-      },
-      {
-        id: 2,
-        name: 'Perbaikan Pipa',
-        details: ['Perbaikan pipa bocor dan instalasi pipa baru'],
-        background: defaultBackgroundImage,
-      },
-    ],
-  },
-  {
     name: 'Instalasi Listrik',
     services: [
       {
@@ -39,6 +22,23 @@ const defaultCategories = [
         id: 4,
         name: 'Pemasangan Lampu',
         details: ['Pemasangan lampu untuk interior dan eksterior rumah'],
+        background: defaultBackgroundImage,
+      },
+    ],
+  },
+  {
+    name: 'Perbaikan Rumah',
+    services: [
+      {
+        id: 1,
+        name: 'Perbaikan Pipa',
+        details: ['Perbaikan pipa bocor dan instalasi pipa baru'],
+        background: defaultBackgroundImage,
+      },
+      {
+        id: 2,
+        name: 'Servis AC',
+        details: ['Perbaikan dan perawatan AC untuk ruangan yang lebih nyaman'],
         background: defaultBackgroundImage,
       },
     ],
@@ -90,12 +90,27 @@ const PortfolioSection = () => {
           return acc;
         }, []);
 
+        // Sort categories and their services alphabetically
+        groupedCategories.sort((a, b) => a.name.localeCompare(b.name));
+        groupedCategories.forEach((category) => {
+          category.services.sort((a, b) => a.name.localeCompare(b.name));
+        });
+
         setCategories(groupedCategories.length > 0 ? groupedCategories : defaultCategories);
         setSelectedCategory(groupedCategories.length > 0 ? groupedCategories[0] : defaultCategories[0]);
       } catch (error) {
         console.error('Error fetching services:', error);
-        setCategories(defaultCategories); // Use default data if API fails
-        setSelectedCategory(defaultCategories[0]);
+
+        // Use default data and sort alphabetically if API fails
+        const sortedDefaultCategories = [...defaultCategories].sort((a, b) =>
+          a.name.localeCompare(b.name)
+        );
+        sortedDefaultCategories.forEach((category) => {
+          category.services.sort((a, b) => a.name.localeCompare(b.name));
+        });
+
+        setCategories(sortedDefaultCategories);
+        setSelectedCategory(sortedDefaultCategories[0]);
       }
     };
 

@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import DOMPurify from 'dompurify'; // Import DOMPurify for sanitization
-import { FaFacebook, FaTwitter, FaInstagram, FaTiktok, FaShareAlt } from 'react-icons/fa';
+import { FaFacebook, FaTwitter, FaInstagram, FaTiktok, FaShareAlt, FaYoutube, FaWhatsapp, FaDiscord, FaSpotify } from 'react-icons/fa';
 import AOS from 'aos';
 import 'aos/dist/aos.css';
 import '../styles/PostSection.css';
@@ -18,6 +18,10 @@ const PostSection = ({ post }) => {
     twitter: <FaTwitter />,
     instagram: <FaInstagram />,
     tiktok: <FaTiktok />,
+    youtube: <FaYoutube />,
+    whatsapp: <FaWhatsapp />,
+    discord: <FaDiscord />,
+    spotify: <FaSpotify />,
   };
 
   // Initialize AOS for animations

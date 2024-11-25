@@ -17,18 +17,18 @@ import iconSMotor from '../assets/icon-layanan/ic_servis.png';
 import iconSMobil from '../assets/icon-layanan/ic_servis_mobil.png';
 
 const defaultServices = [
-    { icon: iconAC, title: "Servis AC", description: "Layanan perbaikan dan perawatan AC rumah Anda." },
-    { icon: iconAir, title: "Instalasi Air", description: "Layanan instalasi dan perbaikan pipa air." },
-    { icon: iconCat, title: "Cat Rumah", description: "Layanan pengecatan interior dan eksterior rumah." },
-    { icon: iconCMobil, title: "Cuci Mobil", description: "Layanan cuci mobil dengan standar tinggi." },
-    { icon: iconCMotor, title: "Cuci Motor", description: "Layanan cuci motor yang cepat dan bersih." },
-    { icon: iconKeramik, title: "Pemasangan Keramik", description: "Layanan pemasangan keramik lantai dan dinding." },
-    { icon: iconKloset, title: "Perbaikan Kloset", description: "Perbaikan dan perawatan kloset untuk rumah Anda." },
-    { icon: iconPipa, title: "Perbaikan Pipa", description: "Layanan perbaikan pipa yang bocor dan tersumbat." },
-    { icon: iconPlafon, title: "Perbaikan Plafon", description: "Layanan perbaikan plafon untuk mempercantik ruangan Anda." },
-    { icon: iconAtapRumah, title: "Perbaikan Atap", description: "Layanan perbaikan dan pemasangan atap rumah Anda." },
-    { icon: iconSMotor, title: "Servis Motor", description: "Layanan servis motor untuk performa optimal." },
-    { icon: iconSMobil, title: "Servis Mobil", description: "Layanan servis mobil untuk perawatan kendaraan Anda." },
+    { icon: iconAC, title: "Servis AC", description: "Layanan perbaikan dan perawatan AC rumah Anda.", category: "Perbaikan AC" },
+    { icon: iconAir, title: "Instalasi Air", description: "Layanan instalasi dan perbaikan pipa air.", category: "Instalasi Air" },
+    { icon: iconCat, title: "Cat Rumah", description: "Layanan pengecatan interior dan eksterior rumah.", category: "Pengecatan" },
+    { icon: iconCMobil, title: "Cuci Mobil", description: "Layanan cuci mobil dengan standar tinggi.", category: "Cuci Kendaraan" },
+    { icon: iconCMotor, title: "Cuci Motor", description: "Layanan cuci motor yang cepat dan bersih.", category: "Cuci Kendaraan" },
+    { icon: iconKeramik, title: "Pemasangan Keramik", description: "Layanan pemasangan keramik lantai dan dinding.", category: "Perbaikan Rumah" },
+    { icon: iconKloset, title: "Perbaikan Kloset", description: "Perbaikan dan perawatan kloset untuk rumah Anda.", category: "Perbaikan Rumah" },
+    { icon: iconPipa, title: "Perbaikan Pipa", description: "Layanan perbaikan pipa yang bocor dan tersumbat.", category: "Instalasi Air" },
+    { icon: iconPlafon, title: "Perbaikan Plafon", description: "Layanan perbaikan plafon untuk mempercantik ruangan Anda.", category: "Perbaikan Rumah" },
+    { icon: iconAtapRumah, title: "Perbaikan Atap", description: "Layanan perbaikan dan pemasangan atap rumah Anda.", category: "Perbaikan Rumah" },
+    { icon: iconSMotor, title: "Servis Motor", description: "Layanan servis motor untuk performa optimal.", category: "Servis Kendaraan" },
+    { icon: iconSMobil, title: "Servis Mobil", description: "Layanan servis mobil untuk perawatan kendaraan Anda.", category: "Servis Kendaraan" },
 ];
 
 const LayananBerandaSection = () => {
@@ -44,11 +44,12 @@ const LayananBerandaSection = () => {
                     icon: `${process.env.REACT_APP_API_URL}${layanan.IkonLayanan?.url || ''}`, // Full URL for API icons
                     title: layanan.NamaLayanan,
                     description: layanan.ExcerptLayanan,
+                    category: layanan.kategori_layanan?.NamaKategori || "Uncategorized",
                 }));
-                setServices(layananData);
+                setServices(interleaveServicesByCategory(layananData));
             } catch (error) {
                 console.error('Error fetching layanan:', error);
-                setServices(defaultServices); // Use default services if API fails
+                setServices(interleaveServicesByCategory(defaultServices)); // Use default services if API fails
             }
         };
 
@@ -62,6 +63,28 @@ const LayananBerandaSection = () => {
             once: true, // Animation happens only once
         });
     }, []);
+
+    // Interleave services by category
+    const interleaveServicesByCategory = (services) => {
+        const groupedByCategory = services.reduce((acc, service) => {
+            if (!acc[service.category]) acc[service.category] = [];
+            acc[service.category].push(service);
+            return acc;
+        }, {});
+
+        const maxLength = Math.max(...Object.values(groupedByCategory).map((arr) => arr.length));
+        const interleaved = [];
+
+        for (let i = 0; i < maxLength; i++) {
+            for (const category in groupedByCategory) {
+                if (groupedByCategory[category][i]) {
+                    interleaved.push(groupedByCategory[category][i]);
+                }
+            }
+        }
+
+        return interleaved;
+    };
 
     // Toggle to show more or fewer services
     const handleShowMore = () => {
