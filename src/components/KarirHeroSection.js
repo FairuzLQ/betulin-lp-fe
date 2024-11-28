@@ -4,7 +4,7 @@ import AOS from 'aos';
 import 'aos/dist/aos.css'; // Import AOS styles
 import axios from 'axios';
 import { useLoading } from '../contexts/LoadingContext';
-import defaultImage from '../assets/images/karir-tim-hero.png'; // Default image
+import defaultImage from '../assets/hero-default/loading-default.png' // Default image
 
 const KarirHeroSection = () => {
   const [heroData, setHeroData] = useState({

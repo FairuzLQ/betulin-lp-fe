@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import '../styles/LayananHeroSection.css';
 import { useLoading } from '../contexts/LoadingContext';
-import layananHeroSectionImage from '../assets/hero-default/layanan-hero-img.svg';
+import layananHeroSectionImage from '../assets/hero-default/loading-default.png';
 
 const LayananHeroSection = () => {
   const [heroData, setHeroData] = useState({
