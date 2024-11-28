@@ -1,15 +1,9 @@
 import React, { useState, useEffect } from 'react';
 import '../styles/LayananHeroSection.css';
 import { useLoading } from '../contexts/LoadingContext';
-import layananHeroSectionImage from '../assets/hero-default/loading-default.png';
 
 const LayananHeroSection = () => {
-  const [heroData, setHeroData] = useState({
-    LayananHeroTitle: 'Layanan Terbaik Kami', // Default title
-    LayananHeroSubtitle: 'Kami siap memberikan layanan terbaik dengan kualitas terjamin.', // Default subtitle
-    LayananHeroButton: 'Jelajahi Layanan Kami', // Default button text
-    LayananHeroImage: { url: layananHeroSectionImage }, // Default image
-  });
+  const [heroData, setHeroData] = useState(null); // Start with null
   const [isFetched, setIsFetched] = useState(false); // Track if fetch has been attempted
   const [error, setError] = useState(null);
   const { showLoading, hideLoading } = useLoading();
@@ -27,16 +21,15 @@ const LayananHeroSection = () => {
           const data = await response.json();
 
           if (data.data) {
-            // Append the API base URL to the relative image URL
             const baseUrl = process.env.REACT_APP_API_URL;
             const imageUrl = data.data.LayananHeroImage?.url
               ? `${baseUrl}${data.data.LayananHeroImage.url}`
-              : layananHeroSectionImage;
+              : null;
 
             setHeroData({
-              LayananHeroTitle: data.data.LayananHeroTitle || 'Layanan Terbaik Kami',
-              LayananHeroSubtitle: data.data.LayananHeroSubtitle || 'Kami siap memberikan layanan terbaik dengan kualitas terjamin.',
-              LayananHeroButton: data.data.LayananHeroButton || 'Jelajahi Layanan Kami',
+              LayananHeroTitle: data.data.LayananHeroTitle,
+              LayananHeroSubtitle: data.data.LayananHeroSubtitle,
+              LayananHeroButton: data.data.LayananHeroButton,
               LayananHeroImage: { url: imageUrl },
             });
           }
@@ -52,6 +45,15 @@ const LayananHeroSection = () => {
       fetchHeroData();
     }
   }, [isFetched, showLoading, hideLoading]);
+
+  // Show loading spinner or message while data is being fetched
+  if (!heroData) {
+    return (
+      <section className="layanan-hero-section">
+        <div className="loading-placeholder">Loading...</div>
+      </section>
+    );
+  }
 
   return (
     <section className="layanan-hero-section">

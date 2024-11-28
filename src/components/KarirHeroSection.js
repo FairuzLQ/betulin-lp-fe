@@ -4,15 +4,9 @@ import AOS from 'aos';
 import 'aos/dist/aos.css'; // Import AOS styles
 import axios from 'axios';
 import { useLoading } from '../contexts/LoadingContext';
-import defaultImage from '../assets/hero-default/loading-default.png' // Default image
 
 const KarirHeroSection = () => {
-  const [heroData, setHeroData] = useState({
-    title: 'Bergabung dengan kami!',
-    subtitle: 'Bergabunglah dengan tim kami dan ciptakan masa depan yang gemilang.',
-    buttonText: 'Lihat Lowongan',
-    imageUrl: defaultImage,
-  });
+  const [heroData, setHeroData] = useState(null); // Start with null
   const [error, setError] = useState(null);
   const [isFetched, setIsFetched] = useState(false); // Track if data has been fetched once
   const { showLoading, hideLoading } = useLoading();
@@ -23,7 +17,6 @@ const KarirHeroSection = () => {
       once: true,
     });
 
-    // Fetch data only if it hasn't been fetched before
     if (!isFetched) {
       showLoading();
 
@@ -36,9 +29,9 @@ const KarirHeroSection = () => {
               title: data.KarirTitle || 'Bergabung dengan kami!',
               subtitle: data.KarirSubtitle || 'Bergabunglah dengan tim kami dan ciptakan masa depan yang gemilang.',
               buttonText: data.KarirButton || 'Lihat Lowongan',
-              imageUrl: data.KarirImage && data.KarirImage.url
+              imageUrl: data.KarirImage?.url
                 ? `${process.env.REACT_APP_API_URL}${data.KarirImage.url}`
-                : defaultImage,
+                : null,
             });
           }
         })
@@ -53,6 +46,15 @@ const KarirHeroSection = () => {
     }
   }, [isFetched, showLoading, hideLoading]);
 
+  if (!heroData) {
+    // Show placeholder while loading
+    return (
+      <section className="karir-hero-section">
+        <div className="loading-placeholder">Loading...</div>
+      </section>
+    );
+  }
+
   return (
     <section className="karir-hero-section">
       <div className="karir-hero-content" data-aos="fade-right">
@@ -60,10 +62,11 @@ const KarirHeroSection = () => {
         <p className="karir-hero-subtitle">{heroData.subtitle}</p>
         <a href="#lowonganAda" className="karir-hero-btn">{heroData.buttonText}</a>
       </div>
-      <div className="karir-hero-image" data-aos="fade-left">
-        <img src={heroData.imageUrl} alt="Karir" />
-      </div>
-      
+      {heroData.imageUrl && (
+        <div className="karir-hero-image" data-aos="fade-left">
+          <img src={heroData.imageUrl} alt="Karir" />
+        </div>
+      )}
     </section>
   );
 };

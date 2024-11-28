@@ -82,3 +82,20 @@
     }
   }
   
+  .loading-placeholder {
+    font-size: 1.5rem;
+    color: #555;
+    text-align: center;
+    padding: 20px;
+    animation: fadeIn 1.5s infinite;
+  }
+  
+  @keyframes fadeIn {
+    0%, 100% {
+      opacity: 0.5;
+    }
+    50% {
+      opacity: 1;
+    }
+  }
+  
