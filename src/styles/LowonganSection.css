@@ -1,124 +1,153 @@
+/* Spinner Styles */
+.loading-placeholder {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 200px;
+  text-align: center;
+}
+
+.loading-spinner {
+  border: 5px solid #f3f3f3;
+  border-top: 5px solid #06479d;
+  border-radius: 50%;
+  width: 50px;
+  height: 50px;
+  animation: spin 1s linear infinite;
+  margin-bottom: 20px;
+}
+
+@keyframes spin {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
 /* Overall Section Styling */
 .lowongan-section {
-    text-align: left;
-    background-color: white !important;
-    padding: 50px 80px;
-  }
-  
-  .section-title-lowongan {
-    font-size: 2.5rem;
-    color: #06479d;
-    text-align: left;
-  }
-  
-  .underline {
-    width: 120px;
-    height: 3px;
-    background-color: #06479d;
-    margin-bottom: 30px;
-    margin-top: 10px;
-  }
-  
-  /* Job Cards Container */
-  .job-cards-container {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 80px;
-    margin-bottom: 40px;
-  }
-  
-  .job-card {
-    background-color: white;
-    padding: 20px;
-    border-radius: 10px;
-    box-shadow: 0 8px 15px rgba(0, 0, 0, 0.1);
-    text-align: left;
-    transition: transform 0.3s ease;
-  }
-  
-  .job-card:hover {
-    transform: scale(1.05);
-  }
-  
-  .job-icon {
-    font-size: 3rem;
-    color: #06479d;
-    margin-bottom: 20px;
-  }
-  
-  .job-title {
-    font-size: 1.5rem;
-    margin-bottom: 10px;
-  }
-  
-  .job-details {
-    font-size: 1rem;
-    color: #555;
-    margin-bottom: 20px;
-  }
-  
-  .divider {
-    margin: 0 10px;
-  }
-  
-  /* Apply Button */
-  .apply-btn {
-    background-color: #ff6a00;
-    color: white;
-    padding: 10px 20px;
-    font-size: 1rem;
-    border: none;
-    border-radius: 50px;
-    cursor: pointer;
-    transition: transform 0.3s ease;
-  }
-  
-  .apply-btn:hover {
-    transform: scale(1.1);
-  }
-  
+  text-align: left;
+  background-color: white !important;
+  padding: 50px 80px;
+}
+
+.section-title-lowongan {
+  font-size: 2.5rem;
+  color: #06479d;
+  text-align: left;
+}
+
+.underline {
+  width: 120px;
+  height: 3px;
+  background-color: #06479d;
+  margin-bottom: 30px;
+  margin-top: 10px;
+}
+
+/* Job Cards Container */
+.job-cards-container {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 80px;
+  margin-bottom: 40px;
+}
+
+.job-card {
+  background-color: white;
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0 8px 15px rgba(0, 0, 0, 0.1);
+  text-align: left;
+  transition: transform 0.3s ease;
+}
+
+.job-card:hover {
+  transform: scale(1.05);
+}
+
+.job-icon {
+  font-size: 3rem;
+  color: #06479d;
+  margin-bottom: 20px;
+}
+
+.job-title {
+  font-size: 1.5rem;
+  margin-bottom: 10px;
+}
+
+.job-details {
+  font-size: 1rem;
+  color: #555;
+  margin-bottom: 20px;
+}
+
+.divider {
+  margin: 0 10px;
+}
+
+/* Apply Button */
+.apply-btn {
+  background-color: #ff6a00;
+  color: white;
+  padding: 10px 20px;
+  font-size: 1rem;
+  border: none;
+  border-radius: 50px;
+  cursor: pointer;
+  transition: transform 0.3s ease;
+}
+
+.apply-btn:hover {
+  transform: scale(1.1);
+}
+
 /* Load More Button */
 .load-more-btn {
-    background-color: #06479d;
-    color: white;
-    padding: 10px 30px;
-    font-size: 1.2rem;
-    border-radius: 50px;
-    cursor: pointer;
-    border: none;
-    transition: transform 0.3s ease;
-    display: block; /* Makes the button take the full width of its container */
-    margin: 0 auto; /* Centers the button horizontally */
+  background-color: #06479d;
+  color: white;
+  padding: 10px 30px;
+  font-size: 1.2rem;
+  border-radius: 50px;
+  cursor: pointer;
+  border: none;
+  transition: transform 0.3s ease;
+  display: block;
+  margin: 0 auto;
+}
+
+.load-more-btn:hover {
+  transform: scale(1.05);
+}
+
+/* No Jobs Available Styling */
+.no-jobs {
+  text-align: center;
+  margin-top: 50px;
+}
+
+.no-jobs p {
+  font-size: 1.2rem;
+  color: #555;
+  margin-top: 10px;
+}
+
+/* Responsive Styling */
+@media (max-width: 768px) {
+  .job-cards-container {
+    grid-template-columns: 1fr;
   }
-  
-  .load-more-btn:hover {
-    transform: scale(1.05);
+
+  .section-title-lowongan {
+    font-size: 2rem;
   }
-  
-  /* No Jobs Available Styling */
-  .no-jobs {
-    text-align: center;
-    margin-top: 50px;
+
+  .apply-btn,
+  .load-more-btn {
+    font-size: 1rem;
   }
-  
-  .no-jobs p {
-    font-size: 1.2rem;
-    color: #555;
-    margin-top: 10px;
-  }
-  
-  /* Responsive Styling */
-  @media (max-width: 768px) {
-    .job-cards-container {
-      grid-template-columns: 1fr; /* One column layout for mobile */
-    }
-  
-    .section-title {
-      font-size: 2rem;
-    }
-  
-    .apply-btn, .load-more-btn {
-      font-size: 1rem;
-    }
-  }
-  
+}

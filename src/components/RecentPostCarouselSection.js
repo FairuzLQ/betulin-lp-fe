@@ -7,10 +7,9 @@ import { useLoading } from '../contexts/LoadingContext';
 
 const RecentPostCarouselSection = () => {
   const [posts, setPosts] = useState([]);
-  const [loading, setLoading] = useState(true);
+  const [loading, setLoading] = useState(true); // Track loading state
   const { showLoading, hideLoading } = useLoading();
 
-  // Fetch recent posts from the API
   useEffect(() => {
     const fetchRecentPosts = async () => {
       showLoading();
@@ -38,26 +37,31 @@ const RecentPostCarouselSection = () => {
               ? new Date(article.TglArtikel).toLocaleDateString()
               : 'Unknown Date',
             category: article.kategori_artikel?.NamaKategori || 'Uncategorized',
-            link: `/blog-post/${article.ArtikelSlug}`, // Dynamic article link using documentId
-            authorLink: `/author/${article.penulis_artikel?.id}`, // Dynamic author link
-            categoryLink: `/blog-kategori/${article.kategori_artikel?.SlugKategori}`, // Dynamic category link
+            link: `/blog-post/${article.ArtikelSlug}`,
+            authorLink: `/author/${article.penulis_artikel?.id}`,
+            categoryLink: `/blog-kategori/${article.kategori_artikel?.SlugKategori}`,
           };
         });
 
         setPosts(formattedPosts);
-        setLoading(false); // Stop loading once data is fetched
       } catch (error) {
         console.error('Error fetching posts:', error);
+      } finally {
+        hideLoading();
         setLoading(false);
       }
-      hideLoading();
     };
 
     fetchRecentPosts();
   }, []);
 
   if (loading) {
-    return <p>Loading...</p>;
+    return (
+      <div className="loading-placeholder">
+        <div className="loading-spinner"></div>
+        <p>Loading Recent Posts...</p>
+      </div>
+    );
   }
 
   return (
@@ -85,12 +89,7 @@ const RecentPostCarouselSection = () => {
                 <Link to={post.link} className="post-title">
                   <h3>{post.title}</h3>
                 </Link>
-                <p>
-                  
-                    {post.author}
-                  
-                  • {post.date}
-                </p>
+                <p>{post.author} • {post.date}</p>
               </div>
             </div>
           </div>

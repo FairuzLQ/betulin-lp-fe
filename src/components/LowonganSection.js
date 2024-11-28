@@ -34,7 +34,14 @@ const LowonganSection = () => {
     setVisibleJobs((prevVisibleJobs) => prevVisibleJobs + 6);
   };
 
-  if (loading) return <p>Loading...</p>;
+  if (loading) {
+    return (
+      <div className="loading-placeholder">
+        <div className="loading-spinner"></div>
+        <p>Loading job postings...</p>
+      </div>
+    );
+  }
 
   return (
     <section className="lowongan-section" data-aos="fade-up">
@@ -43,7 +50,7 @@ const LowonganSection = () => {
 
       {jobs.length === 0 ? (
         <div className="no-jobs" data-aos="fade-up">
-          <FaSadTear size={100} color='#06479d' />
+          <FaSadTear size={100} color="#06479d" />
           <p>Belum ada lowongan yang tersedia saat ini.</p>
         </div>
       ) : (
@@ -56,7 +63,6 @@ const LowonganSection = () => {
                 <p className="job-details">
                   {job.TipePekerjaan} <span className="divider">|</span> {job.LokasiPekerjaan}
                 </p>
-                {/* Link to job detail using documentId */}
                 <Link to={`/karir-detail/${job.documentId}`} className="apply-btn">Lamar</Link>
               </div>
             ))}

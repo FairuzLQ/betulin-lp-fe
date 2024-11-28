@@ -4,43 +4,21 @@ import 'aos/dist/aos.css';
 import '../styles/PortofolioSection.css';
 import { FaSadTear } from 'react-icons/fa';
 
-// Default image for services
-const defaultBackgroundImage = 'https://via.placeholder.com/400x300?text=Service+Image'; // A placeholder image
+const defaultBackgroundImage = 'https://via.placeholder.com/400x300?text=Service+Image';
 
-// Default categories and services
 const defaultCategories = [
   {
     name: 'Instalasi Listrik',
     services: [
-      {
-        id: 3,
-        name: 'Instalasi Listrik',
-        details: ['Instalasi listrik dan pengecekan keamanan jaringan listrik'],
-        background: defaultBackgroundImage,
-      },
-      {
-        id: 4,
-        name: 'Pemasangan Lampu',
-        details: ['Pemasangan lampu untuk interior dan eksterior rumah'],
-        background: defaultBackgroundImage,
-      },
+      { id: 3, name: 'Instalasi Listrik', details: ['Instalasi listrik dan pengecekan keamanan jaringan listrik'], background: defaultBackgroundImage },
+      { id: 4, name: 'Pemasangan Lampu', details: ['Pemasangan lampu untuk interior dan eksterior rumah'], background: defaultBackgroundImage },
     ],
   },
   {
     name: 'Perbaikan Rumah',
     services: [
-      {
-        id: 1,
-        name: 'Perbaikan Pipa',
-        details: ['Perbaikan pipa bocor dan instalasi pipa baru'],
-        background: defaultBackgroundImage,
-      },
-      {
-        id: 2,
-        name: 'Servis AC',
-        details: ['Perbaikan dan perawatan AC untuk ruangan yang lebih nyaman'],
-        background: defaultBackgroundImage,
-      },
+      { id: 1, name: 'Perbaikan Pipa', details: ['Perbaikan pipa bocor dan instalasi pipa baru'], background: defaultBackgroundImage },
+      { id: 2, name: 'Servis AC', details: ['Perbaikan dan perawatan AC untuk ruangan yang lebih nyaman'], background: defaultBackgroundImage },
     ],
   },
 ];
@@ -49,7 +27,7 @@ const PortfolioSection = () => {
   const [categories, setCategories] = useState([]);
   const [selectedCategory, setSelectedCategory] = useState(null);
   const [searchQuery, setSearchQuery] = useState('');
-  const [isDesktop, setIsDesktop] = useState(window.innerWidth >= 1024);
+  const [isLoading, setIsLoading] = useState(true); // Add loading state
 
   useEffect(() => {
     const fetchServices = async () => {
@@ -58,7 +36,6 @@ const PortfolioSection = () => {
         const result = await response.json();
 
         const baseUrl = process.env.REACT_APP_API_URL;
-
         const data = result.data.map((item) => {
           const backgroundImage =
             item.BackgroundLayanan?.formats?.large?.url ||
@@ -67,8 +44,6 @@ const PortfolioSection = () => {
             item.BackgroundLayanan?.url ||
             defaultBackgroundImage;
 
-          const fullBackgroundImage = backgroundImage.startsWith('/') ? `${baseUrl}${backgroundImage}` : backgroundImage;
-
           return {
             id: item.id,
             name: item.NamaLayanan,
@@ -76,7 +51,7 @@ const PortfolioSection = () => {
               detail.children.map((child) => child.text).join(' ')
             ),
             category: item.kategori_layanan?.NamaKategori || 'Layanan Lainnya',
-            background: fullBackgroundImage,
+            background: backgroundImage.startsWith('/') ? `${baseUrl}${backgroundImage}` : backgroundImage,
           };
         });
 
@@ -90,45 +65,33 @@ const PortfolioSection = () => {
           return acc;
         }, []);
 
-        // Sort categories and their services alphabetically
         groupedCategories.sort((a, b) => a.name.localeCompare(b.name));
-        groupedCategories.forEach((category) => {
-          category.services.sort((a, b) => a.name.localeCompare(b.name));
-        });
+        groupedCategories.forEach((category) => category.services.sort((a, b) => a.name.localeCompare(b.name)));
 
-        setCategories(groupedCategories.length > 0 ? groupedCategories : defaultCategories);
-        setSelectedCategory(groupedCategories.length > 0 ? groupedCategories[0] : defaultCategories[0]);
+        setCategories(groupedCategories);
+        setSelectedCategory(groupedCategories[0]);
       } catch (error) {
         console.error('Error fetching services:', error);
-
-        // Use default data and sort alphabetically if API fails
-        const sortedDefaultCategories = [...defaultCategories].sort((a, b) =>
-          a.name.localeCompare(b.name)
-        );
-        sortedDefaultCategories.forEach((category) => {
-          category.services.sort((a, b) => a.name.localeCompare(b.name));
-        });
-
-        setCategories(sortedDefaultCategories);
-        setSelectedCategory(sortedDefaultCategories[0]);
+        setCategories(defaultCategories);
+        setSelectedCategory(defaultCategories[0]);
+      } finally {
+        setIsLoading(false); // Set loading to false after data is fetched
       }
     };
 
     fetchServices();
   }, []);
 
-  useEffect(() => {
-    AOS.init({ once: true });
-    const handleResize = () => setIsDesktop(window.innerWidth >= 1024);
-    window.addEventListener('resize', handleResize);
-    return () => window.removeEventListener('resize', handleResize);
-  }, []);
-
-  if (!selectedCategory) {
-    return <p>Loading...</p>;
+  if (isLoading) {
+    return (
+      <div className="loading-placeholder">
+        <div className="loading-spinner"></div>
+        <p>Loading Services...</p>
+      </div>
+    );
   }
 
-  const filteredServices = selectedCategory.services.filter((service) =>
+  const filteredServices = selectedCategory?.services.filter((service) =>
     service.name.toLowerCase().includes(searchQuery.toLowerCase())
   );
 
@@ -138,18 +101,14 @@ const PortfolioSection = () => {
     setSearchQuery('');
   };
 
-  const numberOfRows = Math.ceil(filteredServices.length / 3);
-  const sectionHeight = isDesktop ? 600 + (numberOfRows - 1) * 250 : 'auto';
-
   return (
-    <div id="services" className="portfolio-section" style={{ height: sectionHeight }}>
+    <div id="services" className="portfolio-section">
       <div className="portfolio-carousel">
         {categories.map((category) => (
           <div
             key={category.name}
             className={`carousel-item ${selectedCategory.name === category.name ? 'active' : ''}`}
             onClick={() => handleCategoryChange(category.name)}
-            data-aos="fade-right"
           >
             <h3>{category.name}</h3>
           </div>
@@ -157,20 +116,19 @@ const PortfolioSection = () => {
       </div>
 
       <div className="portfolio-content">
-        <h2 data-aos="fade-up">Layanan Kami</h2>
+        <h2>Layanan Kami</h2>
         <input
           type="text"
           placeholder="Mau betulin apa?"
           value={searchQuery}
           onChange={(e) => setSearchQuery(e.target.value)}
           className="search-bar"
-          data-aos="fade-in"
         />
 
-        {filteredServices.length > 0 ? (
-          <div className="portfolio-services" data-aos="fade-up">
+        {filteredServices?.length > 0 ? (
+          <div className="portfolio-services">
             {filteredServices.map((service) => (
-              <div className="service-card" key={service.id} data-aos="zoom-in">
+              <div className="service-card" key={service.id}>
                 <div className="card-inner">
                   <div
                     className="card-front"
@@ -186,7 +144,7 @@ const PortfolioSection = () => {
             ))}
           </div>
         ) : (
-          <div className="no-services" data-aos="fade-up">
+          <div className="no-services">
             <FaSadTear size={50} color="#06479d" />
             <p>Sayangnya layanan tersebut belum ada</p>
           </div>
