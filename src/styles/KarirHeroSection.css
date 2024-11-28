@@ -44,11 +44,11 @@
   
   /* Right Image Styling */
   .karir-hero-image img {
-    max-width: 100%;
+    max-width: 550px;
   }
   
   /* Responsive Styling */
-  @media (max-width: 768px) {
+  @media (max-width: 900px) {
     .karir-hero-section {
       flex-direction: column;
       text-align: center;
@@ -76,6 +76,9 @@
     .karir-hero-btn {
       padding: 12px 25px;
       font-size: 1rem;
+    }
+    .karir-hero-image img {
+      max-width: 100%;
     }
   }
   

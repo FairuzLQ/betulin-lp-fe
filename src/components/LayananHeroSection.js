@@ -15,25 +15,29 @@ const LayananHeroSection = () => {
   const { showLoading, hideLoading } = useLoading();
 
   useEffect(() => {
-    // Only fetch if we haven't fetched yet
     if (!isFetched) {
       const fetchHeroData = async () => {
         showLoading();
-        
+
         try {
           const response = await fetch(`${process.env.REACT_APP_API_URL}/api/layanan-hero-section?populate=*`);
           if (!response.ok) {
             throw new Error('Failed to fetch hero section data');
           }
           const data = await response.json();
-          
-          // Check if API data is valid
+
           if (data.data) {
+            // Append the API base URL to the relative image URL
+            const baseUrl = process.env.REACT_APP_API_URL;
+            const imageUrl = data.data.LayananHeroImage?.url
+              ? `${baseUrl}${data.data.LayananHeroImage.url}`
+              : layananHeroSectionImage;
+
             setHeroData({
               LayananHeroTitle: data.data.LayananHeroTitle || 'Layanan Terbaik Kami',
               LayananHeroSubtitle: data.data.LayananHeroSubtitle || 'Kami siap memberikan layanan terbaik dengan kualitas terjamin.',
               LayananHeroButton: data.data.LayananHeroButton || 'Jelajahi Layanan Kami',
-              LayananHeroImage: data.data.LayananHeroImage || { url: layananHeroSectionImage },
+              LayananHeroImage: { url: imageUrl },
             });
           }
         } catch (error) {
@@ -41,7 +45,7 @@ const LayananHeroSection = () => {
           setError('Failed to load hero section data.');
         } finally {
           hideLoading();
-          setIsFetched(true); // Mark fetch as completed
+          setIsFetched(true);
         }
       };
 
@@ -65,8 +69,6 @@ const LayananHeroSection = () => {
       <div className="layanan-hero-image">
         <img src={heroData.LayananHeroImage.url} alt="Layanan Hero" />
       </div>
-      
-      
     </section>
   );
 };
