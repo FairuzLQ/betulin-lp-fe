@@ -22,11 +22,11 @@ const HeroSection = () => {
 
     // Default content for Hero Section
     const defaultHeroData = {
-        berandaHeroTitle: 'Selamat Datang di Betulin',
-        berandaHeroSubtitle: 'Solusi modern untuk kebutuhan rumah Anda',
-        berandaHeroButton1: 'Lihat Layanan Kami',
+        berandaHeroTitle: '...',
+        berandaHeroSubtitle: '...',
+        berandaHeroButton1: '...',
         berandaHeroButtonLink1: '#', // Default link
-        berandaHeroButton2: 'Hubungi Kami',
+        berandaHeroButton2: '...',
         berandaHeroButtonLink2: '#', // Default link
     };
 
