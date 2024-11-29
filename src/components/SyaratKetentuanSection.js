@@ -8,9 +8,9 @@ const defaultTerms = {
   SubtitleSyaratKetentuan: 'Mohon baca dengan seksama sebelum menggunakan layanan kami.',
   UpdatedSyaratKetentuan: new Date(),
   DetailSyaratKetentuan: [
-    { type: 'heading', text: '1. PENGANTAR' },
-    { type: 'paragraph', text: 'Selamat datang di Betulin, aplikasi perbaikan rumah.' },
-  ]
+    { type: 'heading', level: 4, children: [{ text: '1. PENGANTAR' }] },
+    { type: 'paragraph', children: [{ text: 'Selamat datang di Betulin, aplikasi perbaikan rumah.' }] },
+  ],
 };
 
 const SyaratKetentuanSection = () => {
@@ -42,20 +42,24 @@ const SyaratKetentuanSection = () => {
 
   if (loading) return <p>Loading...</p>;
 
-  // Function to render the content based on its type and add <br /> after each item
+  // Function to render the content based on its type and level
   const renderContent = (content, index) => {
     switch (content.type) {
       case 'paragraph':
         return (
           <React.Fragment key={index}>
             <p dangerouslySetInnerHTML={{ __html: DOMPurify.sanitize(content.children[0]?.text) }} />
-            <br />
           </React.Fragment>
         );
       case 'heading':
+        // Subtract 1 from the heading level
+        const adjustedLevel = Math.max(content.level - 1, 1); // Ensure minimum level is h1
+        const HeadingTag = `h${adjustedLevel}`;
         return (
           <React.Fragment key={index}>
-            <h3 dangerouslySetInnerHTML={{ __html: DOMPurify.sanitize(content.children[0]?.text) }} />
+            <HeadingTag
+              dangerouslySetInnerHTML={{ __html: DOMPurify.sanitize(content.children[0]?.text) }}
+            />
           </React.Fragment>
         );
       case 'list':
@@ -66,7 +70,6 @@ const SyaratKetentuanSection = () => {
                 <li key={idx} dangerouslySetInnerHTML={{ __html: DOMPurify.sanitize(item.children[0]?.text) }} />
               ))}
             </ul>
-            <br />
           </React.Fragment>
         );
       default:
