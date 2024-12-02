@@ -12,27 +12,27 @@ const FAQSection = () => {
       answer: "Suar Disabilitas adalah platform yang menyediakan informasi seputar edukasi disabilitas, berita terkini, tempat ramah difabel, kesehatan mental, serta tips untuk teman-teman difabilitas."
     },
     {
-      question: "Bagaimana cara menghubungi kami?",
-      answer: "Anda dapat menghubungi kami melalui nomor telepon, email, atau datang langsung ke alamat kami yang tertera di halaman Kontak."
-    },
-    {
       question: "Apakah ada layanan khusus untuk disabilitas?",
       answer: "Kami menyediakan berbagai layanan informasi yang diperuntukkan khusus bagi komunitas difabel, termasuk informasi tentang aksesibilitas tempat, mental health, dan jenis-jenis disabilitas."
     },
     {
       question: "Bagaimana cara berdonasi untuk Yayasan?",
       answer: "Anda dapat berdonasi melalui halaman Donasi kami yang dapat diakses di website. Kami sangat berterima kasih atas setiap kontribusi yang Anda berikan untuk mendukung yayasan."
+    },
+    {
+      question: "Bagaimana cara menghubungi kami?",
+      answer: "Anda dapat menghubungi kami melalui nomor telepon, email, atau datang langsung ke alamat kami yang tertera di halaman Kontak."
     }
   ];
 
   const defaultPartnerFAQs = [
     {
-      question: "Bagaimana cara menjadi mitra Suar Disabilitas?",
-      answer: "Kami terbuka untuk kemitraan yang bertujuan untuk meningkatkan kualitas hidup bagi teman-teman difabel. Hubungi kami melalui email untuk informasi lebih lanjut."
-    },
-    {
       question: "Apakah ada peluang kerjasama untuk sponsor?",
       answer: "Ya, kami menyediakan peluang untuk kerjasama sponsor dalam berbagai event dan program untuk mendukung komunitas difabel."
+    },
+    {
+      question: "Bagaimana cara menjadi mitra Suar Disabilitas?",
+      answer: "Kami terbuka untuk kemitraan yang bertujuan untuk meningkatkan kualitas hidup bagi teman-teman difabel. Hubungi kami melalui email untuk informasi lebih lanjut."
     },
     {
       question: "Bagaimana cara menyebarkan informasi untuk komunitas difabel?",
@@ -52,21 +52,25 @@ const FAQSection = () => {
       const partnerData = await partnerResponse.json();
 
       setFaqs({
-        user: userData.data.map(faq => ({
-          question: faq.FAQUserPertanyaan,
-          answer: faq.FAQUserJawaban
-        })),
-        partner: partnerData.data.map(faq => ({
-          question: faq.FAQMitraPertanyaan,
-          answer: faq.FAQMitraJawaban
-        }))
+        user: userData.data
+          .map(faq => ({
+            question: faq.FAQUserPertanyaan,
+            answer: faq.FAQUserJawaban
+          }))
+          .sort((a, b) => a.question.localeCompare(b.question)),
+        partner: partnerData.data
+          .map(faq => ({
+            question: faq.FAQMitraPertanyaan,
+            answer: faq.FAQMitraJawaban
+          }))
+          .sort((a, b) => a.question.localeCompare(b.question))
       });
     } catch (error) {
       console.error("Error fetching FAQ data:", error);
       // If the API fails, use default data
       setFaqs({
-        user: defaultUserFAQs,
-        partner: defaultPartnerFAQs
+        user: defaultUserFAQs.sort((a, b) => a.question.localeCompare(b.question)),
+        partner: defaultPartnerFAQs.sort((a, b) => a.question.localeCompare(b.question))
       });
     }
   };
