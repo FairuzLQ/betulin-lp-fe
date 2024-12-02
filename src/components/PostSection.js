@@ -98,7 +98,6 @@ const PostSection = ({ post }) => {
                 />
               ))}
             </p>
-            <br />
           </div>
         );
       case 'heading':
