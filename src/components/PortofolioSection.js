@@ -43,7 +43,7 @@ const PortfolioSection = () => {
             item.BackgroundLayanan?.formats?.small?.url ||
             item.BackgroundLayanan?.url ||
             defaultBackgroundImage;
-
+        
           return {
             id: item.id,
             name: item.NamaLayanan,
@@ -51,9 +51,11 @@ const PortfolioSection = () => {
               detail.children.map((child) => child.text).join(' ')
             ),
             category: item.kategori_layanan?.NamaKategori || 'Layanan Lainnya',
+            priceRange: item.RentangHarga || "Rp50.000-75.000", // Add price range or default value
             background: backgroundImage.startsWith('/') ? `${baseUrl}${backgroundImage}` : backgroundImage,
           };
         });
+        
 
         const groupedCategories = data.reduce((acc, service) => {
           const category = acc.find((cat) => cat.name === service.category);
@@ -135,6 +137,7 @@ const PortfolioSection = () => {
                     style={{ backgroundImage: `url(${service.background})` }}
                   >
                     <h4>{service.name}</h4>
+                    <span className="service-price">{service.priceRange}</span>
                   </div>
                   <div className="card-back">
                     <p>{service.details.join(' ')}</p>

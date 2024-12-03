@@ -109,6 +109,10 @@
     background-position: center; /* Center the image in the card */
     background-repeat: no-repeat; /* Prevents background repetition */
     z-index: 2; /* Ensure front is visible */
+    flex-direction: column; /* Stack elements vertically */
+    justify-content: center; /* Center content vertically */
+    align-items: center; /* Center content horizontally */
+    text-align: center; /* Align text to the center */
     transform: rotateY(0deg);
 }
 
@@ -131,6 +135,13 @@
     z-index: 2;
     margin: 0;
     text-align: center;
+}
+
+.card-front .service-price {
+    font-size: 1rem; /* Slightly smaller than the title */
+    color: #e0e0e0; /* Light color for the subtitle */
+    margin-top: 8px; /* Add space below the title */
+    z-index: 2;
 }
 
 .card-back {
@@ -156,7 +167,7 @@
   }
 
 /* Styling for iPad (max-width: 884px) */
-@media screen and (max-width: 884px) {
+@media screen and (max-width: 1100px) {
     .portfolio-section {
         flex-direction: column; /* Stack items vertically */
         padding: 20px;
