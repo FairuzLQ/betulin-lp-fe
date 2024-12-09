@@ -107,9 +107,14 @@
 
     .download-section__image {
         margin-top: 30px;
+        display: flex;
+        justify-content: center; /* Center the image */
+        width: 100%; /* Ensure it spans the width of the section */
     }
 
     .download-section__image img {
-        max-width: 100%;
+        max-width: 130%; /* Adjust the percentage for a larger image */
+        height: auto; /* Maintain aspect ratio */
+        margin-right: 50px;
     }
 }
