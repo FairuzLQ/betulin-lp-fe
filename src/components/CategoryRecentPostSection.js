@@ -23,7 +23,10 @@ const CategoryRecentPostSection = ({ category }) => {
 
         const baseUrl = process.env.REACT_APP_API_URL;
 
-        const formattedPosts = data.data.slice(0, 3).map((article) => {
+        // Sort data by TglArtikel in descending order (newest first)
+        const sortedData = data.data.sort((a, b) => new Date(b.TglArtikel) - new Date(a.TglArtikel));
+
+        const formattedPosts = sortedData.slice(0, 3).map((article) => {
           const imageFormats = article.FeaturedImage?.formats || {};
           const imageUrl = imageFormats.large?.url || imageFormats.medium?.url || imageFormats.small?.url || article.FeaturedImage?.url;
 
